@@ -4,18 +4,25 @@ const User = require('../models/User');
 const bcryptjs = require('bcryptjs');
 const bcryptSalt = 10;
 
-const create = ( req, res, next ) => {
-  
-  const { firstName, lastName, userName, email, password } = req.body;
+// Signup view
+const signup = ( req, res, next ) => {
+  res.render('./auth/signup');
+}
 
+// Create a new user
+const create = ( req, res, next ) => {  
+  const { firstName, lastName, userName, email, password } = req.body;
+  // no empty fields
   if( !firstName || !lastName || !userName || !email || !password ) {
-    res.send({ errorMessage: 'All fields are mandatory. Please, provide all the information' })
+    res.render('./auth/signup', {
+      errorMessage: 'All fields are mandatory. Please, provide all the information'
+    })
   }
 
   User
     .findOne({ userName })
     .then( user => {
-      console.log(user)
+      //console.log(user)
       if (user) {
       res.send({ errorMessage: "User already exists"});
       return;
@@ -46,4 +53,27 @@ const create = ( req, res, next ) => {
     })
 }
 
-module.exports = {create};
+//Load user and append to req.
+const userById = (req, res, next, id) => {
+  User
+    .findById(id)
+    .then( (err, user) => {
+      if (err || !user) {
+        return res.status('400').send({ errorMessage: "User not found" })
+      }
+      req.profile = user
+      next()
+    })
+}
+
+// Read operation
+const read = (req, res) => {
+  req.profile.password = undefined
+  req.profile.salt = undefined
+  return res.send(req.profile)
+}
+
+// Update operation
+
+
+module.exports = {signup, create, userById, read};

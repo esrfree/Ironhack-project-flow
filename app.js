@@ -9,6 +9,10 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+const flash = require("connect-flash");
+
 
 // Set up the database
 require('./configs/db-config');
@@ -31,23 +35,61 @@ app.use(require('node-sass-middleware')({
   sourceMap: true
 }));
       
-
+// hbs as view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
-
 // default value for title local
 app.locals.title = 'Flow, MERN stack social media platform';
 
+// Enable authentication using session + passport
+app.use(
+  session({
+      secret: "regenerator",
+      resave: true,
+      saveUninitialized: true,
+      store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
+app.use(flash());
+require("./passport")(app);
+
+app.use( (req, res, next) => {
+  /* here I will set a local variable for the body class. This is just another way that
+  you can use local variables and for our purposes we will be doing this in order to track
+  when we are in message boards details page
+  */
+  res.locals.bodyClass = "default";
+
+  /* Thanks to passport we have access to req.session.user to get the current users information.
+  By using res.locals to set the variable "currentUser" we can now call "currentUser" from any of our
+  view pages since we are declaring it in the app.js
+  
+  Normally setting res.locals variable in a route will only give you access to that variable in the
+  view page that you are rendering
+  */
+  res.locals.currentUser = req.session.user;
+
+  /* after we have finished what needs to be done in this section we call next so that we continue onto the
+  next process that must be ran.
+  
+  Forgetting to add a next() here can make your app hang and you may not get any error messages letting
+  your know why it is hanging. If you see  GET / - - ms - -  in your terminal then that will more than likely
+  mean that you forgot to add a next here.
+  */
+  next();
+});
 
 
 const index = require('./routes/index');
 const user = require('./routes/user-routes');
+const auth = require('./routes/auth-routes');
 app.use('/', index);
 app.use('/', user);
+app.use(auth);
 
 
 module.exports = app;
