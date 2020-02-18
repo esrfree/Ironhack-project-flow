@@ -45,7 +45,9 @@ app.locals.title = 'Flow, MERN stack social media platform';
 
 
 const index = require('./routes/index');
+const user = require('./routes/user-routes');
 app.use('/', index);
+app.use('/', user);
 
 
 module.exports = app;

@@ -15,7 +15,7 @@ const create = ( req, res, next ) => {
   User
     .findOne({ userName })
     .then( user => {
-
+      console.log(user)
       if (user) {
       res.send({ errorMessage: "User already exists"});
       return;
@@ -46,4 +46,4 @@ const create = ( req, res, next ) => {
     })
 }
 
-module.exports = { create };
+module.exports = {create};
