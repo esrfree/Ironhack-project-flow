@@ -7,6 +7,7 @@ const User = require("../../models/User");
 router.get("/timeLine", (req, res, next) => {
   Post.find()
     .then((allPost) => {
+      console.log(allPost);
 
     })
     .catch((err) => { next(err) })
