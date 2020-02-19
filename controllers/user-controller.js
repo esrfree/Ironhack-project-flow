@@ -24,7 +24,7 @@ const create = ( req, res, next ) => {
     .then( user => {
       //console.log(user)
       if (user) {
-      res.send({ errorMessage: "User already exists"});
+      res.render('./auth/signup', { errorMessage: "User already exists"});
       return;
       }
 
