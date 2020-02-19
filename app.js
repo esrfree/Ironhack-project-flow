@@ -54,7 +54,7 @@ const index = require('./routes/index');
 const user = require('./routes/user-routes');
 const auth = require('./routes/auth-routes');
 app.use('/', index);
-app.use('/api', user);
+app.use('/', user);
 app.use('/', auth);
 
 
