@@ -1,7 +1,8 @@
 require('dotenv').config();
 
-const bodyParser   = require('body-parser');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+
 const express      = require('express');
 const favicon      = require('serve-favicon');
 const hbs          = require('hbs');
@@ -9,6 +10,7 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const passport     = require('passport');
+
 
 
 // Set up the database
@@ -34,12 +36,13 @@ app.use(passport.session());
 
 // Express View engine setup
 app.use(require('node-sass-middleware')({
-  src:  path.join(__dirname, 'public'),
+  src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   sourceMap: true
 }));
-      
+
 // hbs as view engine
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -54,8 +57,15 @@ const index = require('./routes/index');
 const user = require('./routes/user-routes');
 const auth = require('./routes/auth-routes');
 app.use('/', index);
+
+app.use('/', user);
+app.use('/', require('./routes/post/post.routes'));
+app.use('/', require('./routes/messages/message.routes'));
+app.use('/', require('./routes/reply/reply.routes'));
+
 app.use('/api', user);
 app.use('/', auth);
+
 
 
 module.exports = app;
