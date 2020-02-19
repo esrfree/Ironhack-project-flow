@@ -14,7 +14,7 @@ const messageSchema = new Schema(
       type: String
     },
     // add user._id in order to get the length of the likes array and see how many likes the message has
-    likes: {
+    reactionId: {
       type: [
         {
           type: Schema.Types.ObjectId,
@@ -22,6 +22,11 @@ const messageSchema = new Schema(
         },
 
       ]
+    },
+    //reactions to a commen(emojis)
+    reaction: {
+      type: [String],
+      enum: ["love", "fun", "like", "sad", "amaze", "dislike"]
     },
     // the replies that belong to this message
     replies: {
@@ -33,9 +38,9 @@ const messageSchema = new Schema(
       ]
     },
     // the message board that this message belongs to
-    messageBoard: {
+    parentPost: {
       type: Schema.Types.ObjectId,
-      ref: "Board"
+      ref: "Post"
     }
   },
   { timestamps: true }
