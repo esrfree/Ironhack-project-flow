@@ -50,7 +50,7 @@ app.use('/', index);
 app.use('/', user);
 app.use('/', require('./routes/post/post.routes'));
 app.use('/', require('./routes/messages/message.routes'));
-app.use('/', require('./routes/reply/reply.routes'));
+app.use('/', require('./routes/reply/reply.routes'))
 
 
 module.exports = app;
