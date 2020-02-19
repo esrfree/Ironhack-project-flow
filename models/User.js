@@ -10,11 +10,13 @@ const userSchema = new Schema(
         trim: true,
         required: 'First name is required'
       },
+
       lastName: {
         type: String,
         trim: true,
         required: 'Last name is required'
       },
+
       /* username for the user which will be unique (this cannot be edited so in order to avoid heckling
         and have user accountable for improper behavior, replies or content posted) */
       /* when using passport it would be best to check for duplicates of this field by searching the db first
@@ -28,6 +30,7 @@ const userSchema = new Schema(
           unique: 'Username already exists',
           required: 'Username is required'
       },
+
       // the users avatar for others to see
       avatar: {
           type: String,
@@ -35,6 +38,7 @@ const userSchema = new Schema(
           default:
               "https://cl.goliath.com/image/upload/t_tn,f_auto,q_auto,$h_480,$w_895/go/2020/01/baby-yoda-life-size-figure-584x600-895x480.jpg"
       },
+
       // the email the user will use on the site ()
       email: {
         type: String,
@@ -43,10 +47,18 @@ const userSchema = new Schema(
         match: [/.+\@.+\..+/, 'Please fill a valid email address'],
         required: 'Email is required'
       },
+
       // the users password (hashed)
       password: {
           type: String
       },
+
+      updated: Date,
+      created: {
+        type: Date,
+        default: Date.now
+      },
+      
       // the code sent to user email in order to validate email authenticity
       // for now we will not add this to our example app. But if you fork and clone this app maybe you can create the needed code for practice
       confirmationCode: {
