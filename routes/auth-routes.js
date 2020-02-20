@@ -4,7 +4,7 @@ const authCtrl = require('../controllers/auth-controllers')
 
 const router = express.Router()
 
-router.route('/auth/signin')
+router.route('/login')
   .get(authCtrl.signinForm)
   .post(authCtrl.signin)
 

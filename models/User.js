@@ -52,12 +52,6 @@ const userSchema = new Schema(
       password: {
           type: String
       },
-
-      updated: Date,
-      created: {
-        type: Date,
-        default: Date.now
-      },
       
       // the code sent to user email in order to validate email authenticity
       // for now we will not add this to our example app. But if you fork and clone this app maybe you can create the needed code for practice

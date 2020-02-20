@@ -77,7 +77,7 @@ const userById = (req, res, next, id) => {
       /* If a matching user is found in the database,
       the user object is appended to the request object
       in the profile key */
-      req.profile = user;
+      req.session.user = user;
       /* Then, the next() middleware is used to propagate
       control to the next relevant controller function */
       next()
@@ -92,7 +92,7 @@ to the requesting client.
 const read = (req, res) => {
   req.profile.password = undefined
   req.profile.salt = undefined
-  return res.send({ userProfile: req.profile })
+  return res.send({ userProfile: req.session.user })
 }
 
 // Updating
@@ -103,7 +103,6 @@ request body to update the user data.
 const update = (req, res, next) => {
   let user = req.profile;
   user = _.extend(user, req.body);
-  user.updated = Date.now();
   user.save( err => {
     if (err) {
       return res.status(400).send({ errorMessage: err })

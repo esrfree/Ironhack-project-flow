@@ -9,6 +9,8 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const passport     = require('passport');
+//const session     = require("express-session");          // require session
+//const MongoStore  = require("connect-mongo")(session);   // require mongostore
 
 
 // Set up the database
