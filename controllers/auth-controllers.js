@@ -23,9 +23,9 @@ const signinForm = (req, res) => {
 This is useful for the common scenario of users accessing a web application via a browser.
 */
 const signin = passport.authenticate('local', {
-                  successRedirect: '/',
-                  failureRedirect: '/auth/signin',
-                  failureFlash: true
-                })
+  successRedirect: '/',
+  failureRedirect: '/auth/signin',
+  failureFlash: true
+})
 
-module.exports = {signinForm, signin};
+module.exports = { signinForm, signin };

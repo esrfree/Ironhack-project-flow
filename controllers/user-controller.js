@@ -5,15 +5,15 @@ const bcryptjs = require('bcryptjs');
 const bcryptSalt = 10;
 
 // Signup view
-const signup = ( req, res, next ) => {
+const signup = (req, res, next) => {
   res.render('./auth/signup');
 }
 
 // Create a new user
-const create = ( req, res, next ) => {  
+const create = (req, res, next) => {
   const { firstName, lastName, userName, email, password } = req.body;
   // no empty fields
-  if( !firstName || !lastName || !userName || !email || !password ) {
+  if (!firstName || !lastName || !userName || !email || !password) {
     res.render('./auth/signup', {
       errorMessage: 'All fields are mandatory. Please, provide all the information'
     })
@@ -21,33 +21,34 @@ const create = ( req, res, next ) => {
 
   User
     .findOne({ userName })
-    .then( user => {
+    .then(user => {
       //console.log(user)
       if (user) {
-      res.render('./auth/signup', { errorMessage: "User already exists"});
-      return;
+        res.render('./auth/signup', { errorMessage: "User already exists" });
+        return;
       }
 
       bcryptjs
-      .genSalt(bcryptSalt)
-      .then( salt => bcryptjs.hash( password, salt ))
-      .then( hashedPass => User.create({
-        firstName,
-        lastName,
-        userName,
-        email,
-        password: hashedPass
-      }))
-      .then( userFromDB => {
-        console.log('Newly created user: ', userFromDB);
-        //res.redirect('/...')
-      })
-      .catch( err => {
-        console.log(err);
-        res.send({ errorMessage: err.message })
-      })
+        .genSalt(bcryptSalt)
+        .then(salt => bcryptjs.hash(password, salt))
+        .then(hashedPass => User.create({
+          firstName,
+          lastName,
+          userName,
+          email,
+          password: hashedPass
+        }))
+        .then(userFromDB => {
+          //check if neeed asing session to user
+          console.log('Newly created user: ', userFromDB);
+          //res.redirect('/...')
+        })
+        .catch(err => {
+          console.log(err);
+          res.send({ errorMessage: err.message })
+        })
     })
-    .catch( err => {
+    .catch(err => {
       console.log(err);
       res.send({ errorMessage: err.message })
     })
@@ -57,7 +58,7 @@ const create = ( req, res, next ) => {
 const userById = (req, res, next, id) => {
   User
     .findById(id)
-    .then( (err, user) => {
+    .then((err, user) => {
       if (err || !user) {
         return res.status('400').send({ errorMessage: "User not found" })
       }
@@ -76,4 +77,4 @@ const read = (req, res) => {
 // Update operation
 
 
-module.exports = {signup, create, userById, read};
+module.exports = { signup, create, userById, read };
