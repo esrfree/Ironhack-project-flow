@@ -9,6 +9,9 @@ router.route('/auth/signin')
   .post(authCtrl.signin)
 
 
+//include this in login susscesfull 
+//req.session.currentUser=user
+
 //router.route('/auth/signout')
 //  .get(authCtrl.signout)
 //
