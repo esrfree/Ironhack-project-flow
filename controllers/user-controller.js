@@ -1,5 +1,5 @@
-const User = require('../models/User');
-const _ = require('lodash');
+const User      = require('../models/User');
+const _         = require('lodash');
 
 // BCrypt to encrypt passwords
 const bcryptjs = require('bcryptjs');
@@ -13,6 +13,7 @@ const signup = ( req, res, next ) => {
 // Create a new user
 const create = ( req, res, next ) => {  
   const { firstName, lastName, userName, email, password } = req.body;
+  
   // no empty fields
   if( !firstName || !lastName || !userName || !email || !password ) {
     res.render('./auth/signup', {
@@ -20,10 +21,8 @@ const create = ( req, res, next ) => {
     })
   }
 
-  User
-    .findOne({ userName })
+  User.findOne({ userName })
     .then( user => {
-      //console.log(user)
       if (user) {
       res.render('./auth/signup', { errorMessage: "User already exists"});
       return;
@@ -41,7 +40,7 @@ const create = ( req, res, next ) => {
       }))
       .then( userFromDB => {
         console.log('Newly created user: ', userFromDB);
-        //res.redirect('/...')
+        res.redirect('/login')
       })
       .catch( err => {
         console.log(err);
@@ -54,35 +53,7 @@ const create = ( req, res, next ) => {
     })
 }
 
-// Listing all users ( returning first name, last name, email, updated & created )
-const list = (req, res) => {
-  User.find()
-  .then( (err, users) => {
-    if (err) {
-      return res.status(400).send({ errorMessage: err })
-    }
-    res.send({ users })
-  })
-  .select( 'firstName lastName email updated')
-}
-
-// Loading a user by ID to Read, Update, or Delete
-const userById = (req, res, next, id) => {
-  User
-    .findById(id)
-    .then( (err, user) => {
-      if (err || !user) {
-        return res.status('400').send({ errorMessage: "User not found" })
-      }
-      /* If a matching user is found in the database,
-      the user object is appended to the request object
-      in the profile key */
-      req.session.user = user;
-      /* Then, the next() middleware is used to propagate
-      control to the next relevant controller function */
-      next()
-    })
-}
+/* The User is vailable through req.user after Passport authentication at signin */
 
 // Reading
 /* This function retrieves the user details from req.profile and removes
@@ -90,9 +61,8 @@ sensitive information before sending the user object in the response
 to the requesting client.
 */
 const read = (req, res) => {
-  req.profile.password = undefined
-  req.profile.salt = undefined
-  return res.send({ userProfile: req.session.user })
+  console.log(req.user)
+  res.render('./auth/userView')
 }
 
 // Updating
@@ -101,14 +71,15 @@ uses the lodash module to extend and merge the changes that came in the
 request body to update the user data.
 */
 const update = (req, res, next) => {
-  let user = req.profile;
-  user = _.extend(user, req.body);
-  user.save( err => {
+  let loggedUser = req.user;
+  loggedUser = _.extend(loggedUser, req.body);
+  loggedUser.save()
+  .then( (err, updatedUser) => {
     if (err) {
       return res.status(400).send({ errorMessage: err })
     }
-    user.password = undefined;
-    res.send({ user });
+    updatedUser.password = undefined;
+    res.send({ updatedUser }); // req.user = updatedUser ????
   })
 }
 
@@ -117,8 +88,8 @@ const update = (req, res, next) => {
 remove() query to delete the user from the database.
 */
 const remove = (req, res, next) => {
-  let user = req.profile;
-  user.remove()
+  let loggedUser = req.user;
+  loggedUser.remove()
   .then( (err, deletedUser) => {
     if (err) {
       return res.status(400).send({ errorMessage: err })
@@ -126,9 +97,8 @@ const remove = (req, res, next) => {
     deletedUser.password = undefined;
     res.send({ deletedUser })
   })
-
 }
 
 
 
-module.exports = {signup, create, list, userById, read, update, remove};
+module.exports = {signup, create, read, update, remove };

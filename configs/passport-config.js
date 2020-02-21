@@ -2,8 +2,6 @@ const User = require('../models/User');
 const bcryptjs = require('bcryptjs');
 const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
-const flash = require('connect-flash');
-const session      = require('express-session')
 
 
 // Configure the local strategy for use by Passport.
@@ -16,25 +14,24 @@ const session      = require('express-session')
 passport.use(
   new LocalStrategy({
     usernameField: 'userName',
-    passwordField: 'password', 
-    passReqToCallback: true 
-  }, 
-  ( req, username, password, callback ) => {
+    passwordField: 'password'
+  },
+  ( username, password, done ) => {
     User.findOne({ userName: username })
     .then( user => {
       if (!user) {
-        return callback( null, false, { errorMessage: 'Incorrect username' });
+        return done( null, false, { errorMessage: 'Incorrect username' });
       }
       if (!bcryptjs.compareSync( password, user.password )) {
-        return callback(null, false, { errorMessage: 'Incorrect password' });
+        return done(null, false, { errorMessage: 'Incorrect password' });
       } 
-      callback(null, user);
+      done(null, user);
     })
-    .catch( error => { 
-      callback(error); 
+    .catch( error => {
+      done(error) 
     });
   })
-  );
+);
 
 
   // Configure Passport authenticated session persistence.

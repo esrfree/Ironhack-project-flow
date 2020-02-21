@@ -6,8 +6,8 @@ const config      = require('./config')
 module.exports = app => {
   app.use(session({
     secret: config.jwtSecret,
-    resave: true,
-    saveUninitialized: false,                         // reading from .env the SECRET variable
+    resave: false,
+    saveUninitialized: true,                         // reading from .env the SECRET variable
     //cookie: { maxAge: 60 * 1000 },                    // 60 seconds
     store: new MongoStore({
       mongooseConnection: mongoose.connection,

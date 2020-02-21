@@ -9,8 +9,9 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const passport     = require('passport');
-//const session     = require("express-session");          // require session
-//const MongoStore  = require("connect-mongo")(session);   // require mongostore
+
+// Local user after authetication with Passport
+const localUser = require('./configs/local-user-config');
 
 
 // Set up the database
@@ -31,8 +32,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(localUser);  //uses the req.user generated after authentication with Passport
 
 // Express View engine setup
 app.use(require('node-sass-middleware')({
@@ -52,12 +56,11 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'Flow, MERN stack social media platform';
 
 
-const index = require('./routes/index');
-const user = require('./routes/user-routes');
-const auth = require('./routes/auth-routes');
-app.use('/', index);
-app.use('/', user);
-app.use('/', auth);
+// Routes middleware
+app.use('/', require('./routes/index'));
+app.use('/', require('./routes/user-routes'));
+app.use('/', require('./routes/other-users-routes'));
+app.use('/', require('./routes/auth-routes'));
 
 
 module.exports = app;

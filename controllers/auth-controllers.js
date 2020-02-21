@@ -1,7 +1,7 @@
 
 const passport = require("passport");
 
-const signinForm = (req, res) => {
+const login = (req, res) => {
   res.render('./auth/signin')
 }
 
@@ -21,11 +21,19 @@ const signinForm = (req, res) => {
 
 /* After successful authentication, Passport will establish a persistent login session.
 This is useful for the common scenario of users accessing a web application via a browser.
+
+Your User object is now available through req.user in an express app route callback
+after the user has been authenticated by passport.
 */
-const signin = passport.authenticate('local', {
+const authenticated = passport.authenticate('local', {                  
                   successRedirect: '/',
-                  failureRedirect: '/auth/signin',
-                  failureFlash: true
+                  failureRedirect: '/login'
                 })
 
-module.exports = {signinForm, signin};
+
+const signout = (req, res) => {
+  req.session.destroy();
+  res.redirect('/login')
+}
+
+module.exports = {login, authenticated, signout};
