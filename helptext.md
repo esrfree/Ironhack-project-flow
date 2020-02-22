@@ -1,3 +1,5 @@
+//scss
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -38,12 +40,4 @@ a {
   width: 110px !important;
 }
 
-.menu {
-  min-height: 20px !important;
-}
-
-.body {
-  padding: 0px !important;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-}
 

@@ -1,5 +1,12 @@
+body {
+  padding: 0px !important;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00B7FF; }
+
 .btn-secondary-login {
-  background: linear-gradient(to bottom, rgba(109,110,113,1), rgba(0,0,0,1));
+  background: linear-gradient(to bottom, #6d6e71, black);
   padding: 0px 30px;
   border: none;
   min-height: 28px;
@@ -7,20 +14,24 @@
   border-radius: 20px;
   color: #fff;
   position: relative;
-  outline: none;
-}
+  outline: none; }
 
-.btn-secondary:hover{
-	background: #000;
-  transition: all 1s;
-}
+.btn-secondary:hover {
+  background: #000;
+  transition: all 1s; }
 
 .login-input {
   min-width: 220px !important;
-  margin-right: 10px;
-  padding-left: 17px !important;
-}
+  margin-right: 10px !important;
+  padding-left: 17px !important; }
 
 #banner {
-  min-height: 850px;
-}
+  min-height: 700px !important; }
+
+.navbar-brand img {
+  width: 110px !important; }
+
+.menu {
+  min-height: 20px !important; }
+
+/*# sourceMappingURL=style.css.map */
