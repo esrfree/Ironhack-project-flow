@@ -34,4 +34,8 @@ a {
 .menu {
   min-height: 20px !important; }
 
+.body {
+  padding: 0px !important;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
 /*# sourceMappingURL=style.css.map */
