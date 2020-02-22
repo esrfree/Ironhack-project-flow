@@ -39,7 +39,10 @@ const create = (req, res, next) => {
           password: hashedPass
         }))
         .then(userFromDB => {
-          //check if neeed asing session to user
+          // asing session to req.ssesion.user
+          console.log(req.session)
+          //req.session.user = userFromDB;
+          //res.locals.user = req.session.user
           console.log('Newly created user: ', userFromDB);
           //res.redirect('/...')
         })

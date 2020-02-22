@@ -5,9 +5,10 @@ const User = require("../models/User");
 
 //Display Post
 router.get("/timeLine", (req, res, next) => {
-  Post.find()
+  Post.find({})
     .then((allPost) => {
-      const postArray = allPost.map(post => {
+      const reversedPosts = allPost.reverse();
+      const postArray = reversedPosts.map(post => {
         const obj = {
           ...post._doc,
           isOwner: req.session.user
@@ -21,7 +22,8 @@ router.get("/timeLine", (req, res, next) => {
         posts: postArray,
         noPost: postArray.length === 0
       };
-      res.render('/timeline', data);
+      console.log(data);
+      res.render('testTimeLine', data);
 
     })
     .catch((err) => { next(err) })
@@ -32,12 +34,88 @@ router.post('/createPost', (req, res, next) => {
 
   if (!req.session.user) {
     //redirec to Home Page
-    res.redirect("auth/signin");
+    res.redirect("/users");
     // here we will add a return to stop the rest of the route from running otherwise we may get errors for not finding req.session.user or possibly create blank boards.
     return;
   }
+  const newPost = req.body;
+  newPost.author = req.session.user._id;
+
+  Post.create(newPost)
+    .then(createdPost => {
+      //update user post
+      User.findByIdAndUpdate(
+        req.session.user._id,
+        { $push: { userPost: createdPost._id } },
+        { new: true }
+      )
+        .then(() => {
+          res.redirect('/timeLine');
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
 
 })
+//update post for followers
+router.post("/updateFollowers/:postI", (req, res, next) => {
+  Post.findById(req.params.postId)
+    .then(postFromDB => {
+      if (postFromDB.followers.includes(req.session.user._id)) {
+        postFromDB.pull(req.session.user._id);
+      } else {
+        postFromDB.push(req.session.user._id);
+      }
+      postFromDB
+        .save()
+        .then(updatedBoard => {
+          res.redirect("back");
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+//update likes
+router.post("/updateLikes/:postI", (req, res, next) => {
+  Post.findById(req.params.postId)
+    .then(postFromDB => {
+
+      if (postFromDB.likes.includes(req.session.user._id)) {
+        postFromDB.pull(req.session.user._id);
+      } else {
+        postFromDB.push(req.session.user._id);
+      }
+      postFromDB
+        .save()
+        .then(updatedBoard => {
+          res.redirect("back");
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+//delete post
+router.post("/delete/:postId", (req, res, next) => {
+  if (!req.session.user) {
+    res.redirect("/auth/login");
+  }
+
+  Post.findByIdAndDelete(req.params.postId)
+    .then(() => {
+      User.findByIdAndUpdate(
+        req.session.user._id,
+        { $pull: { userPost: req.params.postId } },
+        { new: true }
+      )
+        .then(() => {
+          res.redirect("/timeLine");
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
 
 
 

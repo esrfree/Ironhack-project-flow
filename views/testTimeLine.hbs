@@ -1,0 +1,21 @@
+<form action="/createPost" method="POST">
+  <label for="titleInput">Title: </label>
+  <input id="titleInput" name="title" type="text">
+  <br>
+  <label for="text"> Post Text: </label>
+  <textarea name="text" id="text" cols="30" rows="30"></textarea>
+  <button>Create</button>
+
+</form>
+
+{{#if noPost}}
+<h3> There are no Post to display at this time. Be the first to create a new post! </h3>
+{{else}}
+{{#each posts}}
+title: {{this.title}}
+{{#if this.isOwner}}
+<form action="/delete/:{{user._id}}" method="POST"><button>X</button></form>
+{{/if}}
+<br>
+{{/each}}
+{{/if}}

@@ -16,6 +16,9 @@ const postSchema = new Schema(
     image: {
       type: String
     },
+    text: {
+      type: String
+    },
     // the messages that belong to this board
     messages: {
       type: [
