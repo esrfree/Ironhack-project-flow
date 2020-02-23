@@ -1,5 +1,6 @@
 const User      = require('../models/User');
 const _         = require('lodash');
+const passport  = require("passport");
 
 // BCrypt to encrypt passwords
 const bcryptjs = require('bcryptjs');
@@ -7,7 +8,7 @@ const bcryptSalt = 10;
 
 // Signup view
 const signup = ( req, res, next ) => {
-  res.render('./auth/signup');
+  res.render('./index');
 }
 
 // Create a new user
@@ -16,7 +17,7 @@ const create = ( req, res, next ) => {
   
   // no empty fields
   if( !firstName || !lastName || !userName || !email || !password ) {
-    res.render('./auth/signup', {
+    res.render('./index', {
       errorMessage: 'All fields are mandatory. Please, provide all the information'
     })
   }
@@ -24,7 +25,7 @@ const create = ( req, res, next ) => {
   User.findOne({ userName })
     .then( user => {
       if (user) {
-      res.render('./auth/signup', { errorMessage: "User already exists"});
+      res.render('./index', { errorMessage: "User already exists"});
       return;
       }
 
@@ -40,7 +41,7 @@ const create = ( req, res, next ) => {
       }))
       .then( userFromDB => {
         console.log('Newly created user: ', userFromDB);
-        res.redirect('/login')
+        next();       // this next takes you to the next route to login
       })
       .catch( err => {
         console.log(err);

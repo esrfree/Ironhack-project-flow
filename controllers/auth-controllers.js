@@ -2,7 +2,7 @@
 const passport = require("passport");
 
 const login = (req, res) => {
-  res.render('./auth/signin')
+  res.render('./index')
 }
 
 //const signin = ( req, res, next ) => {
@@ -26,14 +26,14 @@ Your User object is now available through req.user in an express app route callb
 after the user has been authenticated by passport.
 */
 const authenticated = passport.authenticate('local', {                  
-                  successRedirect: '/',
-                  failureRedirect: '/login'
+                  successRedirect: '/profile',
+                  failureRedirect: '/signup'
                 })
 
 
 const signout = (req, res) => {
   req.session.destroy();
-  res.redirect('/login')
+  res.redirect('/signup')
 }
 
 module.exports = {login, authenticated, signout};

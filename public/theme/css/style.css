@@ -1570,7 +1570,7 @@ ul.album-photos li img{
 }
 
 .footer-wrapper{
-  padding: 50px 0;
+  padding: 15px 0;
   float: left;
   width: 100%;
 }
@@ -1628,7 +1628,7 @@ ul.contact{
 
 ul.contact li{
   list-style: none;
-  padding: 15px 0;
+  padding: 5px 0;
   border-bottom: 1px solid #f1f2f2;
   font-size: 12px;
   font-weight: 600;

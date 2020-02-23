@@ -47,23 +47,33 @@
 					<h2 class="text-white">SIGN UP</h2>
 					<div class="line-divider"></div>
 					<div class="form-wrapper">
-						<form action="#">
+						<form id="form" action="/signup" method="POST">
 							<fieldset class="form-group">
-								<input type="text" class="form-control" id="example-name" placeholder="Name">
+								<input type="text" class="form-control" id="firstname" name="firstName" placeholder="First Name">
+							</fieldset>
+              <fieldset class="form-group">
+								<input type="text" class="form-control" id="lastname" name="lastName" placeholder="Last Name">
+							</fieldset>
+              <fieldset class="form-group">
+								<input type="text" class="form-control" id="username" name="userName" placeholder="Username">
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="email" class="form-control" id="example-email" placeholder="Email">
+								<input type="email" class="form-control" id="input-email" name="email" placeholder="Email">
 							</fieldset>
 							<fieldset class="form-group">
-								<input type="password" class="form-control" id="example-password" placeholder="Password">
+								<input type="password" class="form-control" id="input-password" name="password" placeholder="Password">
 							</fieldset>
+              <br>
+						  <p class="signup-text">Made with ❤️at Ironhack Miami</p>
+						  <button type="submit" class="btn-secondary">Signup</button>
 						</form>
-            <br>
-						<p class="signup-text">Made with ❤️at Ironhack Miami</p>
-						<button class="btn-secondary">Signup</button>
 					</div>
 					<img class="form-shadow" src="/theme/images/bottom-shadow.png" alt="" />
 				</div><!-- Sign Up Form End -->
+
+        {{#if errorMessage}}
+          <div class="error-message">{{ errorMessage }}</div>
+        {{/if}}
 
         {{!-- <svg class="arrows hidden-xs hidden-sm">
           <path class="a1" d="M0 0 L30 32 L60 0"></path>
