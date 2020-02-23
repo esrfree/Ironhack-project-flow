@@ -64,7 +64,7 @@ to the requesting client.
 */
 const read = (req, res) => {
   console.log(req.user)
-  res.render('./auth/userView')
+  res.render('user/profile');
 }
 
 // Updating

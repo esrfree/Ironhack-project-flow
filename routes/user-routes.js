@@ -13,8 +13,8 @@ router
 
 
 router
-    .route('/profile', isLoggedIn)
-    .get(userCtrl.read)
+    .route('/profile')
+    .get(isLoggedIn, userCtrl.read)
 //  .put(userCtrl.update)
     .delete(userCtrl.remove)
 
