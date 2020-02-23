@@ -8,7 +8,7 @@ const bcryptSalt = 10;
 
 // Signup view
 const signup = ( req, res, next ) => {
-  res.render('./index');
+  res.render('index');
 }
 
 // Create a new user
@@ -17,15 +17,16 @@ const create = ( req, res, next ) => {
   
   // no empty fields
   if( !firstName || !lastName || !userName || !email || !password ) {
-    res.render('./index', {
+    res.render('index', {
       errorMessage: 'All fields are mandatory. Please, provide all the information'
     })
+    return;
   }
 
   User.findOne({ userName })
     .then( user => {
       if (user) {
-      res.render('./index', { errorMessage: "User already exists"});
+      res.render('index', { errorMessage: "User already exists"});
       return;
       }
 

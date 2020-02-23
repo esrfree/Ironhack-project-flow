@@ -7,7 +7,7 @@ const isLoggedIn    = require('../configs/route-guard-config');
 router
   .route('/signup')
   //.get(userCtrl.list)
-  //.get(userCtrl.signup)
+  .get(userCtrl.signup)
   .post(userCtrl.create)
   .post(authCtrl.authenticated)
 

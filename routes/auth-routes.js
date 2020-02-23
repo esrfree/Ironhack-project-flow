@@ -8,8 +8,8 @@ router.route('/login')
   .post(authCtrl.authenticated)
 
 
-router.route('/signout')
-  .get(authCtrl.signout)
+router.route('/logout')
+  .get(authCtrl.logout)
 
 
 module.exports = router;

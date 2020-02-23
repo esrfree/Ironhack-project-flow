@@ -31,9 +31,9 @@ const authenticated = passport.authenticate('local', {
                 })
 
 
-const signout = (req, res) => {
+const logout = (req, res) => {
   req.session.destroy();
-  res.redirect('/signup')
+  res.redirect('/')
 }
 
-module.exports = {login, authenticated, signout};
+module.exports = {login, authenticated, logout};
