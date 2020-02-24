@@ -4,12 +4,12 @@ const authCtrl = require('../controllers/auth-controllers')
 const router = express.Router()
 
 router.route('/login')
-  .get(authCtrl.login)
+  //.get(authCtrl.login)
   .post(authCtrl.authenticated)
 
 
-router.route('/signout')
-  .get(authCtrl.signout)
+router.route('/logout')
+  .get(authCtrl.logout)
 
 
 module.exports = router;

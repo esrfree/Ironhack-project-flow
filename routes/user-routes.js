@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const userCtrl = require('../controllers/user-controller')
+const userCtrl = require('../controllers/user-controller');
+const authCtrl = require('../controllers/auth-controllers')
 const isLoggedIn    = require('../configs/route-guard-config');
 
 router
@@ -8,11 +9,12 @@ router
   //.get(userCtrl.list)
   .get(userCtrl.signup)
   .post(userCtrl.create)
+  .post(authCtrl.authenticated)
 
 
 router
-    .route('/user', isLoggedIn)
-    .get(userCtrl.read)
+    .route('/profile')
+    .get(isLoggedIn, userCtrl.read)
 //  .put(userCtrl.update)
     .delete(userCtrl.remove)
 
