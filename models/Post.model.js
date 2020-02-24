@@ -19,12 +19,12 @@ const postSchema = new Schema(
     text: {
       type: String
     },
-    // the messages that belong to this board
-    messages: {
+    // the comments that belong to this board
+    comments: {
       type: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Message"
+          ref: "Comment.model"
         }
       ]
     },

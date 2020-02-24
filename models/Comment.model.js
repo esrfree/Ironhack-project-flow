@@ -2,18 +2,18 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 
-const messageSchema = new Schema(
+const commentSchema = new Schema(
   {
-    // the user that generated this message
+    // the user that generated this comment
     author: {
       type: Schema.Types.ObjectId,
       ref: "User"
     },
-    // the message to be viewed by users
-    message: {
+    // the comment to be viewed by users
+    comment: {
       type: String
     },
-    // add user._id in order to get the length of the likes array and see how many likes the message has
+    // add user._id in order to get the length of the likes array and see how many likes the comment has
     reactionId: {
       type: [
         {
@@ -33,27 +33,19 @@ const messageSchema = new Schema(
       type: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Reply"
+          ref: "Reply.model"
         }
       ]
     },
     // the message board that this message belongs to
     parentPost: {
       type: Schema.Types.ObjectId,
-      ref: "Post"
+      ref: "Post.model"
     }
   },
   { timestamps: true }
 );
 
-// const autoPopulateAuthor = next => {
-//     this.populate("author");
-//     next();
-// };
 
-// messageSchema
-//     .pre("findOne", autoPopulateAuthor)
-//     .pre("find", autoPopulateAuthor);
-
-const Message = model("Message", messageSchema);
-module.exports = Message;
+const Comment = model("Comment", commentSchema);
+module.exports = Comment;

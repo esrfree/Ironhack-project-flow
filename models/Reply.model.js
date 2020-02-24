@@ -14,10 +14,10 @@ const replySchema = new Schema(
     reply: {
       type: String
     },
-    // the message this reply belongs to (not the reply)
-    message: {
+    // the comment this reply belongs to (not the reply)
+    comments: {
       type: Schema.Types.ObjectId,
-      ref: "Message"
+      ref: "Comment.model"
     },
     // add user._id in order to get the length of the likes array and see how many likes the reply has
     reactionId: {

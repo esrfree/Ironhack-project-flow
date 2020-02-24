@@ -15,6 +15,8 @@
 title: {{this.title}}
 {{#if this.isOwner}}
 <form action="/delete/:{{user._id}}" method="POST"><button>X</button></form>
+<form action="/create/c/:{{user._id}}" method="POST"><button>X</button></form>
+
 {{/if}}
 <br>
 {{/each}}

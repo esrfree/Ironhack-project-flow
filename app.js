@@ -21,7 +21,16 @@ const flash = require("connect-flash");
 require('./configs/db-config');
 
 const app_name = require('./package.json').name;
-const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
+
+const debug = require('debug')(`$ {
+    app_name
+  }
+
+  :$ {
+    path.basename(__filename).split('.')[0]
+  }
+
+  `);
 
 const app = express();
 
@@ -30,7 +39,12 @@ const app = express();
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.urlencoded({
+  extended: false
+}
+
+));
 app.use(cookieParser());
 
 // Express View engine setup
@@ -38,7 +52,9 @@ app.use(require('node-sass-middleware')({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
   sourceMap: true
-}));
+}
+
+));
 
 
 // hbs as view engine
@@ -52,15 +68,21 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // default value for title local
 app.locals.title = 'Flow, MERN stack social media platform';
+
 // Enable authentication using session + passport
-app.use(
-  session({
-    secret: "regenerator",
-    resave: true,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-  })
-);
+app.use(session({
+
+  secret: "regenerator",
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection
+  }
+
+  )
+}
+
+));
 app.use(flash());
 require("./Passport")(app);
 
@@ -75,7 +97,9 @@ app.use((req, res, next) => {
   // after we have finished what needs to be done in this section we call next so that we continue onto the next process that must be ran.
   // ** forgetting to add a next() here can make your app hang and you may not get any error messages letting your know why it is hanging. If you see  GET / - - ms - -  in your terminal then that will more than likely mean that you forgot to add a next here.
   next();
-});
+}
+
+);
 
 
 
@@ -85,6 +109,7 @@ app.use((req, res, next) => {
 app.use("/", require("./routes/index"));
 app.use("/", require("./routes/myAuth"));
 app.use('/', require('./routes/post-routes'));
+app.use('/', require('./routes/comments-routes'));
 
 
 
