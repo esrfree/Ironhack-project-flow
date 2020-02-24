@@ -163,7 +163,7 @@ section .wrapper{
 }
 
 .btn-secondary{
-	background: #5E9A4C;
+	background: linear-gradient(to bottom, rgba(109,110,113,1), rgba(0,0,0,1));
 	padding: 0 40px;
 	border: none;
 	min-height: 36px;
@@ -1570,7 +1570,7 @@ ul.album-photos li img{
 }
 
 .footer-wrapper{
-  padding: 50px 0;
+  padding: 15px 0;
   float: left;
   width: 100%;
 }
@@ -1628,7 +1628,7 @@ ul.contact{
 
 ul.contact li{
   list-style: none;
-  padding: 15px 0;
+  padding: 5px 0;
   border-bottom: 1px solid #f1f2f2;
   font-size: 12px;
   font-weight: 600;

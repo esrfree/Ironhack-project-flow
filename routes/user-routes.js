@@ -1,19 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const userCtrl = require('../controllers/user-controller')
+const userCtrl = require('../controllers/user-controller');
 const authCtrl = require('../controllers/auth-controllers')
+const isLoggedIn    = require('../configs/route-guard-config');
 
-router.route('/users')
-  //.get(userCtrl.lis)
+router
+  .route('/signup')
+  //.get(userCtrl.list)
   .get(userCtrl.signup)
   .post(userCtrl.create)
+  .post(authCtrl.authenticated)
 
 
-router.route('/users/:userId')
-    .get(userCtrl.read)
-//  .put(authCtrl.update)
-//  .delete(authCtrl.delete)
-//
-router.param('userId', userCtrl.userById)
+router
+    .route('/profile')
+    .get(isLoggedIn, userCtrl.read)
+//  .put(userCtrl.update)
+    .delete(userCtrl.remove)
+
+
 
 module.exports = router;
