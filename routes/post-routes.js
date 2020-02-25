@@ -11,9 +11,9 @@ router.get("/timeLine", (req, res, next) => {
       const postArray = reversedPosts.map(post => {
         const obj = {
           ...post._doc,
-          isOwner: req.session.user
+          isOwner: req.user
             ? post.author._id.toString() ===
-            req.session.user._id.toString()
+            req.user._id.toString()
             : false
         };
         return obj;
@@ -32,20 +32,20 @@ router.get("/timeLine", (req, res, next) => {
 //create Post
 router.post('/createPost', (req, res, next) => {
 
-  if (!req.session.user) {
+  if (!req.user) {
     //redirec to Home Page
     res.redirect("/users");
     // here we will add a return to stop the rest of the route from running otherwise we may get errors for not finding req.session.user or possibly create blank boards.
     return;
   }
   const newPost = req.body;
-  newPost.author = req.session.user._id;
+  newPost.author = req.user._id;
 
   Post.create(newPost)
     .then(createdPost => {
       //update user post
       User.findByIdAndUpdate(
-        req.session.user._id,
+        req.user._id,
         { $push: { userPost: createdPost._id } },
         { new: true }
       )
@@ -61,10 +61,10 @@ router.post('/createPost', (req, res, next) => {
 router.post("/updateFollowers/:postI", (req, res, next) => {
   Post.findById(req.params.postId)
     .then(postFromDB => {
-      if (postFromDB.followers.includes(req.session.user._id)) {
-        postFromDB.pull(req.session.user._id);
+      if (postFromDB.followers.includes(re.user._id)) {
+        postFromDB.pull(re.user._id);
       } else {
-        postFromDB.push(req.session.user._id);
+        postFromDB.push(re.user._id);
       }
       postFromDB
         .save()
@@ -80,10 +80,10 @@ router.post("/updateLikes/:postI", (req, res, next) => {
   Post.findById(req.params.postId)
     .then(postFromDB => {
 
-      if (postFromDB.likes.includes(req.session.user._id)) {
-        postFromDB.pull(req.session.user._id);
+      if (postFromDB.likes.includes(re.user._id)) {
+        postFromDB.pull(re.user._id);
       } else {
-        postFromDB.push(req.session.user._id);
+        postFromDB.push(re.user._id);
       }
       postFromDB
         .save()
@@ -97,14 +97,14 @@ router.post("/updateLikes/:postI", (req, res, next) => {
 
 //delete post
 router.post("/delete/:postId", (req, res, next) => {
-  if (!req.session.user) {
+  if (!re.user) {
     res.redirect("/auth/login");
   }
 
   Post.findByIdAndDelete(req.params.postId)
     .then(() => {
       User.findByIdAndUpdate(
-        req.session.user._id,
+        re.user._id,
         { $pull: { userPost: req.params.postId } },
         { new: true }
       )

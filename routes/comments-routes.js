@@ -25,14 +25,11 @@ router.post("/create/comment/:postId", (req, res, next) => {
           res.status(200).json(updatedPost);
         })
         .catch(err => next(err));
+    })
 
-
-
-
-
-
-  //   .then(newlyCreatedMessage => {
-  //     res.status(200).json({ newlyCreatedMessage });
-  //   })
-    .catch (err => next(err));
+    //   .then(newlyCreatedMessage => {
+    //     res.status(200).json({ newlyCreatedMessage });
+    //   })
+    .catch(err => next(err));
 });
+module.exports = router;

@@ -1,4 +1,6 @@
 const User = require('../models/User');
+const _ = require('lodash');
+const passport = require("passport");
 
 // BCrypt to encrypt passwords
 const bcryptjs = require('bcryptjs');
@@ -6,25 +8,25 @@ const bcryptSalt = 10;
 
 // Signup view
 const signup = (req, res, next) => {
-  res.render('./auth/signup');
+  res.render('index');
 }
 
 // Create a new user
 const create = (req, res, next) => {
   const { firstName, lastName, userName, email, password } = req.body;
+
   // no empty fields
   if (!firstName || !lastName || !userName || !email || !password) {
-    res.render('./auth/signup', {
+    res.render('index', {
       errorMessage: 'All fields are mandatory. Please, provide all the information'
     })
+    return;
   }
 
-  User
-    .findOne({ userName })
+  User.findOne({ userName })
     .then(user => {
-      //console.log(user)
       if (user) {
-        res.render('./auth/signup', { errorMessage: "User already exists" });
+        res.render('index', { errorMessage: "User already exists" });
         return;
       }
 
@@ -39,12 +41,8 @@ const create = (req, res, next) => {
           password: hashedPass
         }))
         .then(userFromDB => {
-          // asing session to req.ssesion.user
-          console.log(req.session)
-          //req.session.user = userFromDB;
-          //res.locals.user = req.session.user
           console.log('Newly created user: ', userFromDB);
-          //res.redirect('/...')
+          next();       // this next takes you to the next route to login
         })
         .catch(err => {
           console.log(err);
@@ -57,27 +55,52 @@ const create = (req, res, next) => {
     })
 }
 
-//Load user and append to req.
-const userById = (req, res, next, id) => {
-  User
-    .findById(id)
-    .then((err, user) => {
-      if (err || !user) {
-        return res.status('400').send({ errorMessage: "User not found" })
+/* The User is vailable through req.user after Passport authentication at signin */
+
+// Reading
+/* This function retrieves the user details from req.profile and removes
+sensitive information before sending the user object in the response
+to the requesting client.
+*/
+const read = (req, res) => {
+  console.log(req.user)
+  res.render('user/profile');
+}
+
+// Updating
+/* The update function retrieves the user details from req.profile, then
+uses the lodash module to extend and merge the changes that came in the
+request body to update the user data.
+*/
+const update = (req, res, next) => {
+  let loggedUser = req.user;
+  loggedUser = _.extend(loggedUser, req.body);
+  loggedUser.save()
+    .then((err, updatedUser) => {
+      if (err) {
+        return res.status(400).send({ errorMessage: err })
       }
-      req.profile = user
-      next()
+      updatedUser.password = undefined;
+      res.send({ updatedUser }); // req.user = updatedUser ????
     })
 }
 
-// Read operation
-const read = (req, res) => {
-  req.profile.password = undefined
-  req.profile.salt = undefined
-  return res.send(req.profile)
+// Deleting
+/* The remove function retrieves the user from req.profile and uses the
+remove() query to delete the user from the database.
+*/
+const remove = (req, res, next) => {
+  let loggedUser = req.user;
+  loggedUser.remove()
+    .then((err, deletedUser) => {
+      if (err) {
+        return res.status(400).send({ errorMessage: err })
+      }
+      deletedUser.password = undefined;
+      res.send({ deletedUser })
+    })
 }
 
-// Update operation
 
 
-module.exports = { signup, create, userById, read };
+module.exports = { signup, create, read, update, remove };
