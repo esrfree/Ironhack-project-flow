@@ -13,12 +13,18 @@ const postSchema = new Schema(
     title: {
       type: String
     },
-    // the messages that belong to this board
-    messages: {
+    image: {
+      type: String
+    },
+    text: {
+      type: String
+    },
+    // the comments that belong to this board
+    comments: {
       type: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Message"
+          ref: "Comment.model"
         }
       ]
     },
