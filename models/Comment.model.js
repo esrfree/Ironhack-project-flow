@@ -33,19 +33,12 @@ const commentSchema = new Schema(
       type: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Reply.model"
+          ref: "Reply"
         }
       ]
     },
-    // the message board that this message belongs to
-    parentPost: {
-      type: Schema.Types.ObjectId,
-      ref: "Post.model"
-    }
   },
   { timestamps: true }
 );
+module.exports = model("Comment", commentSchema);
 
-
-const Comment = model("Comment", commentSchema);
-module.exports = Comment;

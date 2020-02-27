@@ -45,6 +45,7 @@ app.use('/', require('./routes/index'));
 app.use('/', require('./routes/user-routes'));
 app.use('/', require('./routes/other-users-routes'));
 app.use('/', require('./routes/auth-routes'));
-app.use('/', require('./routes/post-routes'))
-app.use('/', require('./routes/comments-routes'))
+app.use('/', require('./routes/post-routes'));
+app.use('/', require('./routes/comments-routes'));
+app.use('/', require('./routes/reply-routes'));
 module.exports = app;

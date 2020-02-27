@@ -3,14 +3,16 @@ const router = express.Router();
 const Post = require("../models/Post.model");
 const User = require("../models/User");
 const Comment = require('../models/Comment.model')
+const Reply = require('../models/Reply.model')
 
 
-//create message
-router.post("/create/comment/:postId", (req, res, next) => {
+//create comment
+router.post("/createComment/:postId", (req, res, next) => {
   // Logged in user is set as the messages author and the message is grabbed from the body
   const theComment = req.body;
-  theComment.author = req.session.user._id;
-  theComment.parentPost = req.params.postId;
+  theComment.author = req.user._id;
+  console.log("************************post id   " + req.params.postId)
+
 
   // create a new comment and send it back in json format
   Comment.create(theComment)
@@ -22,7 +24,8 @@ router.post("/create/comment/:postId", (req, res, next) => {
         { new: true }
       )
         .then(updatedPost => {
-          res.status(200).json(updatedPost);
+          //res.status(200).json(updatedPost);
+          res.redirect('/timeLine');
         })
         .catch(err => next(err));
     })
@@ -32,4 +35,26 @@ router.post("/create/comment/:postId", (req, res, next) => {
     //   })
     .catch(err => next(err));
 });
+
+
+//delete comment
+router.post("/deleteComment/:commentId/:postId", (req, res, next) => {
+  // find the post and remove the reference to the comment that is being deleted
+  Post.findByIdAndUpdate(
+    req.params.postId,
+    { $pull: { comments: req.params.commentId } },
+    { new: true }
+  )
+    .then(() => {
+      // remove the message itself and redirect user to the previous page
+      Comment.findByIdAndDelete(req.params.commentId)
+        .then(() => {
+          res.redirect("back");
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+
 module.exports = router;
