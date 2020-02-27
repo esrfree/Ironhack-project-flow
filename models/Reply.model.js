@@ -14,11 +14,6 @@ const replySchema = new Schema(
     reply: {
       type: String
     },
-    // the comment this reply belongs to (not the reply)
-    comments: {
-      type: Schema.Types.ObjectId,
-      ref: "Comment.model"
-    },
     // add user._id in order to get the length of the likes array and see how many likes the reply has
     reactionId: {
       type: [
@@ -32,27 +27,11 @@ const replySchema = new Schema(
     reaction: {
       type: [String],
       enum: ["love", "fun", "like", "sad", "amaze", "dislike"]
-    },
-    // the replies to this reply
-    // for now we will not add this to our example app. But if you fork and clone this app maybe you can create a route to do so as practice
-    replies: {
-      type: [
-        {
-          type: Schema.Types.ObjectId,
-          ref: "Reply"
-        }
-      ]
     }
   },
   { timestamps: true }
 );
 
-// const autoPopulateAuthor = next => {
-//     this.populate("author");
-//     next();
-// };
-
-// replySchema.pre("findOne", autoPopulateAuthor).pre("find", autoPopulateAuthor);
 
 const Reply = model("Reply", replySchema);
 module.exports = Reply;
