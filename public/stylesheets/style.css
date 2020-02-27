@@ -38,4 +38,20 @@ a {
   padding: 0px !important;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
+.form-group-main {
+  width: 70% !important;
+  margin-bottom: 15px !important; }
+
+.form-group-age {
+  width: 25% !important;
+  margin-bottom: 15px !important; }
+
+.form-group-address {
+  width: 33% !important;
+  margin-bottom: 15px !important; }
+
+.form-group-city {
+  width: 50% !important;
+  margin-bottom: 15px !important; }
+
 /*# sourceMappingURL=style.css.map */
