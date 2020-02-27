@@ -20,13 +20,15 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
+<<<<<<< HEAD
               <li class="header-button"><a href="/profile">{{user.firstName}}</a></li> <!-- replace with first name -->
+=======
+              <li class="header-button-profile"><a href="/profile">Michaela</a></li> <!-- replace with first name -->
+>>>>>>> 0c6b6ced87bfd6f134a9e707884d0d172952994d
               <li class="header-button"><a href="/logout">Log out</a></li>
             </ul>
             <form class="navbar-form navbar-right hidden-sm">
-              <div class="form-group">
-                <i class="icon ion-android-search"></i>
-              </div>
+              
             </form>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
@@ -46,21 +48,27 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
+<<<<<<< HEAD
                   <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
                   <h3>{{user.firstName}} {{user.lastName}}</h3>
                   <p class="text-muted">Miami</p> <!-- replace with city -->
+=======
+                  <img src="../images/michaela.jpeg" alt="" class="img-responsive profile-photo" />
+                  <h3>Michaela DeMachado</h3>
+                  <p class="text-muted">Miami, Florida
+                  </p> <!-- replace with city -->
+>>>>>>> 0c6b6ced87bfd6f134a9e707884d0d172952994d
                 </div>
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html" class="active">Timeline</a></li>
-                  <li><a href="timeline-about.html">About</a></li>
-                  <li><a href="timeline-album.html">Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
+                  <li><a href="timeline.html" class="active">Profile</a></li>
+                  <li><a href="timeline-about.html">Timeline</a></li>
+                  <li><a href="timeline-album.html">News</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
-                  <li>1,299 people following her</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
+                  {{!-- <li>1,299 people following her</li> --}}
+                  <li><button class="btn-primary">Edit Profile</button></li>
                 </ul>
               </div>
             </div>
@@ -105,8 +113,6 @@
                       <ul class="publishing-tools list-inline">
                         <li><a href="#"><i class="ion-compose"></i></a></li>
                         <li><a href="#"><i class="ion-images"></i></a></li>
-                        <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-                        <li><a href="#"><i class="ion-map"></i></a></li>
                       </ul>
                       <button class="btn btn-primary pull-right">Post</button> <!-- Link to method to post-->
                     </div>
@@ -140,17 +146,25 @@
                     <div class="post-text">
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
                     </div>
+                    <button class="profile-link">Edit</button>
+                    <button class="profile-link">Delete</button>
+                    <a href="timeline.html" class="profile-link">Michaela DeCamara</a>
+
                     <div class="line-divider"></div>
                     <div class="post-comment">
                       <img src="../images/kayla.jpeg" alt="" class="profile-photo-sm" />
                       <p><a href="timeline.html" class="profile-link">Kayla </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                     </div>
+                      <button class="profile-link">Reply</button>
+                      <button class="profile-link">Delete</button>
                     <div class="post-comment">
                       <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
                       <p><a href="timeline.html" class="profile-link">Gustavo</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                     </div>
+                    <button class="profile-link">Edit</button>
+                    <button class="profile-link">Delete</button>
                     <div class="post-comment">
-                      <img src={{user.photo}} alt="" class="profile-photo-sm" />
+                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
                       <input type="text" class="form-control" placeholder="Post a comment">
                       <button class="btn-primary">Post</button>
                     </div>
@@ -158,118 +172,14 @@
                 </div>
               </div>
 
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
-
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Michaela</h5>
-                  <p class="text-grey">10/22/2016</p>
-                </div><!--Post Date End-->
-
-                <img src="images/post-images/13.jpg" alt="post-image" class="img-responsive post-image" />
-                <div class="post-container">
-                  <img src="../images/michaela.jpeg" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Michaela DeCamara</a> <span class="following">following</span></h5>
-                      <p class="text-muted">Yesterday</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a> <!-- Needs to reflect the number of likes-->
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a> <!-- Needs to reflect the number of dislikes-->
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="../images/kayla.jpeg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">Kayla </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">Gustavo</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
-
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>Michaela</h5>
-                  <p class="text-grey">10/21/2016</p>
-                </div><!--Post Date End-->
-
-                <div class="post-container">
-                  <img src="../images/michaela.jpeg" alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Michaela DeCamara</a> <span class="following">following</span></h5>
-                      <p class="text-muted">2 days ago</p>
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 49</a> <!-- Needs to reflect the number of likes-->
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a> <!-- Needs to reflect the number of dislikes-->
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="../images/kayla.jpeg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">Kayla </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">Gustavo</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                    <div class="post-comment">
-                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
-                      <input type="text" class="form-control" placeholder="Post a comment">
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
 
             </div>
             <div class="col-md-2 static">
               <div id="sticky-sidebar">
                 <h4 class="grey">Michaela's activity</h4>
                 <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Michaela</a> Commended on a Photo</p>
-                    <p class="text-muted">5 mins ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Michaela</a> Has posted a photo</p>
-                    <p class="text-muted">an hour ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Michaela</a> Liked her friend's post</p>
-                    <p class="text-muted">4 hours ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Michaela</a> has shared an album</p>
-                    <p class="text-muted">a day ago</p>
-                  </div>
+                  <p>Hiking, running and other</p>
                 </div>
               </div>
             </div>
@@ -291,10 +201,9 @@
             <div class="col-md-2 col-sm-2">
               <h6>Site Map</h6>
               <ul class="footer-links">
-                <li><a href="">Home</a></li>
                 <li><a href="">Timeline</a></li>
                 <li><a href="">Profile</a></li>
-                <li><a href="">News app</a></li>
+                <li><a href="">News</a></li>
               </ul>
             </div>
             <div class="col-md-2 col-sm-2">
