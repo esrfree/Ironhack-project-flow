@@ -5,20 +5,6 @@ const login = (req, res) => {
   res.render('./index')
 }
 
-//const signin = ( req, res, next ) => {
-//  User.findOne({ userName: req.body.username })
-//      .then( userFromDB => {
-//        if( !userFromDB ) {
-//          res.render('./auth/signin' , { 
-//            errorMessage: "This username was not found in the system"
-//          })
-//          return;
-//        }
-//        
-//      })
-//}
-
-
 /* After successful authentication, Passport will establish a persistent login session.
 This is useful for the common scenario of users accessing a web application via a browser.
 

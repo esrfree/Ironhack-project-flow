@@ -13,17 +13,17 @@ const signup = ( req, res, next ) => {
 
 // Create a new user
 const create = ( req, res, next ) => {  
-  const { firstName, lastName, userName, email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
   
   // no empty fields
-  if( !firstName || !lastName || !userName || !email || !password ) {
+  if( !firstName || !lastName || !email || !password ) {
     res.render('index', {
       errorMessage: 'All fields are mandatory. Please, provide all the information'
     })
     return;
   }
 
-  User.findOne({ userName })
+  User.findOne({ email })
     .then( user => {
       if (user) {
       res.render('index', { errorMessage: "User already exists"});
@@ -36,7 +36,6 @@ const create = ( req, res, next ) => {
       .then( hashedPass => User.create({
         firstName,
         lastName,
-        userName,
         email,
         password: hashedPass
       }))
