@@ -6,9 +6,17 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-//router.get('/profile', (req, res, next) => {
-//  res.render('user/profile');
-//});
+router.get('/profile', (req, res, next) => {
+ res.render('profile');
+});
+
+router.get('/profile-edit', (req, res, next) => {
+  res.render('profile-edit');
+ });
+
+ router.get('/timeline-test', (req, res, next) => {
+  res.render('timeline-test');
+ });
 
 // router.get('/profile', (req, res, next) => {
 //   res.render('profile');

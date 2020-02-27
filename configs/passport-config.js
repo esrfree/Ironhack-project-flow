@@ -27,14 +27,10 @@ passport.use(
       } 
       done(null, user);
     })
-    .catch( error => {
-      done(error) 
-    });
-  })
-);
+  }));
 
 
-  // Configure Passport authenticated session persistence.
+// Configure Passport authenticated session persistence.
 //
 // In order to restore authentication state across HTTP requests, Passport needs
 // to serialize users into and deserialize users out of the session.  The
@@ -42,11 +38,11 @@ passport.use(
 // serializing, and querying the user record by ID from the database when
 // deserializing.
 
-passport.serializeUser( (user, callback) => {
+passport.serializeUser((user, callback) => {
   callback(null, user._id);
 });
 
-passport.deserializeUser( (id, callback) => {
+passport.deserializeUser((id, callback) => {
   User.findById(id)
     .then(user => {
       callback(null, user);

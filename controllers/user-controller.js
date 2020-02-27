@@ -1,13 +1,13 @@
-const User      = require('../models/User');
-const _         = require('lodash');
-const passport  = require("passport");
+const User = require('../models/User');
+const _ = require('lodash');
+const passport = require("passport");
 
 // BCrypt to encrypt passwords
 const bcryptjs = require('bcryptjs');
 const bcryptSalt = 10;
 
 // Signup view
-const signup = ( req, res, next ) => {
+const signup = (req, res, next) => {
   res.render('index');
 }
 
@@ -26,8 +26,8 @@ const create = ( req, res, next ) => {
   User.findOne({ email })
     .then( user => {
       if (user) {
-      res.render('index', { errorMessage: "User already exists"});
-      return;
+        res.render('index', { errorMessage: "User already exists" });
+        return;
       }
 
       bcryptjs
@@ -48,7 +48,7 @@ const create = ( req, res, next ) => {
         res.send({ errorMessage: err.message })
       })
     })
-    .catch( err => {
+    .catch(err => {
       console.log(err);
       res.send({ errorMessage: err.message })
     })
@@ -75,13 +75,13 @@ const update = (req, res, next) => {
   let loggedUser = req.user;
   loggedUser = _.extend(loggedUser, req.body);
   loggedUser.save()
-  .then( (err, updatedUser) => {
-    if (err) {
-      return res.status(400).send({ errorMessage: err })
-    }
-    updatedUser.password = undefined;
-    res.send({ updatedUser }); // req.user = updatedUser ????
-  })
+    .then((err, updatedUser) => {
+      if (err) {
+        return res.status(400).send({ errorMessage: err })
+      }
+      updatedUser.password = undefined;
+      res.send({ updatedUser }); // req.user = updatedUser ????
+    })
 }
 
 // Deleting
@@ -91,15 +91,15 @@ remove() query to delete the user from the database.
 const remove = (req, res, next) => {
   let loggedUser = req.user;
   loggedUser.remove()
-  .then( (err, deletedUser) => {
-    if (err) {
-      return res.status(400).send({ errorMessage: err })
-    }
-    deletedUser.password = undefined;
-    res.send({ deletedUser })
-  })
+    .then((err, deletedUser) => {
+      if (err) {
+        return res.status(400).send({ errorMessage: err })
+      }
+      deletedUser.password = undefined;
+      res.send({ deletedUser })
+    })
 }
 
 
 
-module.exports = {signup, create, read, update, remove };
+module.exports = { signup, create, read, update, remove };
