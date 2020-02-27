@@ -11,8 +11,6 @@ router.post("/createComment/:postId", (req, res, next) => {
   // Logged in user is set as the messages author and the message is grabbed from the body
   const theComment = req.body;
   theComment.author = req.user._id;
-  console.log("************************post id   " + req.params.postId)
-
 
   // create a new comment and send it back in json format
   Comment.create(theComment)
