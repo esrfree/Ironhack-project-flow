@@ -66,6 +66,10 @@ const read = (req, res) => {
 uses the lodash module to extend and merge the changes that came in the
 request body to update the user data.
 */
+const readForUpdate = (req, res) => {
+  res.render('edit-profile');
+}
+
 const update = (req, res, next) => {
   User.findByIdAndUpdate(req.user.id, req.body)
   //let loggedUser = req.user;
@@ -98,4 +102,4 @@ const remove = (req, res, next) => {
 
 
 
-module.exports = { signup, create, read, update, remove };
+module.exports = { signup, create, read, readForUpdate, update, remove };

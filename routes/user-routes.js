@@ -10,17 +10,18 @@ router
   .get(userCtrl.signup)
   .post(userCtrl.create)
   .post(authCtrl.authenticated)
-
-
+  
 router
     .route('/profile')
     .get(isLoggedIn, userCtrl.read)
 //  .put(userCtrl.update)
-    .delete(userCtrl.remove)
+//  .delete(userCtrl.remove)
 
 router
-    .route('/profile/edit')
-    .get(isLoggedIn, userCtrl.read)
-    .post(userCtrl.update)
+    .route('profile/edit')
+    .get(userCtrl.readForUpdate)
+    //.post(userCtrl.update)
+
+
 
 module.exports = router;

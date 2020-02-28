@@ -1,4 +1,5 @@
 const passport = require("passport");
+
 const login = (req, res) => {
   res.render('./index')
 }
@@ -12,6 +13,7 @@ const authenticated = passport.authenticate('local', {
   successRedirect: '/profile',
   failureRedirect: '/signup'
 })
+
 const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/')
