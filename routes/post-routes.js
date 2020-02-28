@@ -2,19 +2,26 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post.model");
 const User = require("../models/User");
+const Comment = require("../models/Comment.model")
+const Reply = require('../models/Reply.model')
 
 //Display Post
 router.get("/timeLine", (req, res, next) => {
   Post.find({})
+    .populate({
+      path: "comments",
+
+      populate: [{ path: "replies" }, { path: "author" }]
+    })
+    .populate("followers")
     .then((allPost) => {
+      console.log(allPost + "*******************************returning from db ");
       const reversedPosts = allPost.reverse();
       const postArray = reversedPosts.map(post => {
         const obj = {
           ...post._doc,
-          isOwner: req.user
-            ? post.author._id.toString() ===
-            req.user._id.toString()
-            : false
+          noComments: post.comments.length === 0 ? true : false,
+          isOwner: req.user ? post.author._id.toString() === req.user._id.toString() : false
         };
         return obj;
       });
@@ -22,7 +29,7 @@ router.get("/timeLine", (req, res, next) => {
         posts: postArray,
         noPost: postArray.length === 0
       };
-      console.log(data);
+      console.log(data + "*******************************passing to the view");
       res.render('testTimeLine', data);
 
     })
@@ -34,7 +41,7 @@ router.post('/createPost', (req, res, next) => {
 
   if (!req.user) {
     //redirec to Home Page
-    res.redirect("/users");
+    res.redirect("/");
     // here we will add a return to stop the rest of the route from running otherwise we may get errors for not finding req.session.user or possibly create blank boards.
     return;
   }
@@ -96,7 +103,7 @@ router.post("/updateLikes/:postI", (req, res, next) => {
 });
 
 //delete post
-router.post("/delete/:postId", (req, res, next) => {
+router.post("/deletePost/:postId", (req, res, next) => {
   if (!re.user) {
     res.redirect("/auth/login");
   }
