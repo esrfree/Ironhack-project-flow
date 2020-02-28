@@ -78,7 +78,12 @@ const update = (req, res, next) => {
     if (updatedUser.firstName) user.firstName = updatedUser.firstName;
     if (updatedUser.lastName) user.lastName = updatedUser.lastName;
     if (updatedUser.age) user.age = updatedUser.age;
+    if (updatedUser.street) user.address.street = updatedUser.street;
+    if (updatedUser.city) user.address.city = updatedUser.city;
+    if (updatedUser.state) user.address.state = updatedUser.state;
+    if (updatedUser.zip) user.address.zip = updatedUser.zip;
     user.save();
+    console.log(user)
     res.redirect('/profile')
   })
   .catch( err => {
