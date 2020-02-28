@@ -19,7 +19,7 @@ router
 
 router
     .route('/profile/edit')
-    .get(userCtrl.readForUpdate)
+    .get(isLoggedIn, userCtrl.readForUpdate)
     .post(userCtrl.update)
 
 
