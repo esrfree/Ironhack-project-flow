@@ -102,9 +102,9 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src="../images/michaela.jpeg" alt="" class="img-responsive profile-photo" />
-                  <h3>Michaela DeCamara</h3> <!-- replace name -->
-                  <p class="text-muted">Miami</p> <!-- replace name -->
+                  <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+                  <h3>{{user.firstName}} {{user.lastName}}</h3>
+                  <p class="text-muted">{{user.address.city}}</p>
 
                 </div>
               </div>
@@ -126,8 +126,8 @@
           <!--Timeline Menu for Small Screens-->
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
-              <img src="../images/michaela.jpeg" alt="" class="img-responsive profile-photo" />
-              <h4>Sarah Cruiz</h4>
+              <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+              <h4>{{user.firstName}} {{user.lastName}}</h4>
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
@@ -149,7 +149,7 @@
               <!-- About
               ================================================= -->
               <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Profile Pictures</h4>
+                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Update your pictures</h4>
                     <fieldset class="form-group-about">
                       </fieldset>
               <div class="about-profile">
@@ -157,12 +157,15 @@
                   <form action="/profile/edit" method="post" enctype="multipart/form-data">
                     <label>Profile</label>
                     <input type="file" name="photo">
-                      <br>
+                                        <br>
+
                     <label>Background</label>
                     <input type="file" name="background">
-                      <br>
+                                        <br>
+
                     <input type="submit" value="SAVE">
-                      <br>
+                                        <br>
+
                   </form>
                 </div>
                 <div class="about-content-block">
@@ -175,68 +178,39 @@
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-circle-outline icon-in-title"></i>Your personal information</h4>
                   <div class="organization">
-                    <form id="form" action="/signup" method="POST">
+                    <form id="form" action="/profile/edit" method="POST">
                       <fieldset class="form-group-main">
-                        <input type="text" class="form-control" id="firstname" name="firstName" placeholder="First Name">
+                        <input type="text" class="form-control" id="firstname" name="firstName" placeholder={{user.firstName}}>
                       </fieldset>
                       <fieldset class="form-group-main">
-                        <input type="text" class="form-control" id="lastname" name="lastName" placeholder="Last Name">
+                        <input type="text" class="form-control" id="lastname" name="lastName" placeholder={{user.lastName}}>
                       </fieldset>
                       <fieldset class="form-group-age">
-                        <input type="number" class="form-control" id="age" name="age" placeholder="25">
+                        <input type="number" class="form-control" id="age" name="age" placeholder={{user.age}} >
                       </fieldset>
                       {{!-- Add gender dropdown here              --}}
+                      <div class="about-content-block">
+                        <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Where you live</h4>
+                          <fieldset class="form-group-main">
+                            <input type="text" class="form-control" id="addressStreet" name="street" placeholder={{user.address.street}}>
+                          </fieldset>   
+                          <fieldset class="form-group-city">
+                            <input type="text" class="form-control" id="addressCity" name="city" placeholder={{user.address.city}}>
+                          </fieldset>      
+                          <fieldset class="form-group-address">
+                            <input type="text" class="form-control" id="addressState" name="state" placeholder={{user.address.state}}>
+                          </fieldset>   
+                          <fieldset class="form-group-address">
+                            <input type="text" class="form-control" id="addressZip" name="zip" placeholder={{user.address.zip}}>
+                          </fieldset>                           
+                      </div>
+                      <button type="submit" class="btn-secondary">Update</button>
 						        </form>
                   </div>
                 </div>
-                <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Where you live</h4>
-                    <fieldset class="form-group-main">
-                      <input type="text" class="form-control" id="addressStreet" name="addressStreet" placeholder="120 SW 8th St">
-                    </fieldset>   
-                    <fieldset class="form-group-city">
-                      <input type="text" class="form-control" id="addressCity" name="addressCity" placeholder="Miami">
-                    </fieldset>      
-                    <fieldset class="form-group-address">
-                      <input type="text" class="form-control" id="addressState" name="addressState" placeholder="Florida">
-                    </fieldset>   
-                    <fieldset class="form-group-address">
-                      <input type="text" class="form-control" id="addressZip" name="addressZip" placeholder="33130">
-                    </fieldset>                           
-                </div>
               </div>
-                <button type="submit" class="btn-secondary">Update</button>
-              </div>
-            <div class="col-md-2 static">
-              <div id="sticky-sidebar">
-                <h4 class="grey">Sarah's activity</h4>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
-                    <p class="text-muted">5 mins ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>
-                    <p class="text-muted">an hour ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>
-                    <p class="text-muted">4 hours ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>
-                    <p class="text-muted">a day ago</p>
-                  </div>
-                </div>
-              </div>
+              </div>            
             </div>
-          </div>
         </div>
       </div>
     </div>

@@ -18,6 +18,9 @@ router
 //  .put(userCtrl.update)
     .delete(userCtrl.remove)
 
-
+router
+    .route('/profile/edit')
+    .get(isLoggedIn, userCtrl.read)
+    .post(userCtrl.update)
 
 module.exports = router;

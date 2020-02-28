@@ -56,14 +56,9 @@ const create = ( req, res, next ) => {
 
 /* The User is vailable through req.user after Passport authentication at signin */
 
-// Reading
-/* This function retrieves the user details from req.profile and removes
-sensitive information before sending the user object in the response
-to the requesting client.
-*/
+// Reading - for profile page
 const read = (req, res) => {
-  console.log(req.user)
-  res.render('user/profile');
+  res.render('profile');
 }
 
 // Updating
@@ -72,15 +67,16 @@ uses the lodash module to extend and merge the changes that came in the
 request body to update the user data.
 */
 const update = (req, res, next) => {
-  let loggedUser = req.user;
-  loggedUser = _.extend(loggedUser, req.body);
-  loggedUser.save()
+  User.findByIdAndUpdate(req.user.id, req.body)
+  //let loggedUser = req.user;
+  //loggedUser = _.extend(loggedUser, req.body);
+  //loggedUser.save()
     .then((err, updatedUser) => {
       if (err) {
         return res.status(400).send({ errorMessage: err })
       }
       updatedUser.password = undefined;
-      res.send({ updatedUser }); // req.user = updatedUser ????
+      res.render("profile"); // req.user = updatedUser ????
     })
 }
 
