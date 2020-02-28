@@ -71,17 +71,19 @@ const readForUpdate = (req, res) => {
 }
 
 const update = (req, res, next) => {
-  User.findByIdAndUpdate(req.user.id, req.body)
-  //let loggedUser = req.user;
-  //loggedUser = _.extend(loggedUser, req.body);
-  //loggedUser.save()
-    .then((err, updatedUser) => {
-      if (err) {
-        return res.status(400).send({ errorMessage: err })
-      }
-      updatedUser.password = undefined;
-      res.render("profile"); // req.user = updatedUser ????
-    })
+  const updatedUser = req.body;
+
+  User.findById(req.user.id)
+  .then( user => {
+    if (updatedUser.firstName) user.firstName = updatedUser.firstName;
+    if (updatedUser.lastName) user.lastName = updatedUser.lastName;
+    if (updatedUser.age) user.age = updatedUser.age;
+    user.save();
+    res.redirect('/profile')
+  })
+  .catch( err => {
+    res.send(err)
+  })
 }
 
 // Deleting

@@ -18,9 +18,9 @@ router
 //  .delete(userCtrl.remove)
 
 router
-    .route('profile/edit')
+    .route('/profile/edit')
     .get(userCtrl.readForUpdate)
-    //.post(userCtrl.update)
+    .post(userCtrl.update)
 
 
 

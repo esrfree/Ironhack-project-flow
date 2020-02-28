@@ -1,4 +1,4 @@
-<form action="/profile/edit" method="post" enctype="multipart/form-data">
+<form action="/profile/edit" method="POST" enctype="multipart/form-data">
   <label>Profile</label>
   <input type="file" name="photo">
   <br>
@@ -6,4 +6,18 @@
   <input type="file" name="background">
   <br>         
   <input type="submit" value="SAVE">                            
+</form>
+<br>
+<br>
+<form action="/profile/edit" method="POST">
+  <label for="first-name">First Name</label>
+  <input type="text" id="first-name" name="firstName" placeholder={{user.firstName}}>
+  <br>
+  <label for="last-name">Last Name</label>
+  <input type="text" id="last-name" name="lastName" placeholder={{user.lastName}}>
+  <br>
+  <label for="age">Age</label>
+  <input type="text" id="age" name="age" placeholder={{user.age}}>
+  <br>
+  <button type="submit" class="btn-sm-secondary">Update</button>
 </form>

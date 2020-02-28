@@ -21,7 +21,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
-              <li class="header-button-profile"><a href="/profile">Michaela</a></li> <!-- replace with first name -->
+              <li class="header-button-profile"><a href="/profile">{{user.firstName}}</a></li> <!-- replace with first name -->
               <li class="header-button"><a href="/logout">Log out</a></li>
             </ul>
             <form class="navbar-form navbar-right hidden-sm">
@@ -88,7 +88,7 @@
                   
               <div class="about-profile">
                 <div>
-                  <form action="/profile/edit" method="post" enctype="multipart/form-data">
+                  <form action="/profile/picture" method="post" enctype="multipart/form-data">
                     <label>Profile</label>
                     <input type="file" name="photo">
                                         <br>
@@ -100,7 +100,7 @@
                       <br>
                       <br>
                   </form>
-                  <form action="/profile" method="post" enctype="multipart/form-data">
+                  <form action="/profile/edit" method="post" enctype="multipart/form-data">
                     </div>
                     <div class="about-content-block">
                       <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>News Interests</h4>
@@ -116,13 +116,13 @@
                       <h4 class="grey"><i class="ion-ios-circle-outline icon-in-title"></i>Your personal information</h4>
                       <div class="organization">
                           <fieldset class="form-group-main">
-                            <input type="text" class="form-control" id="firstname" name="firstName" placeholder="First Name">
+                            <input type="text" class="form-control" id="firstname" name="firstName" placeholder={{user.firstName}}>
                           </fieldset>
                           <fieldset class="form-group-main">
-                            <input type="text" class="form-control" id="lastname" name="lastName" placeholder="Last Name">
+                            <input type="text" class="form-control" id="lastname" name="lastName" placeholder={{user.lastName}}>
                           </fieldset>
                           <fieldset class="form-group-age">
-                            <input type="number" class="form-control" id="age" name="age" placeholder="25">
+                            <input type="number" class="form-control" id="age" name="age" placeholder="{{user.age}}">
                           </fieldset>
                           {{!-- Add gender dropdown here              --}}
                       </div>
@@ -130,21 +130,21 @@
                     <div class="about-content-block">
                       <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Where you live</h4>
                         <fieldset class="form-group-main">
-                          <input type="text" class="form-control" id="addressStreet" name="addressStreet" placeholder="120 SW 8th St">
+                          <input type="text" class="form-control" id="addressStreet" name="street" placeholder={{user.address.street}}>
                         </fieldset>   
                         <fieldset class="form-group-city">
-                          <input type="text" class="form-control" id="addressCity" name="addressCity" placeholder="Miami">
+                          <input type="text" class="form-control" id="addressCity" name="city" placeholder={{user.address.city}}>
                         </fieldset>      
                         <fieldset class="form-group-address">
-                          <input type="text" class="form-control" id="addressState" name="addressState" placeholder="Florida">
+                          <input type="text" class="form-control" id="addressState" name="state" placeholder={{user.address.state}}>
                         </fieldset>   
                         <fieldset class="form-group-address">
-                          <input type="text" class="form-control" id="addressZip" name="addressZip" placeholder="33130">
+                          <input type="text" class="form-control" id="addressZip" name="zip" placeholder={{user.address.zip}}>
                         </fieldset>                           
                     </div>
                   </div>
+                  <button type="submit" class="btn-secondary">Update</button>
                 </form>
-                <button type="submit" class="btn-secondary">Update</button>
               </div>
           </div>
         </div>
