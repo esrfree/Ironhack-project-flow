@@ -18,6 +18,10 @@ router.get('/profile/edit', (req, res, next) => {
   res.render('timeline-test');
  });
 
+ router.get('/news', (req, res, next) => {
+  res.render('news');
+ });
+
 // router.get('/profile', (req, res, next) => {
 //   res.render('profile');
 // });
