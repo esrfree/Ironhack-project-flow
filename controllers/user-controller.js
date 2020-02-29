@@ -1,5 +1,4 @@
 const User = require('../models/User');
-const Picture = require('../models/Picture.model')
 const _ = require('lodash');
 const passport = require("passport");
 //const io = require('socket.io')(server);
@@ -103,20 +102,6 @@ const update = (req, res, next) => {
     })
 }
 
-const updateProfilePicture = (req, res, next) => {
-  console.log({file: req.file})
-  const imgPath = req.file.url;
-  const imgName = req.file.originalname;
-  const uploader = req.user._id
-  Picture.create({imgPath, imgName, uploader})
-  .then(movie => {
-    res.redirect('/profile');
-  })
-  .catch(error => {
-    console.log(error);
-  })
-}
-
 // Deleting
 /* The remove function retrieves the user from req.profile and uses the
 remove() query to delete the user from the database.
@@ -135,4 +120,4 @@ const remove = (req, res, next) => {
 
 
 
-module.exports = { signup, create, read, readForUpdate, update, updateProfilePicture, remove };
+module.exports = { signup, create, read, readForUpdate, update, remove };

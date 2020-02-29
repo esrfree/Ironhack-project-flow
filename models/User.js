@@ -18,6 +18,8 @@ const userSchema = new Schema(
           required: 'Last name is required'
         },
         profilePicture: {
+            type: String,
+            default: "./theme/images/users/default_profile.png",
             imgName: String,
             imgPath: String,
         },
@@ -93,12 +95,6 @@ const userSchema = new Schema(
         about: {
             type: String,
             trim: true
-        },
-
-        // User picture
-        photo: {
-            default: "./theme/images/users/default_profile.png",
-            type: String
         },
 
         // when a user is flagged for inappropriate conduct (specify amount to lock user)

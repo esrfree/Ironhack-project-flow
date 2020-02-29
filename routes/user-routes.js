@@ -21,8 +21,8 @@ router
 router
     .route('/profile/edit')
     .get(isLoggedIn, userCtrl.readForUpdate)
-    .post(isLoggedIn, uploadCloud.single('photo'), userCtrl.updateProfilePicture)
-    .post(userCtrl.update)
+    .post(isLoggedIn, uploadCloud.single('photo'), userCtrl.update)
+    //.post(isLoggedIn, userCtrl.update)
 
 
 
