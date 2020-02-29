@@ -13,25 +13,21 @@ const LocalStrategy = require('passport-local').Strategy;
 
 passport.use(
   new LocalStrategy({
-    usernameField: 'userName',
+    usernameField: 'email',
     passwordField: 'password'
   },
-    (username, password, done) => {
-      User.findOne({ userName: username })
-        .then(user => {
-          if (!user) {
-            return done(null, false, { errorMessage: 'Incorrect username' });
-          }
-          if (!bcryptjs.compareSync(password, user.password)) {
-            return done(null, false, { errorMessage: 'Incorrect password' });
-          }
-          done(null, user);
-        })
-        .catch(error => {
-          done(error)
-        });
+  ( username, password, done ) => {
+    User.findOne({ email: username })
+    .then( user => {
+      if (!user) {
+        return done( null, false, { errorMessage: 'Incorrect email' });
+      }
+      if (!bcryptjs.compareSync( password, user.password )) {
+        return done(null, false, { errorMessage: 'Incorrect password' });
+      } 
+      done(null, user);
     })
-);
+  }));
 
 
 // Configure Passport authenticated session persistence.

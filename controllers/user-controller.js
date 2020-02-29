@@ -12,42 +12,41 @@ const signup = (req, res, next) => {
 }
 
 // Create a new user
-const create = (req, res, next) => {
-  const { firstName, lastName, userName, email, password } = req.body;
-
+const create = ( req, res, next ) => {  
+  const { firstName, lastName, email, password } = req.body;
+  
   // no empty fields
-  if (!firstName || !lastName || !userName || !email || !password) {
+  if( !firstName || !lastName || !email || !password ) {
     res.render('index', {
       errorMessage: 'All fields are mandatory. Please, provide all the information'
     })
     return;
   }
 
-  User.findOne({ userName })
-    .then(user => {
+  User.findOne({ email })
+    .then( user => {
       if (user) {
         res.render('index', { errorMessage: "User already exists" });
         return;
       }
 
       bcryptjs
-        .genSalt(bcryptSalt)
-        .then(salt => bcryptjs.hash(password, salt))
-        .then(hashedPass => User.create({
-          firstName,
-          lastName,
-          userName,
-          email,
-          password: hashedPass
-        }))
-        .then(userFromDB => {
-          console.log('Newly created user: ', userFromDB);
-          next();       // this next takes you to the next route to login
-        })
-        .catch(err => {
-          console.log(err);
-          res.send({ errorMessage: err.message })
-        })
+      .genSalt(bcryptSalt)
+      .then( salt => bcryptjs.hash( password, salt ))
+      .then( hashedPass => User.create({
+        firstName,
+        lastName,
+        email,
+        password: hashedPass
+      }))
+      .then( userFromDB => {
+        console.log('Newly created user: ', userFromDB);
+        next();       // this next takes you to the next route to login
+      })
+      .catch( err => {
+        console.log(err);
+        res.send({ errorMessage: err.message })
+      })
     })
     .catch(err => {
       console.log(err);
@@ -57,14 +56,9 @@ const create = (req, res, next) => {
 
 /* The User is vailable through req.user after Passport authentication at signin */
 
-// Reading
-/* This function retrieves the user details from req.profile and removes
-sensitive information before sending the user object in the response
-to the requesting client.
-*/
+// Reading - for profile page
 const read = (req, res) => {
-  console.log(req.user)
-  res.render('user/profile');
+  res.render('profile');
 }
 
 // Updating
@@ -72,17 +66,29 @@ const read = (req, res) => {
 uses the lodash module to extend and merge the changes that came in the
 request body to update the user data.
 */
+const readForUpdate = (req, res) => {
+  res.render('edit-profile');
+}
+
 const update = (req, res, next) => {
-  let loggedUser = req.user;
-  loggedUser = _.extend(loggedUser, req.body);
-  loggedUser.save()
-    .then((err, updatedUser) => {
-      if (err) {
-        return res.status(400).send({ errorMessage: err })
-      }
-      updatedUser.password = undefined;
-      res.send({ updatedUser }); // req.user = updatedUser ????
-    })
+  const updatedUser = req.body;
+
+  User.findById(req.user.id)
+  .then( user => {
+    if (updatedUser.firstName) user.firstName = updatedUser.firstName;
+    if (updatedUser.lastName) user.lastName = updatedUser.lastName;
+    if (updatedUser.age) user.age = updatedUser.age;
+    if (updatedUser.street) user.address.street = updatedUser.street;
+    if (updatedUser.city) user.address.city = updatedUser.city;
+    if (updatedUser.state) user.address.state = updatedUser.state;
+    if (updatedUser.zip) user.address.zip = updatedUser.zip;
+    user.save();
+    console.log(user)
+    res.redirect('/profile')
+  })
+  .catch( err => {
+    res.send(err)
+  })
 }
 
 // Deleting
@@ -103,4 +109,4 @@ const remove = (req, res, next) => {
 
 
 
-module.exports = { signup, create, read, update, remove };
+module.exports = { signup, create, read, readForUpdate, update, remove };

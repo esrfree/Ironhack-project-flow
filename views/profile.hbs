@@ -18,7 +18,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
-              <li class="header-button-profile"><a href="/profile">Michaela</a></li> <!-- replace with first name -->
+              <li class="header-button"><a href="/profile">{{user.firstName}}</a></li> <!-- replace with first name -->
               <li class="header-button"><a href="/logout">Log out</a></li>
             </ul>
             <form class="navbar-form navbar-right hidden-sm">
@@ -42,10 +42,14 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src="../images/michaela.jpeg" alt="" class="img-responsive profile-photo" />
-                  <h3>Michaela DeMachado</h3>
-                  <p class="text-muted">Miami, Florida
-                  </p> <!-- replace with city -->
+                  <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+                  <h3>{{user.firstName}} {{user.lastName}}</h3>
+                  <p class="text-muted">
+                    {{user.address.street}}
+                    {{user.address.city}}
+                    {{user.address.state}}, 
+                    {{user.address.zip}}
+                    </p> <!-- replace with city -->
                 </div>
               </div>
               <div class="col-md-9">
@@ -56,7 +60,11 @@
                 </ul>
                 <ul class="follow-me list-inline">
                   {{!-- <li>1,299 people following her</li> --}}
-                  <li><button class="btn-primary">Edit Profile</button></li>
+                  <li>
+                    <form action="profile/edit" method="GET">
+                      <button type="submit" class="btn-primary">Edit Profile</button>
+                    </form>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -65,8 +73,8 @@
           <!--Timeline Menu for Small Screens-->
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
-              <img src="../images/michaela.jpeg" alt="" class="img-responsive profile-photo" />
-              <h4>Michaela DeCamara</h4>
+              <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+              <h4>{{user.firstName}} {{user.lastName}}</h4>
               <p class="text-muted">Miami</p> <!-- replace with city -->
             </div>
             <div class="mobile-menu">
@@ -92,7 +100,7 @@
                 <div class="row">
                   <div class="col-md-7 col-sm-7">
                     <div class="form-group">
-                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-md" />
+                      <img src={{user.photo}} alt="" class="profile-photo-md" />
                       <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="What's going on?"></textarea>
                     </div>
                   </div>
@@ -114,16 +122,16 @@
 
                 <!--Post Date-->
                 <div class="post-date hidden-xs hidden-sm">
-                  <h5>Michaela</h5>
+                  <h5>{{user.firstName}}</h5>
                   <p class="text-grey">a while ago</p>
                 </div><!--Post Date End-->
 
-                <img src="../images/michaela.jpeg" alt="post-image" class="img-responsive post-image" />
+                <img src={{user.photo}} alt="post-image" class="img-responsive post-image" />
                 <div class="post-container">
-                  <img src="../images/michaela.jpeg" alt="user" class="profile-photo-md pull-left" />
+                  <img src={{user.photo}} alt="user" class="profile-photo-md pull-left" />
                   <div class="post-detail">
                     <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">Michaela DeCamara</a> <span class="following">following</span></h5>
+                      <h5><a href="timeline.html" class="profile-link">{{user.firstName}} {{user.lastName}}</a> <span class="following">following</span></h5>
                       <p class="text-muted">Published a photo about 15 mins ago</p> <!-- Needs to reflect the time since post-->
                     </div>
                     <div class="reaction">
