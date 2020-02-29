@@ -145,4 +145,7 @@ a {
 .search-container input {
   margin-right: 10px; }
 
+#page-contents {
+  padding: 17px 0 50px !important; }
+
 /*# sourceMappingURL=style.css.map */
