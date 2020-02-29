@@ -100,6 +100,10 @@ a {
 .create-post .form-group {
   width: 100%; }
 
+.create-post {
+  margin-bottom: 0px !important;
+  width: 100% !important; }
+
 .post-comment-action {
   margin-left: 50px; }
 
@@ -146,6 +150,6 @@ a {
   margin-right: 10px; }
 
 #page-contents {
-  padding: 17px 0 50px !important; }
+  padding: 17px 0 0px !important; }
 
 /*# sourceMappingURL=style.css.map */
