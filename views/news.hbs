@@ -30,12 +30,8 @@
     </header>
     <!--Header End-->
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal that opens when the page is rendered / commented out to test --> 
+<div class="modal fade" id="interestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -44,66 +40,52 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body interest-modal-body">
         <h4 class="grey" class="modal-header"><i ></i>Pick Your Favorite News Topics</h4>
-          <button type="button" class="btn btn-primary">Technology</button>
-          <button type="button" class="btn btn-secondary">Science</button>
-          <button type="button" class="btn btn-success">Money</button>
-          <button type="button" class="btn btn-danger">Politics</button>
-          <button type="button" class="btn btn-warning">Money</button>
-          <button type="button" class="btn btn-info">Travel</button>
+          <label>
+            <input type="checkbox">
+            &nbsp;&nbsp;&nbsp;Technology
+          </label>
+          <br>
+          <label>
+            <input type="checkbox">
+            &nbsp;&nbsp;&nbsp;Science
+          </label>
+          <br>
+          <label>
+            <input type="checkbox">
+            &nbsp;&nbsp;&nbsp;Money
+          </label>
+          <br>
+          <label>
+            <input type="checkbox">
+            &nbsp;&nbsp;&nbsp;Politics
+          </label>
+          <br>
+          <label>
+            <input type="checkbox">
+            &nbsp;&nbsp;&nbsp;Money
+          </label>
+          <br>
+          <label>
+            <input type="checkbox">
+            &nbsp;&nbsp;&nbsp;Travel
+          </label>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Show Me My News</button>
-        <button type="button" class="btn btn-primary">Maybe later</button>
+        <button type="button" class="btn btn-secondary-black" data-dismiss="modal">Maybe later</button>
+        <button type="button" class="btn btn-primary">Show me my news</button>
       </div>
     </div>
   </div>
 </div>
 
-  <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-secondary active">
-      <input type="radio" name="options" id="option1" autocomplete="off" checked> My News
-    </label>
-    <label class="btn btn-secondary">
-      <input type="radio" name="options" id="option2" autocomplete="off"> All News
-    </label>
-  </div>
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="This is social network html5 template available in themeforest......" />
-		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
-		<meta name="robots" content="index, follow" />
-		<title>News Feed | Check what your friends are doing</title>
-
-    <!-- Stylesheets
-    ================================================= -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/ionicons.min.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <link href="css/emoji.css" rel="stylesheet">
-    <!--Google Webfont-->
-		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
-    <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
-	</head>
-  <body>
-
-    <div id="page-contents">
+<div id="page-contents">
     	<div class="container">
-    		<div class="row">
-
+        <div class="row">
           <!-- Newsfeed Common Side Bar Left
           ================================================= -->
     			<div class="col-md-3 static">
-            <div class="profile-card">
-            	<img src="images/users/user-1.jpg" alt="user" class="profile-photo" />
-            	<h5><a href="timeline.html" class="text-white">Michaela DeCamara</a></h5>
-            </div><!--profile card ends-->
             <ul class="nav-news-feed">
               <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">News</a></div></li>
               <li><i class="icon ion-ios-people"></i><div><a href="newsfeed-people-nearby.html">Profile</a></div></li>
@@ -114,43 +96,27 @@
               <!--chat online div was here -->
             </div><!--chat block ends-->
           </div>
-    			<div class="col-md-7">
-
-            <!-- Post Content
-            ================================================= -->
-            <div class="post-content">
-              <div class="post-container">
-                <img src="/images/cnn-logo.png" alt="user" class="profile-photo-md pull-left" />
-                <div class="post-detail">
-                  <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">CNN Headlines</a> <span class="following">following</span></h5>
-                    <p class="text-muted">Updated 1 hour ago</p> <!-- when post was rendered -->
+    			<div class="col-md-9">
+            <div class="row">
+              <div class="col-md-7 col-sm-7">
+                <div class="search-container">
+                    <input type="text" class="form-control" placeholder="Search News">
+                    <button class="btn-primary">Search</button>     
                   </div>
-                  <div class="reaction">
-                    <!-- when post was rendered -->
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <p><i class="em em-thumbsup"></i> <i class="em em-thumbsup"></i> NEWS POST GOES HERE</p>
-                  </div>
-                  <div>
-                    <a class="anchor-button">Comment</a>
-                    <a class="anchor-button">Share</a>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-comment">
-                    <img src="/images/humberto.png" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Humberto Buniotto </a> This is outrageous!!! <i class="em em-muscle"></i></p>
-                      
-                  </div>
-                  <div class="post-comment">
-                    <a class="anchor-button">Comment</a>
-                    <a class="anchor-button">Share</a>
-                  </div>
+              </div>
+              <div class="col-md-5 col-sm-5">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> All News
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" autocomplete="off"> My News
+                  </label>
                 </div>
+                &nbsp;
+                <a class="anchor-link">My Interests</a>
               </div>
             </div>
-
             <!-- Post Content
             ================================================= -->
             <div class="post-content">
@@ -158,82 +124,67 @@
                 <img src="/images/cnn-logo.png" alt="user" class="profile-photo-md pull-left" />
                 <div class="post-detail">
                   <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">CNN Headlines</a> <span class="following">following</span></h5>
+                    <h5><a href="timeline.html" class="profile-link">CNN Headlines</a></h5>
                     <p class="text-muted">Updated 1 hour ago</p> <!-- when post was rendered -->
                   </div>
                   <div class="reaction">
-                    <!-- when post was rendered -->
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <p><i class="em em-thumbsup"></i> <i class="em em-thumbsup"></i> NEWS POST GOES HERE</p>
-                  </div>
-                  <div class="reaction">
+                    <a class="anchor-link">Share</a>
                     <a class="btn text-green"><i class="icon ion-thumbsup"></i> 39</a>
                     <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 2</a>
                   </div>
-                  <div>
-                    <a class="anchor-button">Share</a>
-                  </div>
-                  <br>
-                    <input type="text" class="form-control-comment" placeholder="Comment">
-                    <br>
-                    <button class="btn-primary">Post</button>
-                  </div>
+                </div>
+                  <div class="line-divider"></div>
+                <div class="post-content">
+                    <div class="row">
+                      <div class="col-md-5 col-sm-5">
+                        <img class="img-responsive" src="/images/coronavirus-news.jpg" />
+                      </div>
+                      <div class="col-md-7 col-sm-7">
+                        <a class="profile-link">Trump says U.S. is "very very ready" for Coronavirus</a>
+                        <br>
+                        <br>
+                        <p>
+                          CNN (AP) – President Donald Trump says the U.S. is “very, very ready” 
+                          for whatever the new Coronavirus threat brings. He has put Vice President Mike Pence 
+                          in charge of overseeing the nation’s response, working with the government’s top health authorities. 
+                          Trump has been pushing back against criticism that his administration isn’t doing enough 
+                          to meet the coronavirus threat.
+                        </p> <!-- NEED TO SHORTEN TEXT TO SHOW SNIPPET OF NEWS SO IT DOESN'T THROW OFF THE FORMAT -->
+                      </div>
+                    </div>
+                </div>
+                <div class="line-divider"></div>
+                <div class="post-detail no-margin">
                   <div class="post-comment">
-                    <img src="/images/humberto.png" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Humberto Buniotto </a> This is outrageous!!! <i class="em em-muscle"></i></p>
+                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
+                      <input type="text" class="form-control" placeholder="Comment">
+                      <button class="btn-primary post-comment-button">Post</button>
+                  </div>
+                  <div>
+                      <div class="post-comment">
+                        <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
+                        <p class="no-margin">
+                          <a href="timeline.html" class="profile-link">Gustavo </a>
+                          <i class="em em-laughing"></i> 
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+                        </p>
+                      </div>
+                      <div class="post-comment-action">
+                        <a class="anchor-button">Reply</a>
+                        <a class="anchor-button">Delete</a>
+                        <a class="anchor-button">Edit</a>
+                      </div>
+                      <div class="post-comment-action">
+                        <div class="post-comment">
+                          <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
+                          <input type="text" class="form-control" placeholder="Comment">
+                          <button class="btn-primary post-comment-button">Post</button>
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            
-
-            
-
-          <!-- Newsfeed Common Side Bar Right
-          ================================================= -->
-    			<div class="col-md-2 static">
-            <div class="suggestions" id="sticky-sidebar">
-              <h4 class="grey">Who to Follow</h4>
-              <div class="follow-user">
-                <img src="images/users/user-11.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Diana Amber</a></h5>
-                  <a href="#" class="text-green">Go to profile</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/users/user-12.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Cris Haris</a></h5>
-                  <a href="#" class="text-green">Go to profile</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/users/user-13.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Brian Walton</a></h5>
-                  <a href="#" class="text-green">Go to profile</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/users/user-14.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Olivia Steward</a></h5>
-                  <a href="#" class="text-green">Go to profile</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="images/users/user-15.jpg" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Sophia Page</a></h5>
-                  <a href="#" class="text-green">Go to profile</a>
-                </div>
-              </div>
-            </div>
-          </div>
     		</div>
     	</div>
     </div>
