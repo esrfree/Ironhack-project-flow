@@ -42,7 +42,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src={{user.profilePicture}} alt="" class="img-responsive profile-photo" />
+                  <img src={{user.profilePicture.imgPath}} alt="" class="img-responsive profile-photo" />
                   <h3>{{user.firstName}} {{user.lastName}}</h3>
                   <p class="text-muted">
                     {{user.address.street}}
@@ -100,7 +100,7 @@
                 <div class="row">
                   <div class="col-md-9 col-sm-9">
                     <div class="form-group">
-                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-md" />
+                      <img src={{user.profilePicture.imgPath}} alt="" class="profile-photo-md" />
                       <textarea name="texts" id="exampleTextarea" cols="30" rows="3" class="form-control" placeholder="What's going on?"></textarea>
                     </div>
                   </div>
@@ -125,9 +125,9 @@
                   <p class="text-grey">a while ago</p>
                 </div><!--Post Date End-->
 
-                <img src={{user.photo}} alt="post-image" class="img-responsive post-image" />
+                <img src={{user.profilePicture.imgPath}} alt="post-image" class="img-responsive post-image" />
                 <div class="post-container">
-                  <img src={{user.photo}} alt="user" class="profile-photo-md pull-left" />
+                  <img src={{user.profilePicture.imgPath}} alt="user" class="profile-photo-md pull-left" />
                   <div class="post-detail">
                     <div class="user-info">
                       <h5><a href="timeline.html" class="profile-link">Michaela DeCamara</a></h5>
@@ -147,7 +147,7 @@
                       <br>
                     <div class="line-divider"></div>
                     <div class="post-comment">
-                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
+                      <img src={{user.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
                       <input type="text" class="form-control" placeholder="Comment">
                       <button class="btn-primary post-comment-button">Post</button>
                     </div>
@@ -167,7 +167,7 @@
                       </div>
                       <div class="post-comment-action">
                         <div class="post-comment">
-                          <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
+                          <img src={{user.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
                           <input type="text" class="form-control" placeholder="Comment">
                           <button class="btn-primary post-comment-button">Post</button>
                         </div>

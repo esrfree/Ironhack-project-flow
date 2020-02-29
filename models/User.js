@@ -18,10 +18,9 @@ const userSchema = new Schema(
           required: 'Last name is required'
         },
         profilePicture: {
-            type: String,
-            default: "./theme/images/users/default_profile.png",
             imgName: String,
-            imgPath: String,
+            imgPath: {type: String, default: "./theme/images/users/default_profile.png"},
+            // default: "./theme/images/users/default_profile.png"
         },
         backgroundPicture: {
             imgName: String,

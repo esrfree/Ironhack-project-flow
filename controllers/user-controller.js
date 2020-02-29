@@ -84,7 +84,7 @@ const update = (req, res, next) => {
       if (req.file.url && req.file.originalname) {
         const imgPath = req.file.url;
         const imgName = req.file.originalname;
-        updatedUser.profilePicture = { imgPath, imgName }
+        user.profilePicture = { imgPath, imgName }
       }
       if (updatedUser.firstName) user.firstName = updatedUser.firstName;
       if (updatedUser.lastName) user.lastName = updatedUser.lastName;
