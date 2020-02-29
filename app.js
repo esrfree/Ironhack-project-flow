@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
 const passport = require('passport');
+
 // Local user after authetication with Passport
 const localUser = require('./configs/local-user-config');
 // Set up the database
@@ -15,6 +16,10 @@ require('./configs/db-config');
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 const app = express();
+//socket.io
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
 // use session here
 require('./configs/session-config')(app);
 // Set up passport

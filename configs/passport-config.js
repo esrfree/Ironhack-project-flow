@@ -4,6 +4,7 @@ const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 
 
+
 // Configure the local strategy for use by Passport.
 //
 // The local strategy require a `verify` function which receives the credentials
@@ -25,6 +26,8 @@ passport.use(
           if (!bcryptjs.compareSync(password, user.password)) {
             return done(null, false, { errorMessage: 'Incorrect password' });
           }
+
+
           done(null, user);
         })
         .catch(error => {

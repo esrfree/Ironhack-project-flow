@@ -1,5 +1,8 @@
 const passport = require("passport");
+
+
 const login = (req, res) => {
+
   res.render('./index')
 }
 /* After successful authentication, Passport will establish a persistent login session.
