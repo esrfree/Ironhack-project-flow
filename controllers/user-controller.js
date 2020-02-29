@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const _ = require('lodash');
 const passport = require("passport");
+const io = require('socket.io')(server);
+const socket = io(http);
 
 // BCrypt to encrypt passwords
 const bcryptjs = require('bcryptjs');
@@ -12,11 +14,11 @@ const signup = (req, res, next) => {
 }
 
 // Create a new user
-const create = ( req, res, next ) => {  
+const create = (req, res, next) => {
   const { firstName, lastName, email, password } = req.body;
-  
+
   // no empty fields
-  if( !firstName || !lastName || !email || !password ) {
+  if (!firstName || !lastName || !email || !password) {
     res.render('index', {
       errorMessage: 'All fields are mandatory. Please, provide all the information'
     })
@@ -24,29 +26,29 @@ const create = ( req, res, next ) => {
   }
 
   User.findOne({ email })
-    .then( user => {
+    .then(user => {
       if (user) {
         res.render('index', { errorMessage: "User already exists" });
         return;
       }
 
       bcryptjs
-      .genSalt(bcryptSalt)
-      .then( salt => bcryptjs.hash( password, salt ))
-      .then( hashedPass => User.create({
-        firstName,
-        lastName,
-        email,
-        password: hashedPass
-      }))
-      .then( userFromDB => {
-        console.log('Newly created user: ', userFromDB);
-        next();       // this next takes you to the next route to login
-      })
-      .catch( err => {
-        console.log(err);
-        res.send({ errorMessage: err.message })
-      })
+        .genSalt(bcryptSalt)
+        .then(salt => bcryptjs.hash(password, salt))
+        .then(hashedPass => User.create({
+          firstName,
+          lastName,
+          email,
+          password: hashedPass
+        }))
+        .then(userFromDB => {
+          console.log('Newly created user: ', userFromDB);
+          next();       // this next takes you to the next route to login
+        })
+        .catch(err => {
+          console.log(err);
+          res.send({ errorMessage: err.message })
+        })
     })
     .catch(err => {
       console.log(err);
@@ -58,7 +60,11 @@ const create = ( req, res, next ) => {
 
 // Reading - for profile page
 const read = (req, res) => {
-  res.render('profile');
+  console.log(req.user)
+  socket.on('connection', (socket => {
+    socket.emit('message', `User ${req.user.name} connected`);
+  }))
+  res.render('user/profile');
 }
 
 // Updating
@@ -74,21 +80,21 @@ const update = (req, res, next) => {
   const updatedUser = req.body;
 
   User.findById(req.user.id)
-  .then( user => {
-    if (updatedUser.firstName) user.firstName = updatedUser.firstName;
-    if (updatedUser.lastName) user.lastName = updatedUser.lastName;
-    if (updatedUser.age) user.age = updatedUser.age;
-    if (updatedUser.street) user.address.street = updatedUser.street;
-    if (updatedUser.city) user.address.city = updatedUser.city;
-    if (updatedUser.state) user.address.state = updatedUser.state;
-    if (updatedUser.zip) user.address.zip = updatedUser.zip;
-    user.save();
-    console.log(user)
-    res.redirect('/profile')
-  })
-  .catch( err => {
-    res.send(err)
-  })
+    .then(user => {
+      if (updatedUser.firstName) user.firstName = updatedUser.firstName;
+      if (updatedUser.lastName) user.lastName = updatedUser.lastName;
+      if (updatedUser.age) user.age = updatedUser.age;
+      if (updatedUser.street) user.address.street = updatedUser.street;
+      if (updatedUser.city) user.address.city = updatedUser.city;
+      if (updatedUser.state) user.address.state = updatedUser.state;
+      if (updatedUser.zip) user.address.zip = updatedUser.zip;
+      user.save();
+      console.log(user)
+      res.redirect('/profile')
+    })
+    .catch(err => {
+      res.send(err)
+    })
 }
 
 // Deleting

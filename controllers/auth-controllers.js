@@ -1,6 +1,7 @@
 const passport = require("passport");
 
 const login = (req, res) => {
+
   res.render('./index')
 }
 

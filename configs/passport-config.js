@@ -4,6 +4,7 @@ const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
 
 
+
 // Configure the local strategy for use by Passport.
 //
 // The local strategy require a `verify` function which receives the credentials
@@ -16,18 +17,18 @@ passport.use(
     usernameField: 'email',
     passwordField: 'password'
   },
-  ( username, password, done ) => {
-    User.findOne({ email: username })
-    .then( user => {
-      if (!user) {
-        return done( null, false, { errorMessage: 'Incorrect email' });
-      }
-      if (!bcryptjs.compareSync( password, user.password )) {
-        return done(null, false, { errorMessage: 'Incorrect password' });
-      } 
-      done(null, user);
-    })
-  }));
+    (username, password, done) => {
+      User.findOne({ email: username })
+        .then(user => {
+          if (!user) {
+            return done(null, false, { errorMessage: 'Incorrect email' });
+          }
+          if (!bcryptjs.compareSync(password, user.password)) {
+            return done(null, false, { errorMessage: 'Incorrect password' });
+          }
+          done(null, user);
+        })
+    }));
 
 
 // Configure Passport authenticated session persistence.
