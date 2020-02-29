@@ -3,6 +3,7 @@ const router = express.Router();
 const userCtrl = require('../controllers/user-controller');
 const authCtrl = require('../controllers/auth-controllers')
 const isLoggedIn    = require('../configs/route-guard-config');
+const uploadCloud = require('../configs/cloudinary-config');
 
 router
   .route('/signup')
@@ -20,6 +21,7 @@ router
 router
     .route('/profile/edit')
     .get(isLoggedIn, userCtrl.readForUpdate)
+    .post(isLoggedIn, uploadCloud.single('photo'), userCtrl.updateProfilePicture)
     .post(userCtrl.update)
 
 

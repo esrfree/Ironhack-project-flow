@@ -17,7 +17,14 @@ const userSchema = new Schema(
           trim: true,
           required: 'Last name is required'
         },
-
+        profilePicture: {
+            imgName: String,
+            imgPath: String,
+        },
+        backgroundPicture: {
+            imgName: String,
+            imgPath: String,
+        },
         // the email the user will use on the site ()
         email: {
           type: String,

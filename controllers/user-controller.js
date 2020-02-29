@@ -1,8 +1,9 @@
 const User = require('../models/User');
+const Picture = require('../models/Picture.model')
 const _ = require('lodash');
 const passport = require("passport");
-const io = require('socket.io')(server);
-const socket = io(http);
+//const io = require('socket.io')(server);
+//const socket = io(http);
 
 // BCrypt to encrypt passwords
 const bcryptjs = require('bcryptjs');
@@ -61,10 +62,10 @@ const create = (req, res, next) => {
 // Reading - for profile page
 const read = (req, res) => {
   console.log(req.user)
-  socket.on('connection', (socket => {
-    socket.emit('message', `User ${req.user.name} connected`);
-  }))
-  res.render('user/profile');
+  //socket.on('connection', (socket => {
+  //  socket.emit('message', `User ${req.user.name} connected`);
+  //}))
+  res.render('profile');
 }
 
 // Updating
@@ -81,6 +82,11 @@ const update = (req, res, next) => {
 
   User.findById(req.user.id)
     .then(user => {
+      if (req.file.url && req.file.originalname) {
+        const imgPath = req.file.url;
+        const imgName = req.file.originalname;
+        updatedUser.profilePicture = { imgPath, imgName }
+      }
       if (updatedUser.firstName) user.firstName = updatedUser.firstName;
       if (updatedUser.lastName) user.lastName = updatedUser.lastName;
       if (updatedUser.age) user.age = updatedUser.age;
@@ -95,6 +101,20 @@ const update = (req, res, next) => {
     .catch(err => {
       res.send(err)
     })
+}
+
+const updateProfilePicture = (req, res, next) => {
+  console.log({file: req.file})
+  const imgPath = req.file.url;
+  const imgName = req.file.originalname;
+  const uploader = req.user._id
+  Picture.create({imgPath, imgName, uploader})
+  .then(movie => {
+    res.redirect('/profile');
+  })
+  .catch(error => {
+    console.log(error);
+  })
 }
 
 // Deleting
@@ -115,4 +135,4 @@ const remove = (req, res, next) => {
 
 
 
-module.exports = { signup, create, read, readForUpdate, update, remove };
+module.exports = { signup, create, read, readForUpdate, update, updateProfilePicture, remove };

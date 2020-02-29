@@ -1,10 +1,7 @@
 <form action="/profile/edit" method="POST" enctype="multipart/form-data">
   <label>Profile</label>
   <input type="file" name="photo">
-  <br>
-  <label>Background</label>
-  <input type="file" name="background">
-  <br>         
+  <br>        
   <input type="submit" value="SAVE">                            
 </form>
 <br>
@@ -22,7 +19,7 @@
   <br>
   <h3>Update Address</h3>
   <label for="street-address">Street</label>
-  <input type="text" id="street-address" name="street" placeholder={{user.address.street}}>
+  <input type="text" id="street-address" name="street" placeholder="{{user.address.street}}">
   <br>
   <label for="city-address">City</label>
   <input type="text" id="city-address" name="city" placeholder={{user.address.city}}>
