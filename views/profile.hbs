@@ -97,22 +97,27 @@
               <!-- Post Create Box
               ================================================= -->
               <div class="create-post">
-                <div class="row">
-                  <div class="col-md-9 col-sm-9">
-                    <div class="form-group">
-                      <img src={{user.profilePicture.imgPath}} alt="" class="profile-photo-md" />
-                      <textarea name="texts" id="exampleTextarea" cols="30" rows="3" class="form-control" placeholder="What's going on?"></textarea>
+                <form action="/createPost" method="POST">
+                  <div class="row">
+                    <div class="col-md-9 col-sm-9">
+                      <div class="form-group">                      
+                        <img src={{user.profilePicture.imgPath}} alt="" class="profile-photo-md" />
+                        <textarea name="texts" id="exampleTextarea" cols="30" rows="3" class="form-control" placeholder="What's going on?"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                      <div class="tools">
+                        <ul class="publishing-tools list-inline">
+                          <li>
+                            <label for="upload" class="ion-images" style="cursor: pointer"></label>
+                            <input id="upload" type="file" name="photo" style="display: none">
+                          </li>
+                        </ul>
+                        <button class="btn btn-primary">Post</button> <!-- Link to method to post-->
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-3 col-sm-3">
-                    <div class="tools">
-                      <ul class="publishing-tools list-inline">
-                        <li><a href="#"><i class="ion-images"></i></a></li>
-                      </ul>
-                      <button class="btn btn-primary">Post</button> <!-- Link to method to post-->
-                    </div>
-                  </div>
-                </div>
+                </form>
               </div><!-- Post Create Box End-->
 
               <!-- Post Content
