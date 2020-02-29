@@ -87,4 +87,62 @@ a {
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; }
 
+.no-margin {
+  margin: 0 !important; }
+
+.post-content .post-container .post-detail .post-comment .form-control {
+  margin-right: 10px; }
+
+.post-comment-button {
+  height: 30px;
+  margin-top: 7px; }
+
+.create-post .form-group {
+  width: 100%; }
+
+.post-comment-action {
+  margin-left: 50px; }
+
+.btn-upload {
+  background: #27aae1;
+  padding: 5px 20px;
+  border: none;
+  font-size: 14px;
+  border-radius: 4px;
+  color: #fff;
+  position: relative;
+  font-weight: 600;
+  outline: none;
+  margin-left: 10px; }
+
+.btn-upload input {
+  display: none; }
+
+.about-profile .about-content-block h4 i.icon-in-camera {
+  margin-right: 15px;
+  color: #27aae1; }
+
+.interest-modal-body {
+  width: 350px;
+  margin: 0 auto; }
+
+.btn-secondary-black {
+  background: black;
+  padding: 5px 20px;
+  border: none;
+  font-size: 14px;
+  border-radius: 4px;
+  color: #fff;
+  position: relative;
+  font-weight: 600;
+  outline: none; }
+
+.search-container {
+  display: inline-flex;
+  margin-bottom: 10px;
+  width: 100%; }
+
+.search-container input {
+  margin-right: 10px; }
+
 /*# sourceMappingURL=style.css.map */

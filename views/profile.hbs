@@ -91,62 +91,52 @@
       </div>
       <!--Timeline Menu for Small Screens End-->
 
-    </div>
-    <div id="page-contents">
-      <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-7">
-
-          <!-- Post Create Box
+      <!-- Post Create Box
               ================================================= -->
-          <div class="create-post">
-
-            <div class="row">
-              <div class="col-md-7 col-sm-7">
-                <form action="/createPost" method="POST"></form>
-                <div class="form-group">
-                  <img src={{user.photo}} alt="" class="profile-photo-md" />
-                  <textarea name="text" id="exampleTextarea" cols="30" rows="1" class="form-control"
-                    placeholder="What's going on?"></textarea>
-                </div>
-              </div>
-              <div class="col-md-5 col-sm-5">
-                <div class="tools">
-                  <ul class="publishing-tools list-inline">
-                    <li><a href="#"><i class="ion-compose"></i></a></li>
-                    <li><a href="#"><i class="ion-images"></i></a></li>
-                  </ul>
-                  <button type="submit" class="btn btn-primary pull-right">Post</button> <!-- Link to method to post-->
-                </div>
-              </div>
+      <div class="create-post">
+        <div class="row">
+          <div class="col-md-9 col-sm-9">
+            <div class="form-group">
+              <form action="/createPost" method="POST">
+                <img src="../images/michaela.jpeg" alt="" class="profile-photo-md" />
+                <textarea name="text" id="exampleTextarea" cols="30" rows="3" class="form-control"
+                  placeholder="What's going on?"></textarea>
             </div>
-            </form>
-          </div><!-- Post Create Box End-->
+          </div>
+          <div class="col-md-3 col-sm-3">
+            <div class="tools">
+              <ul class="publishing-tools list-inline">
+                <li><a href="#"><i class="ion-images"></i></a></li>
+              </ul>
+              <button type="submit" class="btn btn-primary">Post</button> <!-- Link to method to post-->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div><!-- Post Create Box End-->
 
-          <!-- Post Content
+      <!-- Post Create Box
               ================================================= -->
-          <div class="post-content">
-            {{#if noPost}}
-            <h3> There are no Post to display at this time. Be the first to create a new post! </h3>
-            {{else}}
-            {{#each posts}}
-            <!--Post start-->
-            <!--Post Date-->
-            <div class="post-date hidden-xs hidden-sm">
-              <h5>{{user.firstName}}</h5>
-              <p class="text-grey">a while ago</p>
-            </div>
-            <!--Post Date End-->
+      <div class="post-content">
 
-            <img src={{user.photo}} alt="post-image" class="img-responsive post-image" />
-            <div class="post-container">
-              <img src={{this.image} alt="user" class="profile-photo-md pull-left" />
-              <div class="post-detail">
-                <div class="user-info">
-                  <h5><a href="timeline.html" class="profile-link">{{user.firstName}} {{user.lastName}}</a> <span
-                class="following">following</span></h5>
-              <p class="text-muted">Published a photo about 15 mins ago</p>
-              <!-- Needs to reflect the time since post-->
+        <!--Post Date-->
+        <div class="post-date hidden-xs hidden-sm">
+          <h5>{{user.firstName}}</h5>
+          <p class="text-grey">a while ago</p>
+        </div>
+        <!--Post Date End-->
+        <!--Post display start-->
+        {{#if noPost}}
+        <h3> There are no Post to display at this time. Be the first to create a new post! </h3>
+        {{else}}
+        {{#each posts}}
+        <img src={{this.image}} alt="post-image" class="img-responsive post-image" />
+        <div class="post-container">
+          <img src={{user.photo}} alt="user" class="profile-photo-md pull-left" />
+          <div class="post-detail">
+            <div class="user-info">
+              <h5><a href="timeline.html" class="profile-link">Michaela DeCamara</a></h5>
+              <p class="text-muted">Published a photo about {{}} mins ago</p> <!-- Needs to reflect the time since post-->
             </div>
             <div class="reaction">
               <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
@@ -156,12 +146,9 @@
             </div>
             <div class="line-divider"></div>
             <div class="post-text">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i
-                  class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.<i class="em em-anguished"></i> <i class="em em-anguished"></i> <i
+                  class="em em-anguished"></i></p>
             </div>
             <a class="anchor-button">Reply</a>
             <a class="anchor-button">Delete</a>
@@ -169,49 +156,128 @@
             <br>
             <div class="line-divider"></div>
             <div class="post-comment">
-              <img src="../images/kayla.jpeg" alt="" class="profile-photo-sm" />
-              <p><a href="timeline.html" class="profile-link">Kayla </a><i class="em em-laughing"></i> Lorem ipsum
-                dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-            </div>
-            <a class="anchor-button">Reply</a>
-            <a class="anchor-button">Delete</a>
-            <a class="anchor-button">Edit</a>
-            <br>
-            <div class="post-reply">
-              <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
-              <p><a href="timeline.html" class="profile-link">Gustavo</a> Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud </p>
-            </div>
-            <a class="anchor-button">Reply</a>
-            <a class="anchor-button">Delete</a>
-            <a class="anchor-button">Edit</a>
-            <br>
-            <div class="post-comment">
               <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
               <input type="text" class="form-control" placeholder="Comment">
-              <button class="btn-primary">Post</button>
+              <button class="btn-primary post-comment-button">Post</button>
+            </div>
+            <div>
+              <div class="post-comment">
+                <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
+                <p class="no-margin">
+                  <a href="timeline.html" class="profile-link">Gustavo </a>
+                  <i class="em em-laughing"></i>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+                </p>
+              </div>
+              <div class="post-comment-action">
+                <a class="anchor-button">Reply</a>
+                <a class="anchor-button">Delete</a>
+                <a class="anchor-button">Edit</a>
+              </div>
+              <div class="post-comment-action">
+                <div class="post-comment">
+                  <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
+                  <input type="text" class="form-control" placeholder="Comment">
+                  <button class="btn-primary post-comment-button">Post</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        {{/if}}
-        <!--Post End-->
       </div>
-
-
-
     </div>
-    <div class="col-md-2 static">
-      <div id="sticky-sidebar">
-        <h4 class="grey">Michaela's activity</h4>
-        <div class="feed-item">
-          <p>Hiking, running and other</p>
-        </div>
-      </div>
+    </form>
+  </div><!-- Post Create Box End-->
+
+  <!-- Post Content
+              ================================================= -->
+  <div class="post-content">
+    {{#if noPost}}
+    <h3> There are no Post to display at this time. Be the first to create a new post! </h3>
+    {{else}}
+    {{#each posts}}
+    <!--Post start-->
+    <!--Post Date-->
+    <div class="post-date hidden-xs hidden-sm">
+      <h5>{{user.firstName}}</h5>
+      <p class="text-grey">a while ago</p>
+    </div>
+    <!--Post Date End-->
+
+    <img src={{user.photo}} alt="post-image" class="img-responsive post-image" />
+    <div class="post-container">
+      <img src={{this.image} alt="user" class="profile-photo-md pull-left" />
+              <div class="post-detail">
+                <div class="user-info">
+                  <h5><a href="timeline.html" class="profile-link">{{user.firstName}} {{user.lastName}}</a> <span
+        class="following">following</span></h5>
+      <p class="text-muted">Published a photo about 15 mins ago</p>
+      <!-- Needs to reflect the time since post-->
+    </div>
+    <div class="reaction">
+      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
+      <!-- Needs to reflect the number of likes-->
+      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+      <!-- Needs to reflect the number of dislikes-->
+    </div>
+    <div class="line-divider"></div>
+    <div class="post-text">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+        culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i
+          class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+    </div>
+    <a class="anchor-button">Reply</a>
+    <a class="anchor-button">Delete</a>
+    <a class="anchor-button">Edit</a>
+    <br>
+    <div class="line-divider"></div>
+    <div class="post-comment">
+      <img src="../images/kayla.jpeg" alt="" class="profile-photo-sm" />
+      <p><a href="timeline.html" class="profile-link">Kayla </a><i class="em em-laughing"></i> Lorem ipsum
+        dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+    </div>
+    <a class="anchor-button">Reply</a>
+    <a class="anchor-button">Delete</a>
+    <a class="anchor-button">Edit</a>
+    <br>
+    <div class="post-reply">
+      <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
+      <p><a href="timeline.html" class="profile-link">Gustavo</a> Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud </p>
+    </div>
+    <a class="anchor-button">Reply</a>
+    <a class="anchor-button">Delete</a>
+    <a class="anchor-button">Edit</a>
+    <br>
+    <div class="post-comment">
+      <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
+      <input type="text" class="form-control" placeholder="Comment">
+      <button class="btn-primary">Post</button>
     </div>
   </div>
+</div>
+
+{{/if}}
+<!--Post End-->
+</div>
+
+
+
+</div>
+<div class="col-md-2 static">
+  <div id="sticky-sidebar">
+    <h4 class="grey">Michaela's activity</h4>
+    <div class="feed-item">
+      <p>Hiking, running and other</p>
+    </div>
+  </div>
+</div>
+</div>
 </div>
 </div>
 </div>

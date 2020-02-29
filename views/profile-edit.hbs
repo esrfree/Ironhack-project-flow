@@ -84,32 +84,60 @@
               <!-- About
               ================================================= -->
               <div class="about-content-block">
-                <h4 class="grey"><i class="ion-ios-camera-outline icon-in-title"></i>Profile Pictures</h4>
-                  
               <div class="about-profile">
-                <div>
-                  <form action="/profile/picture" method="post" enctype="multipart/form-data">
-                    <label>Profile</label>
-                    <input type="file" name="photo">
-                                        <br>
-
-                    <label>Background</label>
-                    <input type="file" name="background">
-                      <br>
-                    <input type="submit" value="Save">
-                      <br>
-                      <br>
-                  </form>
                   <form action="/profile/edit" method="post" enctype="multipart/form-data">
+                    <div class="about-content-block">
+                      <h4 class="grey">
+                        <i class="ion-ios-information-outline ion-ios-camera"></i>
+                        Profile Pictures
+                      </h4> 
+                      <label>Profile</label>
+                      <label class="btn-upload">
+                        <input type="file" name="photo">Upload
+                      </label>
+                      <br>
+                      <label>Background</label>
+                      <label class="btn-upload">
+                        <input type="file" name="photo">Upload
+                      </label>
+                      <br>
+                      <br>
+                      <input type="submit" value="Save">
+                        <br>
+                        <br>
                     </div>
                     <div class="about-content-block">
                       <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>News Interests</h4>
-                        <button type="button" class="btn btn-primary">Technology</button>
-                        <button type="button" class="btn btn-secondary">Science</button>
-                        <button type="button" class="btn btn-success">Money</button>
-                        <button type="button" class="btn btn-danger">Politics</button>
-                        <button type="button" class="btn btn-warning">Money</button>
-                        <button type="button" class="btn btn-info">Travel</button>
+                        <label>
+                          <input type="checkbox">
+                          &nbsp;&nbsp;&nbsp;Technology
+                        </label>
+                        <br>
+                        <label>
+                          <input type="checkbox">
+                          &nbsp;&nbsp;&nbsp;Science
+                        </label>
+                        <br>
+                        <label>
+                          <input type="checkbox">
+                          &nbsp;&nbsp;&nbsp;Money
+                        </label>
+                        <br>
+                        <label>
+                          <input type="checkbox">
+                          &nbsp;&nbsp;&nbsp;Politics
+                        </label>
+                        <br>
+                        <label>
+                          <input type="checkbox">
+                          &nbsp;&nbsp;&nbsp;Money
+                        </label>
+                        <br>
+                        <label>
+                          <input type="checkbox">
+                          &nbsp;&nbsp;&nbsp;Travel
+                        </label>
+                        <br>
                       
                     </div>
                     <div class="about-content-block">
@@ -142,15 +170,13 @@
                           <input type="text" class="form-control" id="addressZip" name="zip" placeholder={{user.address.zip}}>
                         </fieldset>                           
                     </div>
-                  </div>
-                  <button type="submit" class="btn-secondary">Update</button>
+                </div>
                 </form>
               </div>
           </div>
         </div>
       </div>
     </div>
-
 
     <!-- Footer
     ================================================= -->

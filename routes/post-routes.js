@@ -47,15 +47,35 @@ router.get("/profile/:userId", (req, res, next) => {
       populate: [{ path: 'comments', populate: [{ path: 'replies' }, { path: 'author' }] }, { path: 'author' }]
     })
     //.populate("followers")
-    .then((allPost) => {
+    .then((user) => {
       //console.log(allPost + "*******************************returning from db ");
       //console.log(allPost.userPost[1].comments[1].replies[0].reply + "************************replyyyyyyyyy")
       //console.log({ allPost: allPost })
-      const reversedPosts = allPost;
-      const postArray = allPost.map(post => {
+
+      const postArray = user.userPosts.map(post => {
+        let commentNo, replyNo;
+        if (post.comments.length === 0) {
+          commentNo = false;
+          replyNo = false;
+        }
+        else {
+          commentNo = true;
+          replyNo = true;
+          const commentArray = post.comments.map(com => {
+            const commentObj = {
+              ...com._doc,
+              noReply: com.replies.length === 0 ? true : false,
+              isOwner: req.user ? com.author._id.toString() === req.user._id.toString() : false
+            }
+            return commentObj;
+          })
+
+        }
+
         const obj = {
           ...post._doc,
-          noComments: post.comments.length === 0 ? true : false,
+          noComments: commentNo,
+          noReply: replyNo,
           isOwner: req.user ? req.params.userId.toString() === req.user._id.toString() : false
         };
 
