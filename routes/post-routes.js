@@ -5,18 +5,20 @@ const User = require("../models/User");
 const Comment = require("../models/Comment.model")
 const Reply = require('../models/Reply.model')
 
-//Display Post
+//Display all Post
 router.get("/timeLine", (req, res, next) => {
   Post.find({})
-    .populate({
-      path: "comments",
-
-      populate: [{ path: "replies" }, { path: "author" }]
-    })
+    .populate([
+      { path: "comments", populate: [{ path: "replies" }, { path: "author" }] },
+      { path: 'author' }
+    ])
     .populate("followers")
     .then((allPost) => {
-      console.log(allPost + "*******************************returning from db ");
+      console.log(allPost + "***********all post");
+      console.log(allPost[0].comments[0].replies[0].reply + "************************replyyyyyyyyy")
+
       const reversedPosts = allPost.reverse();
+      console.log(reversedPosts + "**************reversed");
       const postArray = reversedPosts.map(post => {
         const obj = {
           ...post._doc,
@@ -35,6 +37,44 @@ router.get("/timeLine", (req, res, next) => {
     })
     .catch((err) => { next(err) })
 });
+
+//display user's Post
+router.get("/profile/:userId", (req, res, next) => {
+  console.log(req.params.userId + "******************user")
+  User.findById(req.params.userId)
+    .populate({
+      path: "userPost",
+      populate: [{ path: 'comments', populate: [{ path: 'replies' }, { path: 'author' }] }, { path: 'author' }]
+    })
+    //.populate("followers")
+    .then((allPost) => {
+      //console.log(allPost + "*******************************returning from db ");
+      //console.log(allPost.userPost[1].comments[1].replies[0].reply + "************************replyyyyyyyyy")
+      //console.log({ allPost: allPost })
+      const reversedPosts = allPost;
+      const postArray = allPost.map(post => {
+        const obj = {
+          ...post._doc,
+          noComments: post.comments.length === 0 ? true : false,
+          isOwner: req.user ? req.params.userId.toString() === req.user._id.toString() : false
+        };
+
+        return obj;
+      });
+      const data = {
+        posts: postArray,
+        noPost: postArray.length === 0
+      };
+      console.log(data + "*******************************passing to the view");
+      res.render('profile');
+
+    })
+    .catch((err) => { next(err) })
+});
+
+
+
+
 
 //create Post
 router.post('/createPost', (req, res, next) => {
