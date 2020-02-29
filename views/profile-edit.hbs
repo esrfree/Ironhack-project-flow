@@ -1,25 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="This is social network html5 template available in themeforest......" />
-		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
-		<meta name="robots" content="index, follow" />
-		<title>About Me | Learn Detail About Me</title>
-
-    <!-- Stylesheets
-    ================================================= -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/ionicons.min.css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" />
-    <!--Google Webfont-->
-		<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700' rel='stylesheet' type='text/css'>
-    <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
-	</head>
-  <body>
 
     <!-- Header
     ================================================= -->
@@ -35,57 +15,17 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="index.html"><img src="/images/flow-logo.png" alt="flow-logo"></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
-              <li class="dropdown"><a href="index.html">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Newsfeed <span><img src="images/down-arrow.png" alt="" /></span></a>
-                  <ul class="dropdown-menu newsfeed-home">
-                    <li><a href="newsfeed.html">Newsfeed</a></li>
-                    <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                    <li><a href="newsfeed-friends.html">My friends</a></li>
-                    <li><a href="newsfeed-messages.html">Chatroom</a></li>
-                    <li><a href="newsfeed-images.html">Images</a></li>
-                    <li><a href="newsfeed-videos.html">Videos</a></li>
-                  </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Timeline <span><img src="images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu login">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All Pages <span><img src="images/down-arrow.png" alt="" /></span></a>
-                <ul class="dropdown-menu page-list">
-                  <li><a href="index.html">Landing Page</a></li>
-                  <li><a href="newsfeed.html">Newsfeed</a></li>
-                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>
-                  <li><a href="newsfeed-friends.html">My friends</a></li>
-                  <li><a href="newsfeed-messages.html">Chatroom</a></li>
-                  <li><a href="newsfeed-images.html">Images</a></li>
-                  <li><a href="newsfeed-videos.html">Videos</a></li>
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html">Timeline About</a></li>
-                  <li><a href="timeline-album.html">Timeline Album</a></li>
-                  <li><a href="timeline-friends.html">Timeline Friends</a></li>
-                  <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-              </li>
-              <li class="dropdown"><a href="contact.html">Contact</a></li>
+              <li class="header-button-profile"><a href="/profile">{{user.firstName}}</a></li> <!-- replace with first name -->
+              <li class="header-button"><a href="/logout">Log out</a></li>
             </ul>
             <form class="navbar-form navbar-right hidden-sm">
-              <div class="form-group">
-                <i class="icon ion-android-search"></i>
-                <input type="text" class="form-control" placeholder="Search friends, photos, videos">
-              </div>
+              
             </form>
           </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
@@ -105,23 +45,17 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img src="../images/michaela.jpeg" alt="" class="img-responsive profile-photo" />
-                  <h3>Michaela DeCamara</h3> <!-- replace name -->
-                  <p class="text-muted">Miami</p> <!-- replace name -->
+                  <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+                  <h3>{{user.firstName}} {{user.lastName}}</h3>
+                  <p class="text-muted">{{user.address.city}}</p>
 
                 </div>
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html" class="active">About</a></li>
-                  <li><a href="timeline-album.html">Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
-                </ul>
-                <ul class="follow-me list-inline">
-                  <li>1,299 people following her</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
-                </ul>
+                <li><a href="/profile" class="active">Profile</a></li>
+                <li><a href="/timeline">Timeline</a></li>
+                <li><a href="/news">News</a></li>
               </div>
             </div>
           </div><!--Timeline Menu for Large Screens End-->
@@ -129,17 +63,15 @@
           <!--Timeline Menu for Small Screens-->
           <div class="navbar-mobile hidden-lg hidden-md">
             <div class="profile-info">
-              <img src="../images/michaela.jpeg" alt="" class="img-responsive profile-photo" />
-              <h4>Sarah Cruiz</h4>
+              <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+              <h4>{{user.firstName}} {{user.lastName}}</h4>
             </div>
             <div class="mobile-menu">
               <ul class="list-inline">
-                <li><a href="timline.html">Timeline</a></li>
-                <li><a href="timeline-about.html" class="active">About</a></li>
-                <li><a href="timeline-album.html">Album</a></li>
-                <li><a href="timeline-friends.html">Friends</a></li>
+                <li><a href="/profile" class="active">Profile</a></li>
+                <li><a href="/timeline">Timeline</a></li>
+                <li><a href="/news">News</a></li>
               </ul>
-              <button class="btn-primary">Add Friend</button>
             </div>
           </div><!--Timeline Menu for Small Screens End-->
 
@@ -151,79 +83,69 @@
 
               <!-- About
               ================================================= -->
+              <div class="about-content-block">
+                <h4 class="grey"><i class="ion-ios-camera-outline icon-in-title"></i>Profile Pictures</h4>
+                  
               <div class="about-profile">
-                <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>About you</h4>
-                    <fieldset class="form-group-about">
-                        <input type="text-area" class="form-control" id="aboutYou" name="aboutYou" placeholder="I'm adventurous and love music blablabla...">
-                      </fieldset>         
-                    {{!--  change this to text area / 3 lines --}}
-       
-                </div>
-                <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-circle-outline icon-in-title"></i>Your personal information</h4>
-                  <div class="organization">
-                    <form id="form" action="/signup" method="POST">
-                      <fieldset class="form-group-main">
-                        <input type="text" class="form-control" id="firstname" name="firstName" placeholder="First Name">
-                      </fieldset>
-                      <fieldset class="form-group-main">
-                        <input type="text" class="form-control" id="lastname" name="lastName" placeholder="Last Name">
-                      </fieldset>
-                      <fieldset class="form-group-age">
-                        <input type="number" class="form-control" id="age" name="age" placeholder="25">
-                      </fieldset>
-                      {{!-- Add gender dropdown here              --}}
-						        </form>
+                <div>
+                  <form action="/profile/picture" method="post" enctype="multipart/form-data">
+                    <label>Profile</label>
+                    <input type="file" name="photo">
+                                        <br>
+
+                    <label>Background</label>
+                    <input type="file" name="background">
+                      <br>
+                    <input type="submit" value="Save">
+                      <br>
+                      <br>
+                  </form>
+                  <form action="/profile/edit" method="post" enctype="multipart/form-data">
+                    </div>
+                    <div class="about-content-block">
+                      <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>News Interests</h4>
+                        <button type="button" class="btn btn-primary">Technology</button>
+                        <button type="button" class="btn btn-secondary">Science</button>
+                        <button type="button" class="btn btn-success">Money</button>
+                        <button type="button" class="btn btn-danger">Politics</button>
+                        <button type="button" class="btn btn-warning">Money</button>
+                        <button type="button" class="btn btn-info">Travel</button>
+                      
+                    </div>
+                    <div class="about-content-block">
+                      <h4 class="grey"><i class="ion-ios-circle-outline icon-in-title"></i>Your personal information</h4>
+                      <div class="organization">
+                          <fieldset class="form-group-main">
+                            <input type="text" class="form-control" id="firstname" name="firstName" placeholder={{user.firstName}}>
+                          </fieldset>
+                          <fieldset class="form-group-main">
+                            <input type="text" class="form-control" id="lastname" name="lastName" placeholder={{user.lastName}}>
+                          </fieldset>
+                          <fieldset class="form-group-age">
+                            <input type="number" class="form-control" id="age" name="age" placeholder="{{user.age}}">
+                          </fieldset>
+                          {{!-- Add gender dropdown here              --}}
+                      </div>
+                    </div>
+                    <div class="about-content-block">
+                      <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Where you live</h4>
+                        <fieldset class="form-group-main">
+                          <input type="text" class="form-control" id="addressStreet" name="street" placeholder={{user.address.street}}>
+                        </fieldset>   
+                        <fieldset class="form-group-city">
+                          <input type="text" class="form-control" id="addressCity" name="city" placeholder={{user.address.city}}>
+                        </fieldset>      
+                        <fieldset class="form-group-address">
+                          <input type="text" class="form-control" id="addressState" name="state" placeholder={{user.address.state}}>
+                        </fieldset>   
+                        <fieldset class="form-group-address">
+                          <input type="text" class="form-control" id="addressZip" name="zip" placeholder={{user.address.zip}}>
+                        </fieldset>                           
+                    </div>
                   </div>
-                </div>
-                <div class="about-content-block">
-                  <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Where you live</h4>
-                    <fieldset class="form-group-main">
-                      <input type="text" class="form-control" id="addressStreet" name="addressStreet" placeholder="120 SW 8th St">
-                    </fieldset>   
-                    <fieldset class="form-group-city">
-                      <input type="text" class="form-control" id="addressCity" name="addressCity" placeholder="Miami">
-                    </fieldset>      
-                    <fieldset class="form-group-address">
-                      <input type="text" class="form-control" id="addressState" name="addressState" placeholder="Florida">
-                    </fieldset>   
-                    <fieldset class="form-group-address">
-                      <input type="text" class="form-control" id="addressZip" name="addressZip" placeholder="33130">
-                    </fieldset>                           
-                </div>
+                  <button type="submit" class="btn-secondary">Update</button>
+                </form>
               </div>
-                <button type="submit" class="btn-secondary">Update</button>
-              </div>
-            <div class="col-md-2 static">
-              <div id="sticky-sidebar">
-                <h4 class="grey">Sarah's activity</h4>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
-                    <p class="text-muted">5 mins ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>
-                    <p class="text-muted">an hour ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>
-                    <p class="text-muted">4 hours ago</p>
-                  </div>
-                </div>
-                <div class="feed-item">
-                  <div class="live-activity">
-                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>
-                    <p class="text-muted">a day ago</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -237,7 +159,7 @@
       	<div class="row">
           <div class="footer-wrapper">
             <div class="col-md-3 col-sm-3">
-              <a href=""><img src="images/flow-logo.png" alt="flow-logo" class="navbar-brand" /></a>
+              <a href=""><img src="/images/flow-logo.png" alt="flow-logo" class="navbar-brand" /></a>
               
             </div>
             <div class="col-md-2 col-sm-2">
@@ -284,5 +206,4 @@
     <script src="js/jquery.scrollbar.min.js"></script>
     <script src="js/script.js"></script>
     
-  </body>
 </html>
