@@ -1,8 +1,8 @@
 const User = require('../models/User');
 const _ = require('lodash');
 const passport = require("passport");
-const io = require('socket.io')(server);
-const socket = io(http);
+// const io = require('socket.io')(server);
+// const socket = io(http);
 
 // BCrypt to encrypt passwords
 const bcryptjs = require('bcryptjs');
@@ -61,10 +61,10 @@ const create = (req, res, next) => {
 // Reading - for profile page
 const read = (req, res) => {
   console.log(req.user)
-  socket.on('connection', (socket => {
-    socket.emit('message', `User ${req.user.name} connected`);
-  }))
-  res.render('user/profile');
+  // socket.on('connection', (socket => {
+  //   socket.emit('message', `User ${req.user.name} connected`);
+  // }))
+  res.render('profile');
 }
 
 // Updating

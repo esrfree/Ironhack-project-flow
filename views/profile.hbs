@@ -1,234 +1,262 @@
-    <!-- Header
+<!-- Header
     ================================================= -->
-		<header id="header">
-      <nav class="navbar navbar-default navbar-fixed-top menu">
-        <div class="container">
-
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html"><img src="images/flow-logo.png" alt="flow-logo"></a>
-          </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right main-menu">
-              <li class="header-button"><a href="/profile">{{user.firstName}}</a></li> <!-- replace with first name -->
-              <li class="header-button"><a href="/logout">Log out</a></li>
-            </ul>
-            <form class="navbar-form navbar-right hidden-sm">
-              
-            </form>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
-      </nav>
-    </header>
-    <!--Header End-->
-
+<header id="header">
+  <nav class="navbar navbar-default navbar-fixed-top menu">
     <div class="container">
 
-      <!-- Timeline
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img src="images/flow-logo.png" alt="flow-logo"></a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right main-menu">
+          <li class="header-button"><a href="/profile">{{user.firstName}}</a></li> <!-- replace with first name -->
+          <li class="header-button"><a href="/logout">Log out</a></li>
+        </ul>
+        <form class="navbar-form navbar-right hidden-sm">
+
+        </form>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+</header>
+<!--Header End-->
+
+<div class="container">
+
+  <!-- Timeline
       ================================================= -->
-      <div class="timeline">
-        <div class="timeline-cover">
+  <div class="timeline">
+    <div class="timeline-cover">
 
-          <!--Timeline Menu for Large Screens-->
-          <div class="timeline-nav-bar hidden-sm hidden-xs">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="profile-info">
-                  <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
-                  <h3>{{user.firstName}} {{user.lastName}}</h3>
-                  <p class="text-muted">
-                    {{user.address.street}}
-                    {{user.address.city}}
-                    {{user.address.state}}, 
-                    {{user.address.zip}}
-                    </p> <!-- replace with city -->
-                </div>
-              </div>
-              <div class="col-md-9">
-                <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html" class="active">Profile</a></li>
-                  <li><a href="timeline-about.html">Timeline</a></li>
-                  <li><a href="timeline-album.html">News</a></li>
-                </ul>
-                <ul class="follow-me list-inline">
-                  {{!-- <li>1,299 people following her</li> --}}
-                  <li>
-                    <form action="profile/edit" method="GET">
-                      <button type="submit" class="btn-primary">Edit Profile</button>
-                    </form>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div><!--Timeline Menu for Large Screens End-->
-
-          <!--Timeline Menu for Small Screens-->
-          <div class="navbar-mobile hidden-lg hidden-md">
+      <!--Timeline Menu for Large Screens-->
+      <div class="timeline-nav-bar hidden-sm hidden-xs">
+        <div class="row">
+          <div class="col-md-3">
             <div class="profile-info">
               <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
-              <h4>{{user.firstName}} {{user.lastName}}</h4>
-              <p class="text-muted">Miami</p> <!-- replace with city -->
+              <h3>{{user.firstName}} {{user.lastName}}</h3>
+              <p class="text-muted">
+                {{user.address.street}}
+                {{user.address.city}}
+                {{user.address.state}},
+                {{user.address.zip}}
+              </p> <!-- replace with city -->
             </div>
-            <div class="mobile-menu">
-              <ul class="list-inline">
-                <li><a href="timline.html" class="active">Timeline</a></li>
-                <li><a href="timeline-about.html">About</a></li>
-                <li><a href="timeline-album.html">Album</a></li>
-                <li><a href="timeline-friends.html">Friends</a></li>
-              </ul>
-              <button class="btn-primary">Add Friend</button>
-            </div>
-          </div><!--Timeline Menu for Small Screens End-->
-
-        </div>
-        <div id="page-contents">
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-7">
-
-              <!-- Post Create Box
-              ================================================= -->
-              <div class="create-post">
-                <div class="row">
-                  <div class="col-md-7 col-sm-7">
-                    <div class="form-group">
-                      <img src={{user.photo}} alt="" class="profile-photo-md" />
-                      <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="What's going on?"></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-5 col-sm-5">
-                    <div class="tools">
-                      <ul class="publishing-tools list-inline">
-                        <li><a href="#"><i class="ion-compose"></i></a></li>
-                        <li><a href="#"><i class="ion-images"></i></a></li>
-                      </ul>
-                      <button class="btn btn-primary pull-right">Post</button> <!-- Link to method to post-->
-                    </div>
-                  </div>
-                </div>
-              </div><!-- Post Create Box End-->
-
-              <!-- Post Content
-              ================================================= -->
-              <div class="post-content">
-
-                <!--Post Date-->
-                <div class="post-date hidden-xs hidden-sm">
-                  <h5>{{user.firstName}}</h5>
-                  <p class="text-grey">a while ago</p>
-                </div><!--Post Date End-->
-
-                <img src={{user.photo}} alt="post-image" class="img-responsive post-image" />
-                <div class="post-container">
-                  <img src={{user.photo}} alt="user" class="profile-photo-md pull-left" />
-                  <div class="post-detail">
-                    <div class="user-info">
-                      <h5><a href="timeline.html" class="profile-link">{{user.firstName}} {{user.lastName}}</a> <span class="following">following</span></h5>
-                      <p class="text-muted">Published a photo about 15 mins ago</p> <!-- Needs to reflect the time since post-->
-                    </div>
-                    <div class="reaction">
-                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>  <!-- Needs to reflect the number of likes-->
-                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a> <!-- Needs to reflect the number of dislikes-->
-                    </div>
-                    <div class="line-divider"></div>
-                    <div class="post-text">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                    </div>
-                      <a class="anchor-button">Reply</a>
-                      <a class="anchor-button">Delete</a>
-                      <a class="anchor-button">Edit</a>
-                      <br>
-                    <div class="line-divider"></div>
-                    <div class="post-comment">
-                      <img src="../images/kayla.jpeg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">Kayla </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                      <a class="anchor-button">Reply</a>
-                      <a class="anchor-button">Delete</a>
-                      <a class="anchor-button">Edit</a>
-                      <br>
-                    <div class="post-reply">
-                      <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
-                      <p><a href="timeline.html" class="profile-link">Gustavo</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                    </div>
-                      <a class="anchor-button">Reply</a>
-                      <a class="anchor-button">Delete</a>
-                      <a class="anchor-button">Edit</a>
-                      <br>
-                    <div class="post-comment">
-                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
-                      <input type="text" class="form-control" placeholder="Comment">
-                      <button class="btn-primary">Post</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              
-
-            </div>
-            <div class="col-md-2 static">
-              <div id="sticky-sidebar">
-                <h4 class="grey">Michaela's activity</h4>
-                <div class="feed-item">
-                  <p>Hiking, running and other</p>
-                </div>
-              </div>
-            </div>
+          </div>
+          <div class="col-md-9">
+            <ul class="list-inline profile-menu">
+              <li><a href="timeline.html" class="active">Profile</a></li>
+              <li><a href="timeline-about.html">Timeline</a></li>
+              <li><a href="timeline-album.html">News</a></li>
+            </ul>
+            <ul class="follow-me list-inline">
+              {{!-- <li>1,299 people following her</li> --}}
+              <li>
+                <form action="profile/edit" method="GET">
+                  <button type="submit" class="btn-primary">Edit Profile</button>
+                </form>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
+      <!--Timeline Menu for Large Screens End-->
 
-    <!-- Footer
+      <!--Timeline Menu for Small Screens-->
+      <div class="navbar-mobile hidden-lg hidden-md">
+        <div class="profile-info">
+          <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+          <h4>{{user.firstName}} {{user.lastName}}</h4>
+          <p class="text-muted">Miami</p> <!-- replace with city -->
+        </div>
+        <div class="mobile-menu">
+          <ul class="list-inline">
+            <li><a href="timline.html" class="active">Timeline</a></li>
+            <li><a href="timeline-about.html">About</a></li>
+            <li><a href="timeline-album.html">Album</a></li>
+            <li><a href="timeline-friends.html">Friends</a></li>
+          </ul>
+          <button class="btn-primary">Add Friend</button>
+        </div>
+      </div>
+      <!--Timeline Menu for Small Screens End-->
+
+    </div>
+    <div id="page-contents">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
+
+          <!-- Post Create Box
+              ================================================= -->
+          <div class="create-post">
+
+            <div class="row">
+              <div class="col-md-7 col-sm-7">
+                <form action="/createPost" method="POST"></form>
+                <div class="form-group">
+                  <img src={{user.photo}} alt="" class="profile-photo-md" />
+                  <textarea name="text" id="exampleTextarea" cols="30" rows="1" class="form-control"
+                    placeholder="What's going on?"></textarea>
+                </div>
+              </div>
+              <div class="col-md-5 col-sm-5">
+                <div class="tools">
+                  <ul class="publishing-tools list-inline">
+                    <li><a href="#"><i class="ion-compose"></i></a></li>
+                    <li><a href="#"><i class="ion-images"></i></a></li>
+                  </ul>
+                  <button type="submit" class="btn btn-primary pull-right">Post</button> <!-- Link to method to post-->
+                </div>
+              </div>
+            </div>
+            </form>
+          </div><!-- Post Create Box End-->
+
+          <!-- Post Content
+              ================================================= -->
+          <div class="post-content">
+            {{#if noPost}}
+            <h3> There are no Post to display at this time. Be the first to create a new post! </h3>
+            {{else}}
+            {{#each posts}}
+            <!--Post start-->
+            <!--Post Date-->
+            <div class="post-date hidden-xs hidden-sm">
+              <h5>{{user.firstName}}</h5>
+              <p class="text-grey">a while ago</p>
+            </div>
+            <!--Post Date End-->
+
+            <img src={{user.photo}} alt="post-image" class="img-responsive post-image" />
+            <div class="post-container">
+              <img src={{this.image} alt="user" class="profile-photo-md pull-left" />
+              <div class="post-detail">
+                <div class="user-info">
+                  <h5><a href="timeline.html" class="profile-link">{{user.firstName}} {{user.lastName}}</a> <span
+                class="following">following</span></h5>
+              <p class="text-muted">Published a photo about 15 mins ago</p>
+              <!-- Needs to reflect the time since post-->
+            </div>
+            <div class="reaction">
+              <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
+              <!-- Needs to reflect the number of likes-->
+              <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+              <!-- Needs to reflect the number of dislikes-->
+            </div>
+            <div class="line-divider"></div>
+            <div class="post-text">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i
+                  class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+            </div>
+            <a class="anchor-button">Reply</a>
+            <a class="anchor-button">Delete</a>
+            <a class="anchor-button">Edit</a>
+            <br>
+            <div class="line-divider"></div>
+            <div class="post-comment">
+              <img src="../images/kayla.jpeg" alt="" class="profile-photo-sm" />
+              <p><a href="timeline.html" class="profile-link">Kayla </a><i class="em em-laughing"></i> Lorem ipsum
+                dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+            </div>
+            <a class="anchor-button">Reply</a>
+            <a class="anchor-button">Delete</a>
+            <a class="anchor-button">Edit</a>
+            <br>
+            <div class="post-reply">
+              <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
+              <p><a href="timeline.html" class="profile-link">Gustavo</a> Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                veniam, quis nostrud </p>
+            </div>
+            <a class="anchor-button">Reply</a>
+            <a class="anchor-button">Delete</a>
+            <a class="anchor-button">Edit</a>
+            <br>
+            <div class="post-comment">
+              <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
+              <input type="text" class="form-control" placeholder="Comment">
+              <button class="btn-primary">Post</button>
+            </div>
+          </div>
+        </div>
+
+        {{/if}}
+        <!--Post End-->
+      </div>
+
+
+
+    </div>
+    <div class="col-md-2 static">
+      <div id="sticky-sidebar">
+        <h4 class="grey">Michaela's activity</h4>
+        <div class="feed-item">
+          <p>Hiking, running and other</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Footer
     ================================================= -->
-    <footer id="footer">
-      <div class="container">
-      	<div class="row">
-          <div class="footer-wrapper">
-            <div class="col-md-3 col-sm-3">
-              <a href=""><img src="images/flow-logo.png" alt="flow-logo" class="navbar-brand" /></a>
-              
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h6>Site Map</h6>
-              <ul class="footer-links">
-                <li><a href="">Timeline</a></li>
-                <li><a href="">Profile</a></li>
-                <li><a href="">News</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-             {{!-- empty div to maintain space --}}
-            </div>
-            <div class="col-md-2 col-sm-2">
-              {{!-- empty div to maintain space --}}
-            </div>
-            <div class="col-md-3 col-sm-3">
-                  <h6>Contact</h6>
-                    <ul class="contact">
-                      <li><i class="icon ion-ios-telephone-outline"></i>(305) 555-1234</li>
-                      <li><i class="icon ion-ios-email-outline"></i>hello@flowsocial.com</li>
-                      <li><i class="icon ion-ios-location-outline"></i>120 SW 8th St, Miami, FL 33130</li>
-                    </ul>
-            </div>
-          </div>
-      	</div>
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="footer-wrapper">
+        <div class="col-md-3 col-sm-3">
+          <a href=""><img src="images/flow-logo.png" alt="flow-logo" class="navbar-brand" /></a>
+
+        </div>
+        <div class="col-md-2 col-sm-2">
+          <h6>Site Map</h6>
+          <ul class="footer-links">
+            <li><a href="">Timeline</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="">News</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-2">
+          {{!-- empty div to maintain space --}}
+        </div>
+        <div class="col-md-2 col-sm-2">
+          {{!-- empty div to maintain space --}}
+        </div>
+        <div class="col-md-3 col-sm-3">
+          <h6>Contact</h6>
+          <ul class="contact">
+            <li><i class="icon ion-ios-telephone-outline"></i>(305) 555-1234</li>
+            <li><i class="icon ion-ios-email-outline"></i>hello@flowsocial.com</li>
+            <li><i class="icon ion-ios-location-outline"></i>120 SW 8th St, Miami, FL 33130</li>
+          </ul>
+        </div>
       </div>
-      <div class="copyright">
-        <p>Copyright MERNers ® All Rights Reserved</p>
-      </div>
-		</footer>
-    
-    <!--preloader-->
-    <div id="spinner-wrapper">
-      <div class="spinner"></div>
     </div>
+  </div>
+  <div class="copyright">
+    <p>Copyright MERNers ® All Rights Reserved</p>
+  </div>
+</footer>
+
+<!--preloader-->
+<div id="spinner-wrapper">
+  <div class="spinner"></div>
+</div>
