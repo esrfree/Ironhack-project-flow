@@ -23,7 +23,7 @@ module.exports = app => {
     saveUninitialized: true,                         // reading from .env the SECRET variable
     //cookie: { maxAge: 60 * 1000 },                    // 60 seconds
     store: new MongoStore({
-      mongooseConnection: mongoose.connection,
+      uri: process.env.MONGODB_URI,
       ttl: 24 * 60 * 60 // 1 day
     })
   }))

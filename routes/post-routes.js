@@ -71,9 +71,11 @@ router.get("/profile/:userId", (req, res, next) => {
           })
 
         }
+        let newPost = [...post._doc];
+        newPost.comments = commentArray;
 
         const obj = {
-          ...post._doc,
+          post: newPost,
           noComments: commentNo,
           noReply: replyNo,
           isOwner: req.user ? req.params.userId.toString() === req.user._id.toString() : false
