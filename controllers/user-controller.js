@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const _ = require('lodash');
 const passport = require("passport");
+const axios = require("axios");
 //const io = require('socket.io')(server);
 //const socket = io(http);
 
@@ -116,6 +117,24 @@ const remove = (req, res, next) => {
     })
 }
 
+// News
+const newsFeed = (req, res, next) => {
+  axios.get(process.env.NEWS_TOP, {
+    params: {
+      country: 'us',
+      page: 10,
+      apiKey: process.env.NEWS_SECRET
+    }
+  })
+  .then( news => {
+    const feed = news.data.articles
+    res.render('news', {feed})
+  })
+  .catch( err => {
+    console.log(err);
+  })
+}
 
 
-module.exports = { signup, create, read, readForUpdate, update, remove };
+
+module.exports = { signup, create, read, readForUpdate, update, remove, newsFeed };

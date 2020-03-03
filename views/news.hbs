@@ -119,72 +119,71 @@
             </div>
             <!-- Post Content
             ================================================= -->
-            <div class="post-content">
-              <div class="post-container">
-                <img src="/images/cnn-logo.png" alt="user" class="profile-photo-md pull-left" />
-                <div class="post-detail">
-                  <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">CNN Headlines</a></h5>
-                    <p class="text-muted">Updated 1 hour ago</p> <!-- when post was rendered -->
-                  </div>
-                  <div class="reaction">
-                    <a class="anchor-link">Share</a>
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 39</a>
-                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 2</a>
-                  </div>
-                </div>
-                  <div class="line-divider"></div>
-                <div class="post-content">
-                    <div class="row">
-                      <div class="col-md-5 col-sm-5">
-                        <img class="img-responsive" src="/images/coronavirus-news.jpg" />
-                      </div>
-                      <div class="col-md-7 col-sm-7">
-                        <a class="profile-link">Trump says U.S. is "very very ready" for Coronavirus</a>
-                        <br>
-                        <br>
-                        <p>
-                          CNN (AP) – President Donald Trump says the U.S. is “very, very ready” 
-                          for whatever the new Coronavirus threat brings. He has put Vice President Mike Pence 
-                          in charge of overseeing the nation’s response, working with the government’s top health authorities. 
-                          Trump has been pushing back against criticism that his administration isn’t doing enough 
-                          to meet the coronavirus threat.
-                        </p> <!-- NEED TO SHORTEN TEXT TO SHOW SNIPPET OF NEWS SO IT DOESN'T THROW OFF THE FORMAT -->
-                      </div>
+            {{#each feed}}
+              <div class="post-content">
+                <div class="post-container">
+                  <!-- <img src="/images/cnn-logo.png" alt="user" class="profile-photo-md pull-left" /> -->
+                  <div class="post-detail">
+                    <div class="user-info">
+                      <h5><a href="timeline.html" class="profile-link">{{this.source.name}}</a></h5>
+                      <h5><a href="https://newsapi.org/" class="profile-link">powered by NewsAPI.org</a></h5>
+                      <p class="text-muted">Date: {{this.publishedAt}}</p> <!-- when post was rendered -->
                     </div>
-                </div>
-                <div class="line-divider"></div>
-                <div class="post-detail no-margin">
-                  <div class="post-comment">
-                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
-                      <input type="text" class="form-control" placeholder="Comment">
-                      <button class="btn-primary post-comment-button">Post</button>
+                    <div class="reaction">
+                      <a class="anchor-link">Share</a>
+                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> 39</a>
+                      <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 2</a>
+                    </div>
                   </div>
-                  <div>
-                      <div class="post-comment">
-                        <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
-                        <p class="no-margin">
-                          <a href="timeline.html" class="profile-link">Gustavo </a>
-                          <i class="em em-laughing"></i> 
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-                        </p>
-                      </div>
-                      <div class="post-comment-action">
-                        <a class="anchor-button">Reply</a>
-                        <a class="anchor-button">Delete</a>
-                        <a class="anchor-button">Edit</a>
-                      </div>
-                      <div class="post-comment-action">
-                        <div class="post-comment">
-                          <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
-                          <input type="text" class="form-control" placeholder="Comment">
-                          <button class="btn-primary post-comment-button">Post</button>
+                    <div class="line-divider"></div>
+                  <div class="post-content">
+                      <div class="row">
+                        <div class="col-md-5 col-sm-5">
+                          <img class="img-responsive" src="{{this.urlToImage}}"/>
+                        </div>
+                        <div class="col-md-7 col-sm-7">
+                          <a class="profile-link">{{this.title}}</a>
+                          <br>
+                          <br>
+                          <p>
+                            {{this.description}}
+                          </p> <!-- NEED TO SHORTEN TEXT TO SHOW SNIPPET OF NEWS SO IT DOESN'T THROW OFF THE FORMAT -->
                         </div>
                       </div>
                   </div>
+                  <div class="line-divider"></div>
+                  <div class="post-detail no-margin">
+                    <div class="post-comment">
+                        <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
+                        <input type="text" class="form-control" placeholder="Comment">
+                        <button class="btn-primary post-comment-button">Post</button>
+                    </div>
+                    <div>
+                        <div class="post-comment">
+                          <img src="../images/gustavo.jpeg" alt="" class="profile-photo-sm" />
+                          <p class="no-margin">
+                            <a href="timeline.html" class="profile-link">Gustavo </a>
+                            <i class="em em-laughing"></i> 
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+                          </p>
+                        </div>
+                        <div class="post-comment-action">
+                          <a class="anchor-button">Reply</a>
+                          <a class="anchor-button">Delete</a>
+                          <a class="anchor-button">Edit</a>
+                        </div>
+                        <div class="post-comment-action">
+                          <div class="post-comment">
+                            <img src="../images/michaela.jpeg" alt="" class="profile-photo-sm" />
+                            <input type="text" class="form-control" placeholder="Comment">
+                            <button class="btn-primary post-comment-button">Post</button>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            {{/each}}
     		</div>
     	</div>
     </div>

@@ -25,4 +25,10 @@ router
 //.delete(userCtrl.remove)
 
 
+//News
+router
+  .route('/newsfeed')
+  .get(isLoggedIn, userCtrl.newsFeed)
+
+
 module.exports = router;
