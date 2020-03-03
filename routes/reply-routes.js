@@ -20,7 +20,7 @@ router.post("/createReply/:commentId", (req, res, next) => {
   // create a new reply message, and once we have it push the reference _id of the reply to it onto the original message
   Reply.create(theReply)
     .then(newlyCreatedReply => {
-      console.log("created reply" + newlyCreatedReply)
+      // console.log("created reply" + newlyCreatedReply)
       // find the message we reply to from params and update it with the reference to the reply
       Comment.findByIdAndUpdate(
         req.params.commentId,
@@ -29,7 +29,7 @@ router.post("/createReply/:commentId", (req, res, next) => {
       )
         .then(updatedMessage => {
           //res.status(200).json(updatedMessage);
-          res.redirect('/timeLine');
+          res.redirect(`/profile/${req.user._id}`);
         })
         .catch(err => next(err));
     })
@@ -46,7 +46,7 @@ router.post("/deleteReply/:replyId/:commentId", (req, res, next) => {
       // find and delete the reply
       Reply.findByIdAndDelete(req.params.replyId)
         .then(() => {
-          next();
+          res.redirect(`/profile/${req.user._id}`);
         })
         .catch(err => next(err));
     })

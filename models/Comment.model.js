@@ -40,5 +40,15 @@ const commentSchema = new Schema(
   },
   { timestamps: true }
 );
+
+
+// const deleteReply = next => {
+//   this.update({ $set: { replies: [] } });
+//   next();
+// };
+
+// commentSchema
+//   .post("findOneAndRemove", deleteReply)
+//   .post("findByIdAndDelete", deleteReply);
 module.exports = model("Comment", commentSchema);
 

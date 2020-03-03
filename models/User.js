@@ -73,7 +73,7 @@ const userSchema = new Schema(
             type: String
         },
         // the boards that have been created by the user
-        userPosts: {
+        userPost: {
             type: [
                 {
                     type: Schema.Types.ObjectId,

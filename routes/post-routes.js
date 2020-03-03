@@ -40,7 +40,7 @@ router.get("/timeLine", (req, res, next) => {
 
 //display user's Post
 router.get("/profile/:userId", (req, res, next) => {
-  console.log(req.params.userId + "******************user")
+
   User.findById(req.params.userId)
     .populate({
       path: "userPost",
@@ -48,47 +48,35 @@ router.get("/profile/:userId", (req, res, next) => {
     })
     //.populate("followers")
     .then((user) => {
-      //console.log(allPost + "*******************************returning from db ");
-      //console.log(allPost.userPost[1].comments[1].replies[0].reply + "************************replyyyyyyyyy")
-      //console.log({ allPost: allPost })
-
-      const postArray = user.userPosts.map(post => {
-        let commentNo, replyNo;
-        if (post.comments.length === 0) {
-          commentNo = false;
-          replyNo = false;
+      // console.log(user.userPost.length + "  numero de post**************************************")
+      // console.log(user)
+      const postArray = user.userPost.map((post, i) => {
+        //   // console.log(post.comments[0].author + "****************************post.comments")
+        let updatedComments = post._doc.comments.map(comment => {
+          // console.log(req.user._id, comment.author._id, req.user && comment.author._id === req.user._id)
+          // console.log(comment.comment);
+          return {
+            ...comment,
+            isOwner: req.user && comment.author._id.toString() === req.user._id.toString()
+          }
         }
-        else {
-          commentNo = true;
-          replyNo = true;
-          const commentArray = post.comments.map(com => {
-            const commentObj = {
-              ...com._doc,
-              noReply: com.replies.length === 0 ? true : false,
-              isOwner: req.user ? com.author._id.toString() === req.user._id.toString() : false
-            }
-            return commentObj;
-          })
-
-        }
-        let newPost = [...post._doc];
-        newPost.comments = commentArray;
-
+        )
+        // console.log(updatedComments)
         const obj = {
-          post: newPost,
-          noComments: commentNo,
-          noReply: replyNo,
-          isOwner: req.user ? req.params.userId.toString() === req.user._id.toString() : false
+          ...post._doc,
+          noComments: post.comments.length === 0 ? true : false,
+          comments: updatedComments,
+          isOwner: req.user ? post.author._id.toString() === req.user._id.toString() : false
         };
-
+        // console.log(obj.comments[0])
         return obj;
       });
       const data = {
         posts: postArray,
         noPost: postArray.length === 0
       };
-      console.log(data + "*******************************passing to the view");
-      res.render('profile');
+
+      res.render('profile', data);
 
     })
     .catch((err) => { next(err) })
@@ -119,7 +107,7 @@ router.post('/createPost', (req, res, next) => {
         { new: true }
       )
         .then(() => {
-          res.redirect('/timeLine');
+          res.redirect(`/profile/${req.user._id}`);
         })
         .catch(err => next(err));
     })
@@ -127,7 +115,8 @@ router.post('/createPost', (req, res, next) => {
 
 })
 //update post for followers
-router.post("/updateFollowers/:postI", (req, res, next) => {
+router.post("/updateFollowers/:postId", (req, res, next) => {
+  // let newParam = req.params.postId.toString().slice(0, -1);
   Post.findById(req.params.postId)
     .then(postFromDB => {
       if (postFromDB.followers.includes(re.user._id)) {
@@ -145,19 +134,21 @@ router.post("/updateFollowers/:postI", (req, res, next) => {
     .catch(err => next(err));
 });
 //update likes
-router.post("/updateLikes/:postI", (req, res, next) => {
+router.post("/updateLikes/:postId", (req, res, next) => {
   Post.findById(req.params.postId)
     .then(postFromDB => {
-
-      if (postFromDB.likes.includes(re.user._id)) {
-        postFromDB.pull(re.user._id);
+      console.log("*************************************found")
+      if (postFromDB.likes.includes(req.user._id)) {
+        postFromDB.likes.pull(req.user._id);
+        console.log("*************************************incluides")
       } else {
-        postFromDB.push(re.user._id);
+        postFromDB.likes.push(req.user._id);
+        console.log("***********No**************************incluides")
       }
       postFromDB
         .save()
-        .then(updatedBoard => {
-          res.redirect("back");
+        .then(updatedPost => {
+          res.redirect(`/profile/${req.user._id}`);;
         })
         .catch(err => next(err));
     })
@@ -166,24 +157,50 @@ router.post("/updateLikes/:postI", (req, res, next) => {
 
 //delete post
 router.post("/deletePost/:postId", (req, res, next) => {
-  if (!re.user) {
+  if (!req.user) {
     res.redirect("/auth/login");
   }
+  Post.findById(req.params.postId)
+    .populate({
+      path: "comments", populate: { path: 'replies' }
+    })
+    .then(post => {
+      let a = post.comments[0].reply[0]
+      console.log("inside post" + a)
+      post.comments.map(com => {
+        console.log("inside comment")
+        com.reply.map(reply => {
+          console.log("inside reply")
+          Reply.findByIdAndDelete(reply._id)
+            .then((value) => { console.log(deleted) })
+            .catch(err => next(err))
+        })
+        Comment.findByIdAndDelete(com._id)
+          .then((value) => { console.log(deleted) })
+          .catch(err => next(err))
+      })
+    })
+    .catch(err => next(err));
 
   Post.findByIdAndDelete(req.params.postId)
     .then(() => {
+
       User.findByIdAndUpdate(
-        re.user._id,
+        req.user._id,
         { $pull: { userPost: req.params.postId } },
         { new: true }
       )
         .then(() => {
-          res.redirect("/timeLine");
+          res.redirect(`/profile/${req.user._id}`);
         })
         .catch(err => next(err));
     })
     .catch(err => next(err));
 });
+
+
+
+
 
 
 
