@@ -13,17 +13,16 @@ router
   .post(authCtrl.authenticated)
   
 router
-    .route('/profile')
-    .get(isLoggedIn, userCtrl.read)
-//  .put(userCtrl.update)
-//  .delete(userCtrl.remove)
+  .route('/profile/edit')
+  .get(isLoggedIn, userCtrl.readForUpdate)
+  .post(isLoggedIn, uploadCloud.single('photo'), userCtrl.update)
+  //.post(isLoggedIn, userCtrl.update)
 
 router
-    .route('/profile/edit')
-    .get(isLoggedIn, userCtrl.readForUpdate)
-    .post(isLoggedIn, uploadCloud.single('photo'), userCtrl.update)
-    //.post(isLoggedIn, userCtrl.update)
-
+  .route('/profile')
+  .get(isLoggedIn, userCtrl.read)
+//.put(userCtrl.update)
+//.delete(userCtrl.remove)
 
 
 module.exports = router;

@@ -60,7 +60,6 @@ const create = (req, res, next) => {
 
 // Reading - for profile page
 const read = (req, res) => {
-  console.log(req.user)
   //socket.on('connection', (socket => {
   //  socket.emit('message', `User ${req.user.name} connected`);
   //}))
@@ -78,27 +77,26 @@ const readForUpdate = (req, res) => {
 
 const update = (req, res, next) => {
   const updatedUser = req.body;
-
   User.findById(req.user.id)
-    .then(user => {
-      if (req.file.url && req.file.originalname) {
+    .then(foundUser => {
+      if (req.file) {
         const imgPath = req.file.url;
         const imgName = req.file.originalname;
-        user.profilePicture = { imgPath, imgName }
+        foundUser.profilePicture = { imgPath, imgName };
       }
-      if (updatedUser.firstName) user.firstName = updatedUser.firstName;
-      if (updatedUser.lastName) user.lastName = updatedUser.lastName;
-      if (updatedUser.age) user.age = updatedUser.age;
-      if (updatedUser.street) user.address.street = updatedUser.street;
-      if (updatedUser.city) user.address.city = updatedUser.city;
-      if (updatedUser.state) user.address.state = updatedUser.state;
-      if (updatedUser.zip) user.address.zip = updatedUser.zip;
-      user.save();
-      console.log(user)
-      res.redirect('/profile')
+      if (updatedUser.firstName) foundUser.firstName = updatedUser.firstName;
+      if (updatedUser.lastName) foundUser.lastName = updatedUser.lastName;
+      if (updatedUser.age) foundUser.age = updatedUser.age;
+      if (updatedUser.street) foundUser.address.street = updatedUser.street;
+      if (updatedUser.city) foundUser.address.city = updatedUser.city;
+      if (updatedUser.state) foundUser.address.state = updatedUser.state;
+      if (updatedUser.zip) foundUser.address.zip = updatedUser.zip;
+      foundUser.save();
+      console.log(foundUser.firstName)
+      res.redirect('/profile');
     })
     .catch(err => {
-      res.send(err)
+      console.log("No encontramos al usuario", err)
     })
 }
 
