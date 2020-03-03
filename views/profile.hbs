@@ -1,20 +1,36 @@
 <!-- Header
     ================================================= -->
-<header id="header">
-  <nav class="navbar navbar-default navbar-fixed-top menu">
-    <div class="container">
 
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html"><img src="images/flow-logo.png" alt="flow-logo"></a>
-      </div>
+		<header id="header">
+      <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><img src="/images/flow-logo.png" alt="flow-logo"></a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right main-menu">
+              <li class="header-button-profile"><a href="/profile">Michaela</a></li> <!-- replace with first name -->
+              <li class="header-button"><a href="/logout">Log out</a></li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-sm">
+              
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+      </nav>
+    </header>
+    <!--Header End-->
+
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -35,8 +51,43 @@
 
   <!-- Timeline
       ================================================= -->
-  <div class="timeline">
-    <div class="timeline-cover">
+
+      <div class="timeline">
+        <div class="timeline-cover">
+
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+                  <h3>{{user.firstName}} {{user.lastName}}</h3>
+                  <p class="text-muted">
+                    {{user.address.street}}
+                    {{user.address.city}}
+                    {{user.address.state}}, 
+                    {{user.address.zip}}
+                    </p> <!-- replace with city -->
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a ></a></li>
+                  <li><a ></a></li>
+                  <li><a ></a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  {{!-- <li>1,299 people following her</li> --}}
+                  <li>
+                    <form action="profile/edit" method="GET">
+                      <button type="submit" class="btn-primary">Edit Profile</button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
 
       <!--Timeline Menu for Large Screens-->
       <div class="timeline-nav-bar hidden-sm hidden-xs">
@@ -44,33 +95,17 @@
           <div class="col-md-3">
             <div class="profile-info">
               <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
-              <h3>{{user.firstName}} {{user.lastName}}</h3>
-              <p class="text-muted">
-                {{user.address.street}}
-                {{user.address.city}}
-                {{user.address.state}},
-                {{user.address.zip}}
-              </p> <!-- replace with city -->
+
+              <h4>{{user.firstName}} {{user.lastName}}</h4>
+              <p class="text-muted">Miami, Florida</p> <!-- replace with city -->
             </div>
-          </div>
-          <div class="col-md-9">
-            <ul class="list-inline profile-menu">
-              <li><a href="timeline.html" class="active">Profile</a></li>
-              <li><a href="timeline-about.html">Timeline</a></li>
-              <li><a href="timeline-album.html">News</a></li>
-            </ul>
-            <ul class="follow-me list-inline">
-              {{!-- <li>1,299 people following her</li> --}}
-              <li>
-                <form action="profile/edit" method="GET">
-                  <button type="submit" class="btn-primary">Edit Profile</button>
-                </form>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!--Timeline Menu for Large Screens End-->
+           
+            <div class="mobile-menu">
+              
+              <button class="btn-primary">Edit Profile</button>
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
 
       <!--Timeline Menu for Small Screens-->
       <div class="navbar-mobile hidden-lg hidden-md">
@@ -99,6 +134,7 @@
 
           <!-- Post Create Box
               ================================================= -->
+
           <div class="create-post">
             <form action="/createPost" method="POST">
               <div class="row">
@@ -237,6 +273,50 @@
 
                       {{/each}}
                       {{/if}}
+
+              <div class="create-post-menu">
+                 <!-- Newsfeed Common Side Bar Left
+                ================================================= -->
+                <div class="col-md-3 static">
+                  <ul class="nav-news-feed">
+                    <li><i class="icon ion-ios-briefcase"></i><div><a href="/profile">Profile</a></div></li>
+                    <li><i class="icon ion-ios-people-outline"></i><div><a href="/timeline">Timeline</a></div></li>
+                    <li><i class="icon ion-ios-paper"></i><div><a href="/news">News</a></div></li>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                      <img src="../images/michaela.jpeg" alt="" class="profile-photo-md" />
+                      <textarea name="texts" id="exampleTextarea" cols="30" rows="3" class="form-control" placeholder="What's going on?"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-sm-2">
+                    <div class="tools">
+                      <ul class="publishing-tools list-inline">
+                        <li><a href="#"><i class="ion-images"></i></a></li>
+                      </ul>
+                      <button class="btn btn-primary">Post</button> <!-- Link to method to post-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+                      <!-- Post Create Box End-->
+
+                      <!-- Post Content
+                      ================================================= -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="page-contents">
+              <div class="container">
+                <div class="row"> 
+                  <div class="col-md-9">
+                      
+                    <!-- Post Content
+
                     </div>
 
                   </div>

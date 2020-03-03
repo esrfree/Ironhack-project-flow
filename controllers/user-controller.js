@@ -1,8 +1,10 @@
 const User = require('../models/User');
 const _ = require('lodash');
 const passport = require("passport");
+
 // const io = require('socket.io')(server);
 // const socket = io(http);
+
 
 // BCrypt to encrypt passwords
 const bcryptjs = require('bcryptjs');
@@ -20,7 +22,7 @@ const create = (req, res, next) => {
   // no empty fields
   if (!firstName || !lastName || !email || !password) {
     res.render('index', {
-      errorMessage: 'All fields are mandatory. Please, provide all the information'
+      errorMessage: 'All fields are mandatory. Please provide all the information'
     })
     return;
   }
@@ -54,13 +56,14 @@ const create = (req, res, next) => {
       console.log(err);
       res.send({ errorMessage: err.message })
     })
-}
+};
 
 /* The User is vailable through req.user after Passport authentication at signin */
 
 // Reading - for profile page
 const read = (req, res) => {
   console.log(req.user)
+
   // socket.on('connection', (socket => {
   //   socket.emit('message', `User ${req.user.name} connected`);
   // }))

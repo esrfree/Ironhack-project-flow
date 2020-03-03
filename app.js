@@ -64,12 +64,20 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 // default value for title local
 app.locals.title = 'Flow, MERN stack social media platform';
 
-// Routes middleware
+// Routes middleware - pages
 app.use('/', require('./routes/index'));
+app.use('/', require('./routes/timeline'));
+app.use('/', require('./routes/profile'));
+app.use('/', require('./routes/profile-edit'));
+app.use('/', require('./routes/news'));
+app.use('/', require('./routes/user-list'));
+
+// Routes middleware - functionality
 app.use('/', require('./routes/user-routes'));
 app.use('/', require('./routes/other-users-routes'));
 app.use('/', require('./routes/auth-routes'));
 app.use('/', require('./routes/post-routes'));
 app.use('/', require('./routes/comments-routes'));
 app.use('/', require('./routes/reply-routes'));
+
 module.exports = app;
