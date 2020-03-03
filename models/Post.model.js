@@ -50,5 +50,16 @@ const postSchema = new Schema(
   { timestamps: true }
 );
 
+// const deleteComment = next => {
+//   this.update({ $set: { comments: [] } });
+//   next();
+// };
+
+// postSchema
+//   .post("findOneAndRemove", deleteComment)
+//   .post("findByIdAndDelete", deleteComment);
+
+
+
 const Post = model("Post", postSchema);
 module.exports = Post;

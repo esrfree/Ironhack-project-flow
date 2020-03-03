@@ -8,6 +8,10 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
 const passport = require('passport');
+const helpers = require('handlebars-helpers')(['comparison', 'string']);
+
+
+
 
 // Local user after authetication with Passport
 const localUser = require('./configs/local-user-config');
@@ -45,6 +49,16 @@ app.use(require('node-sass-middleware')({
 // hbs as view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+// app.set('hbs', 'helpers');
+hbs.registerHelper(helpers);
+// hbs.registerHelper('compare', (id1, id2) => {
+//   console.log("calling helper compare")
+//   if (id1 !== id2)
+//     return true
+//   return false
+// });
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 // default value for title local
