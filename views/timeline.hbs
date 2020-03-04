@@ -1,0 +1,290 @@
+<!-- Header
+    ================================================= -->
+<header id="header">
+  <nav class="navbar navbar-default navbar-fixed-top menu">
+    <div class="container">
+
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><img src="images/flow-logo.png" alt="flow-logo"></a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right main-menu">
+          <li class="header-button-profile"><a href="/profile/{{user._id}}">{{user.firstName}}</a></li>
+          <!-- replace with first name -->
+          <li class="header-button"><a href="/logout">Log out</a></li>
+        </ul>
+        <form class="navbar-form navbar-right hidden-sm">
+
+        </form>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+</header>
+<!--Header End-->
+
+<div class="container">
+
+  <!-- Timeline
+      ================================================= -->
+  <div class="timeline">
+    <div class="timeline-cover">
+
+      <!--Timeline Menu for Large Screens-->
+      <div class="timeline-nav-bar hidden-sm hidden-xs">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="profile-info">
+              <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+              <h3>{{user.firstName}} {{user.lastName}}</h3>
+              <p class="text-muted">
+                {{user.address.street}}
+                {{user.address.city}}
+                {{user.address.state}},
+                {{user.address.zip}}
+              </p> <!-- replace with city -->
+            </div>
+          </div>
+          <div class="col-md-9">
+            <ul class="list-inline profile-menu">
+              <li><a href="/profile/{{user._id}}" class="active">Profile</a></li>
+              <li><a href="/timeLine">Timeline</a></li>
+              <li><a href="timeline-album.html">News</a></li>
+            </ul>
+            <ul class="follow-me list-inline">
+              {{!-- <li>1,299 people following her</li> --}}
+              <li>
+                <form action="profile/edit" method="GET">
+                  <button type="submit" class="btn-primary">Edit Profile</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--Timeline Menu for Large Screens End-->
+
+      <!--Timeline Menu for Small Screens-->
+      <div class="navbar-mobile hidden-lg hidden-md">
+        <div class="profile-info">
+          <img src={{user.photo}} alt="" class="img-responsive profile-photo" />
+          <h4>{{user.firstName}} {{user.lastName}}</h4>
+          <p class="text-muted">Miami</p> <!-- replace with city -->
+        </div>
+        <div class="mobile-menu">
+          <ul class="list-inline">
+            <li><a href="timline.html" class="active">Timeline</a></li>
+            <li><a href="timeline-about.html">About</a></li>
+            <li><a href="timeline-album.html">Album</a></li>
+            <li><a href="timeline-friends.html">Friends</a></li>
+          </ul>
+          <button class="btn-primary">Add Friend</button>
+        </div>
+      </div>
+      <!--Timeline Menu for Small Screens End-->
+
+    </div>
+    <div id="page-contents">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
+
+          <!-- Post Create Box
+              ================================================= -->
+          <div class="create-post">
+            <form action="/createPost" method="POST">
+              <div class="row">
+                <div class="col-md-9 col-sm-9">
+                  <div class="form-group">
+                    <img src="{{user.photo}}" alt="" class="profile-photo-md" />
+                    <textarea name="text" id="exampleTextarea" cols="30" rows="3" class="form-control"
+                      placeholder="What's going on?"></textarea>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                  <div class="tools">
+                    <ul class="publishing-tools list-inline">
+                      <li><a href="#"><i class="ion-images"></i></a></li>
+                    </ul>
+                    <button type="submit" class="btn btn-primary">Post</button> <!-- Link to method to post-->
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div><!-- Post Create Box End-->
+
+          <!-- Post Content
+              ================================================= -->
+          <div class="post-content">
+            {{#if noPost}}
+            <h3> There are no Post to display at this time. Be the first to create a new post! </h3>
+            {{else}}
+            {{#each posts}}
+            <!--Post Date-->
+            <div class="post-date hidden-xs hidden-sm">
+              <h5>{{this.author.firstName}}</h5>
+              <p class="text-grey"> {{#formatTime  this.createdAt "MMM Do YY"}}{{/formatTime}}</p>
+            </div>
+            <!--Post Date End-->
+
+            <img src={{this.image}} alt="post-image" class="img-responsive post-image" />
+            <!--Image from post-->
+            <div class="post-container">
+              <img src={{this.author.photo}} alt="user" class="profile-photo-md pull-left" />
+              <div class="post-detail">
+                <div class="user-info">
+                  <h5><a href="profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}}
+                      {{this.author.lastName}}</a></h5>
+                  <p class="text-muted">Published {{#relativeTime this.createdAt}} {{/relativeTime}}</p>
+                  <!-- Needs to reflect the time since post-->
+                </div>
+                <div class="reaction">
+                  <form action="/updateLikes/{{this._id}}" method="POST">
+                    <button type="submit" class="btn text-green"><i class="icon ion-thumbsup"></i>
+                      {{#if this.likes.length }}
+                      {{this.likes.length }}
+                      {{else }}
+                      0
+                      {{/if}}</button>
+                  </form>
+                  {{!-- <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
+                  <!-- Needs to reflect the number of likes-->
+                  <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a> --}}
+                  <!-- Needs to reflect the number of dislikes-->
+                </div>
+                <div class="line-divider"></div>
+                <div class="post-text">
+                  <p>{{this.text}}<i class="em em-anguished"></i> <i class="em em-anguished"></i> <i
+                      class="em em-anguished"></i></p>
+                </div>
+                {{#if this.isOwner}}
+                <form action="/deletePost/{{this._id}}" method="POST"><button
+                    class="btn-primary post-comment-button">Delete
+                    Post</button></form>
+                {{/if}}
+                <br>
+                <div class="line-divider"></div>
+                <div class="post-comment">
+                  <!--comments form-->
+                  <img src={{user.photo}} alt="" class="profile-photo-sm" />
+                  <form action="/createComment/{{this._id}}" method="POST">
+                    <input type="text" name="comment" class="form-control" placeholder="Comment">
+                    <button class="btn-primary post-comment-button">Comment</button>
+                  </form>
+                </div><!-- comment form end-->
+
+                <div>
+                  <!-- comment text start-->
+                  <div class="post-comment">
+                    {{#if this.noComments}}
+                    {{else}}
+                    {{#each this.comments}}
+                    <img src={{this.author.photo}} alt="" class="profile-photo-sm" />
+                    <p class="no-margin">
+                      <a href="profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
+                      <i class="em em-laughing"></i>
+                      {{this.comment}}
+                    </p>
+                  </div>
+                  <div class="post-comment-action">
+                    {{#if this.isOwner}}
+                    <form action="/deleteComment/{{this._id}}/{{../this._id}}" method="POST"><button
+                        class="anchor-button">Delete Comment</button>
+                    </form>
+                    {{/if}}
+                  </div>
+
+                  <div class="post-comment-action">
+                    <!-- reply start-->
+                    <div class="post-comment">
+                      <img src={{req.user.photo}} alt="" class="profile-photo-sm" />
+                      <form action="/createReply/{{this._id}}" method="POST">
+                        <input name="reply" type="text" class="form-control" placeholder="Replies">
+                        <button class="btn-primary post-comment-button">Reply</button>
+                      </form>
+                      </form>
+                    </div><!-- reply form end-->
+                    {{#if this.replies}}
+                    {{#each this.replies}}
+                    <img src={{this.author.photo}} alt="" class="profile-photo-sm" />
+                    <p class="no-margin">
+                      <a href="/profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
+                      <i class="em em-laughing"></i>
+                      {{this.reply}}
+                    </p>
+                    {{#compare this.author.email "===" user.email }}
+                    <form action="/deleteReply/{{this._id}}/{{../this._id}}" method="POST"><button
+                        class="anchor-button">Delete Reply</button></form>
+                    {{else}}
+                    <h1> </h1>
+                    {{/compare}}
+                    {{/each}}
+                    {{/if}}
+                  </div>
+                  {{/each}}
+                  {{/if}}
+                </div><!-- comment text end-->
+              </div>
+            </div>
+            {{/each}}
+            {{/if}}
+          </div><!-- Post Content end========================== -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer
+    ================================================= -->
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="footer-wrapper">
+        <div class="col-md-3 col-sm-3">
+          <a href=""><img src="images/flow-logo.png" alt="flow-logo" class="navbar-brand" /></a>
+
+        </div>
+        <div class="col-md-2 col-sm-2">
+          <h6>Site Map</h6>
+          <ul class="footer-links">
+            <li><a href="/timeLine">Timeline</a></li>
+            <li><a href="/profile/{{user._id}}">Profile</a></li>
+            <li><a href="">News</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-2">
+          {{!-- empty div to maintain space --}}
+        </div>
+        <div class="col-md-2 col-sm-2">
+          {{!-- empty div to maintain space --}}
+        </div>
+        <div class="col-md-3 col-sm-3">
+          <h6>Contact</h6>
+          <ul class="contact">
+            <li><i class="icon ion-ios-telephone-outline"></i>(305) 555-1234</li>
+            <li><i class="icon ion-ios-email-outline"></i>hello@flowsocial.com</li>
+            <li><i class="icon ion-ios-location-outline"></i>120 SW 8th St, Miami, FL 33130</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    <p>Copyright MERNers ® All Rights Reserved</p>
+  </div>
+</footer>
+
+<!--preloader-->
+<div id="spinner-wrapper">
+  <div class="spinner"></div>
+</div>

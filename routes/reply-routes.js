@@ -29,7 +29,8 @@ router.post("/createReply/:commentId", (req, res, next) => {
       )
         .then(updatedMessage => {
           //res.status(200).json(updatedMessage);
-          res.redirect(`/profile/${req.user._id}`);
+          // res.redirect(`/profile/${req.user._id}`);
+          res.redirect("back");
         })
         .catch(err => next(err));
     })
@@ -46,7 +47,8 @@ router.post("/deleteReply/:replyId/:commentId", (req, res, next) => {
       // find and delete the reply
       Reply.findByIdAndDelete(req.params.replyId)
         .then(() => {
-          res.redirect(`/profile/${req.user._id}`);
+          // res.redirect(`/profile/${req.user._id}`);
+          res.redirect("back");
         })
         .catch(err => next(err));
     })
