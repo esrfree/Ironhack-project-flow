@@ -1,1 +1,12 @@
 <h1>All Users</h1>
+{{#each users}}
+  <img src="{{this.profilePicture.imgPath}}" alt="profile picture"> 
+  <p>
+    {{this.firstName}} {{this.lastName}} <br>
+    {{this.email}}
+    <form action="/users/{{this._id}}" method="GET">
+      <button type="submit">Profile</button>
+    </form>
+  </p>
+  <br>
+{{/each}}

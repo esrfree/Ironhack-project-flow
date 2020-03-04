@@ -120,7 +120,7 @@ const remove = (req, res, next) => {
 
 // News
 const newsFeed = (req, res, next) => {
-  let topic = req.query.news || "ironhack";
+  let topic = req.query.topic || "ironhack";
   // axios config
   const url = process.env.NEWS_SEARCH;
   const config = {
