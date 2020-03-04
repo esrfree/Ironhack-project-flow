@@ -42,11 +42,11 @@ app.use(passport.session());
 app.use(localUser);  //uses the req.user generated after authentication with Passport
 
 // Express View engine setup
-app.use(require('node-sass-middleware')({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  sourceMap: true
-}));
+// app.use(require('node-sass-middleware')({
+//   src: path.join(__dirname, 'public'),
+//   dest: path.join(__dirname, 'public'),
+//   sourceMap: true
+// }));
 
 // hbs as view engine
 app.set('views', path.join(__dirname, 'views'));

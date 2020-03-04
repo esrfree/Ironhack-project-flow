@@ -34,34 +34,29 @@ const userSchema = new Schema(
             required: 'Email is required'
         },
 
-        // the users password (hashed)
-        password: {
+        // the users password (hashed) // Erick, I removed the default placeholders here to make the form work
+        password: { 
             type: String
         },
 
         age: {
-            default: "Age?",
             type: String
         },
 
         address: {
             street: {
                 type: String,
-                default: "Street"
             },
             city: {
                 type: String,
-                default: "City"
             },
             state: {
                 type: String,
                 uppercase: true,
                 enum: statesArray,
-                default: "FL"
             },
             zip: {
                 type: String,
-                default: "Zip Code"
             }
         },
 
