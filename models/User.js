@@ -11,13 +11,20 @@ const userSchema = new Schema(
             trim: true,
             required: 'First name is required'
         },
-
         lastName: {
             type: String,
             trim: true,
             required: 'Last name is required'
         },
-
+        profilePicture: {
+            imgName: String,
+            imgPath: {type: String, default: "./theme/images/users/default_profile.png"},
+            // default: "./theme/images/users/default_profile.png"
+        },
+        backgroundPicture: {
+            imgName: String,
+            imgPath: String,
+        },
         // the email the user will use on the site ()
         email: {
             type: String,
@@ -86,12 +93,6 @@ const userSchema = new Schema(
         about: {
             type: String,
             trim: true
-        },
-
-        // User picture
-        photo: {
-            default: "./theme/images/users/default_profile.png",
-            type: String
         },
 
         // when a user is flagged for inappropriate conduct (specify amount to lock user)

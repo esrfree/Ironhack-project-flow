@@ -22,6 +22,7 @@ require('./configs/db-config');
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 const app = express();
+
 //socket.io
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);

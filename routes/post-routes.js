@@ -4,6 +4,7 @@ const Post = require("../models/Post.model");
 const User = require("../models/User");
 const Comment = require("../models/Comment.model")
 const Reply = require('../models/Reply.model')
+const uploadCloud = require("../configs/cloudinary-config");
 
 //Display all Post
 router.get("/timeLine", (req, res, next) => {
@@ -88,7 +89,7 @@ router.get("/profile/:userId", (req, res, next) => {
 
 
 //create Post
-router.post('/createPost', (req, res, next) => {
+router.post('/createPost', uploadCloud.single("image"), (req, res, next) => {
 
   if (!req.user) {
     //redirec to Home Page
@@ -98,6 +99,7 @@ router.post('/createPost', (req, res, next) => {
   }
   const newPost = req.body;
   newPost.author = req.user._id;
+  newPost.image = req.file.url;
 
   Post.create(newPost)
     .then(createdPost => {

@@ -101,7 +101,7 @@
           <!-- Post Create Box
               ================================================= -->
           <div class="create-post">
-            <form action="/createPost" method="POST">
+            <form action="/createPost" method="POST" enctype="multipart/form-data">
               <div class="row">
                 <div class="col-md-9 col-sm-9">
                   <div class="form-group">
@@ -113,7 +113,7 @@
                 <div class="col-md-3 col-sm-3">
                   <div class="tools">
                     <ul class="publishing-tools list-inline">
-                      <li><a href="#"><i class="ion-images"></i></a></li>
+                      <li><input type="file" name="image"><i class="ion-images"></i></a></li><!-- Style please-->
                     </ul>
                     <button type="submit" class="btn btn-primary">Post</button> <!-- Link to method to post-->
                   </div>
@@ -188,6 +188,7 @@
                     {{#if this.noComments}}
                     {{else}}
                     {{#each this.comments}}
+
                     <img src={{this.author.photo}} alt="" class="profile-photo-sm" />
                     <p class="no-margin">
                       <a href="profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
@@ -210,8 +211,8 @@
                       <form action="/createReply/{{this._id}}" method="POST">
                         <input name="reply" type="text" class="form-control" placeholder="Replies">
                         <button class="btn-primary post-comment-button">Reply</button>
-                      </form>
-                      </form>
+                        {{!-- </form>
+                      </form> --}}
                     </div><!-- reply form end-->
                     {{#if this.replies}}
                     {{#each this.replies}}
@@ -227,6 +228,7 @@
                     {{else}}
                     <h1> </h1>
                     {{/compare}}
+
                     {{/each}}
                     {{/if}}
                   </div>
