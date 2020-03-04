@@ -120,6 +120,7 @@ const remove = (req, res, next) => {
 
 // News
 const newsFeed = (req, res, next) => {
+  let topic = req.query.news || "ironhack";
   // axios config
   const url = process.env.NEWS_SEARCH;
   const config = {
@@ -131,7 +132,7 @@ const newsFeed = (req, res, next) => {
         autoCorrect: false,
         pageNumber: 1,
         pageSize: 10,
-        q: "Art",
+        q: topic,
         safeSearch: false
     }
   }
@@ -143,24 +144,6 @@ const newsFeed = (req, res, next) => {
   })
   .catch(e => console.error(e))
 }
-
-
-//const newsFeed = (req, res, next) => {
-//  axios.get(process.env.NEWS_TOP, {
-//    params: {
-//      country: 'us',
-//      page: 10,
-//      apiKey: process.env.NEWS_SECRET
-//    }
-//  })
-//  .then( news => {
-//    const feed = news.data.articles
-//    res.render('news', {feed})
-//  })
-//  .catch( err => {
-//    console.log(err);
-//  })
-//}
 
 
 

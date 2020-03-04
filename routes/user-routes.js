@@ -26,9 +26,9 @@ router
 
 
 //News
-router
-  .route('/newsfeed')
-  .get(isLoggedIn, userCtrl.newsFeed)
+//router
+//  .route('/newsfeed')
+//  .get(isLoggedIn, userCtrl.newsFeed)
 
 
 module.exports = router;
