@@ -9,13 +9,16 @@ const Reply = require('../models/Reply.model')
 //create comment
 router.post("/createComment/:postId", (req, res, next) => {
   // Logged in user is set as the messages author and the message is grabbed from the body
+  console.log("*************************************inside comment create post route")
   const theComment = req.body;
   theComment.author = req.user._id;
+
 
   // create a new comment and send it back in json format
   Comment.create(theComment)
     .then(newlyCreatedComment => {
-      // find the post we comment to from params and update it with the reference to the reply
+      // find the post we comment to from params and update it with the reference
+      // console.log("Created comment ***************" + newlyCreatedComment)
       Post.findByIdAndUpdate(
         req.params.postId,
         { $push: { comments: newlyCreatedComment._id } },
@@ -23,7 +26,7 @@ router.post("/createComment/:postId", (req, res, next) => {
       )
         .then(updatedPost => {
           //res.status(200).json(updatedPost);
-          res.redirect('/timeLine');
+          res.redirect(`/profile/${req.user._id}`);
         })
         .catch(err => next(err));
     })
@@ -47,7 +50,7 @@ router.post("/deleteComment/:commentId/:postId", (req, res, next) => {
       // remove the message itself and redirect user to the previous page
       Comment.findByIdAndDelete(req.params.commentId)
         .then(() => {
-          res.redirect("back");
+          res.redirect(`/profile/${req.user._id}`);
         })
         .catch(err => next(err));
     })

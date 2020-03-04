@@ -7,14 +7,14 @@ const statesArray = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL",
 const userSchema = new Schema(
     {
         firstName: {
-          type: String,
-          trim: true,
-          required: 'First name is required'
+            type: String,
+            trim: true,
+            required: 'First name is required'
         },
         lastName: {
-          type: String,
-          trim: true,
-          required: 'Last name is required'
+            type: String,
+            trim: true,
+            required: 'Last name is required'
         },
         profilePicture: {
             imgName: String,
@@ -27,11 +27,11 @@ const userSchema = new Schema(
         },
         // the email the user will use on the site ()
         email: {
-          type: String,
-          trim: true,
-          unique: 'Email already exists',
-          match: [/.+\@.+\..+/, 'Please fill a valid email address'],
-          required: 'Email is required'
+            type: String,
+            trim: true,
+            unique: 'Email already exists',
+            match: [/.+\@.+\..+/, 'Please fill a valid email address'],
+            required: 'Email is required'
         },
 
         // the users password (hashed)
@@ -77,14 +77,14 @@ const userSchema = new Schema(
         // the code sent to user email in order to validate email authenticity
         // for now we will not add this to our example app. But if you fork and clone this app maybe you can create the needed code for practice
         confirmationCode: {
-          type: String
+            type: String
         },
         // the boards that have been created by the user
-        userBoards: {
+        userPost: {
             type: [
                 {
                     type: Schema.Types.ObjectId,
-                    ref: "Board"
+                    ref: "Post"
                 }
             ]
         },
@@ -122,15 +122,15 @@ const userSchema = new Schema(
 
         // the boards that the user is following
         // for now we will not add this to our example app. But if you fork and clone this app maybe you can create the needed code for practice
-        followingBoards: {
+        followingPost: {
             type: [
                 {
                     type: Schema.Types.ObjectId,
-                    ref: "Board"
+                    ref: "Post"
                 }
             ]
         },
-        
+
         // the users that this user is following
         // for now we will not add this to our example app. But if you fork and clone this app maybe you can create a route to do so as practice
         // for now we will not add this to our example app. But if you fork and clone this app maybe you can create the needed code for practice

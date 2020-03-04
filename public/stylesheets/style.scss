@@ -124,6 +124,11 @@ a {
   width: 100%;
 }
 
+.create-post {
+  margin-bottom: 0px !important;
+  width: 100% !important;
+}
+
 .post-comment-action {
   margin-left: 50px;
 }
@@ -175,4 +180,8 @@ margin: 0 auto;
 
 .search-container input {
   margin-right: 10px;
+}
+
+#page-contents {
+  padding: 17px 0 0px !important;
 }
