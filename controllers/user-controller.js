@@ -2,9 +2,9 @@ const User = require('../models/User');
 const _ = require('lodash');
 const passport = require("passport");
 
-// const io = require('socket.io')(server);
-// const socket = io(http);
-
+const axios = require("axios");
+//const io = require('socket.io')(server);
+//const socket = io(http);
 
 // BCrypt to encrypt passwords
 const bcryptjs = require('bcryptjs');
@@ -62,11 +62,9 @@ const create = (req, res, next) => {
 
 // Reading - for profile page
 const read = (req, res) => {
-  console.log(req.user)
-
-  // socket.on('connection', (socket => {
-  //   socket.emit('message', `User ${req.user.name} connected`);
-  // }))
+  //socket.on('connection', (socket => {
+  //  socket.emit('message', `User ${req.user.name} connected`);
+  //}))
   res.render('profile');
 }
 
@@ -81,22 +79,26 @@ const readForUpdate = (req, res) => {
 
 const update = (req, res, next) => {
   const updatedUser = req.body;
-
   User.findById(req.user.id)
-    .then(user => {
-      if (updatedUser.firstName) user.firstName = updatedUser.firstName;
-      if (updatedUser.lastName) user.lastName = updatedUser.lastName;
-      if (updatedUser.age) user.age = updatedUser.age;
-      if (updatedUser.street) user.address.street = updatedUser.street;
-      if (updatedUser.city) user.address.city = updatedUser.city;
-      if (updatedUser.state) user.address.state = updatedUser.state;
-      if (updatedUser.zip) user.address.zip = updatedUser.zip;
-      user.save();
-      console.log(user)
-      res.redirect('/profile')
+    .then(foundUser => {
+      if (req.file) {
+        const imgPath = req.file.url;
+        const imgName = req.file.originalname;
+        foundUser.profilePicture = { imgPath, imgName };
+      }
+      if (updatedUser.firstName) foundUser.firstName = updatedUser.firstName;
+      if (updatedUser.lastName) foundUser.lastName = updatedUser.lastName;
+      if (updatedUser.age) foundUser.age = updatedUser.age;
+      if (updatedUser.street) foundUser.address.street = updatedUser.street;
+      if (updatedUser.city) foundUser.address.city = updatedUser.city;
+      if (updatedUser.state) foundUser.address.state = updatedUser.state;
+      if (updatedUser.zip) foundUser.address.zip = updatedUser.zip;
+      foundUser.save();
+      console.log(foundUser.firstName)
+      res.redirect('/profile');
     })
     .catch(err => {
-      res.send(err)
+      console.log("No encontramos al usuario", err)
     })
 }
 
@@ -116,6 +118,50 @@ const remove = (req, res, next) => {
     })
 }
 
+// News
+const newsFeed = (req, res, next) => {
+  // axios config
+  const url = process.env.NEWS_SEARCH;
+  const config = {
+    headers: {
+        "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+        "X-RapidAPI-Key": process.env.NEWS_SECRET
+    },
+    params: {
+        autoCorrect: false,
+        pageNumber: 1,
+        pageSize: 10,
+        q: "Art",
+        safeSearch: false
+    }
+  }
+  // axios call
+  axios.get(url, config)
+  .then(response => {
+    const feed = response.data.value;
+    res.render('news', {feed})
+  })
+  .catch(e => console.error(e))
+}
 
 
-module.exports = { signup, create, read, readForUpdate, update, remove };
+//const newsFeed = (req, res, next) => {
+//  axios.get(process.env.NEWS_TOP, {
+//    params: {
+//      country: 'us',
+//      page: 10,
+//      apiKey: process.env.NEWS_SECRET
+//    }
+//  })
+//  .then( news => {
+//    const feed = news.data.articles
+//    res.render('news', {feed})
+//  })
+//  .catch( err => {
+//    console.log(err);
+//  })
+//}
+
+
+
+module.exports = { signup, create, read, readForUpdate, update, remove, newsFeed };
