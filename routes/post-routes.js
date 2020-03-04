@@ -4,9 +4,11 @@ const Post = require("../models/Post.model");
 const User = require("../models/User");
 const Comment = require("../models/Comment.model")
 const Reply = require('../models/Reply.model')
+const uploadCloud = require("../configs/cloudinary-config");
 
 //Display all Post
 router.get("/timeLine", (req, res, next) => {
+  // console.log('inside route***********************************************************');
   Post.find({})
     .populate([
       { path: "comments", populate: [{ path: "replies" }, { path: "author" }] },
@@ -14,11 +16,11 @@ router.get("/timeLine", (req, res, next) => {
     ])
     .populate("followers")
     .then((allPost) => {
-      console.log(allPost + "***********all post");
-      console.log(allPost[0].comments[0].replies[0].reply + "************************replyyyyyyyyy")
+      // console.log(allPost + "***********all post");
+      // console.log(allPost[0].comments[0].replies[0].reply + "************************replyyyyyyyyy")
 
       const reversedPosts = allPost.reverse();
-      console.log(reversedPosts + "**************reversed");
+      // console.log(reversedPosts + "**************reversed");
       const postArray = reversedPosts.map(post => {
         const obj = {
           ...post._doc,
@@ -31,8 +33,8 @@ router.get("/timeLine", (req, res, next) => {
         posts: postArray,
         noPost: postArray.length === 0
       };
-      console.log(data + "*******************************passing to the view");
-      res.render('testTimeLine', data);
+      // console.log(data + "*******************************passing to the view");
+      res.render('timeline', data);
 
     })
     .catch((err) => { next(err) })
@@ -87,7 +89,7 @@ router.get("/profile/:userId", (req, res, next) => {
 
 
 //create Post
-router.post('/createPost', (req, res, next) => {
+router.post('/createPost', uploadCloud.single("image"), (req, res, next) => {
 
   if (!req.user) {
     //redirec to Home Page
@@ -97,6 +99,7 @@ router.post('/createPost', (req, res, next) => {
   }
   const newPost = req.body;
   newPost.author = req.user._id;
+  newPost.image = req.file.url;
 
   Post.create(newPost)
     .then(createdPost => {
@@ -107,7 +110,8 @@ router.post('/createPost', (req, res, next) => {
         { new: true }
       )
         .then(() => {
-          res.redirect(`/profile/${req.user._id}`);
+          // res.redirect(`/profile/${req.user._id}`);
+          res.redirect('back')
         })
         .catch(err => next(err));
     })
@@ -148,7 +152,8 @@ router.post("/updateLikes/:postId", (req, res, next) => {
       postFromDB
         .save()
         .then(updatedPost => {
-          res.redirect(`/profile/${req.user._id}`);;
+          // res.redirect(`/profile/${req.user._id}`);
+          res.redirect("back");
         })
         .catch(err => next(err));
     })
@@ -191,7 +196,8 @@ router.post("/deletePost/:postId", (req, res, next) => {
         { new: true }
       )
         .then(() => {
-          res.redirect(`/profile/${req.user._id}`);
+          // res.redirect(`/profile/${req.user._id}`);
+          res.redirect("back");
         })
         .catch(err => next(err));
     })

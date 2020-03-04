@@ -9,10 +9,7 @@ const postSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User"
     },
-    // the title for the board that will be displayed to users
-    title: {
-      type: String
-    },
+
     image: {
       type: String
     },

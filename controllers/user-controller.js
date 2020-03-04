@@ -124,24 +124,24 @@ const newsFeed = (req, res, next) => {
   const url = process.env.NEWS_SEARCH;
   const config = {
     headers: {
-        "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-        "X-RapidAPI-Key": process.env.NEWS_SECRET
+      "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+      "X-RapidAPI-Key": process.env.NEWS_SECRET
     },
     params: {
-        autoCorrect: false,
-        pageNumber: 1,
-        pageSize: 10,
-        q: "Art",
-        safeSearch: false
+      autoCorrect: false,
+      pageNumber: 1,
+      pageSize: 10,
+      q: "Art",
+      safeSearch: false
     }
   }
   // axios call
   axios.get(url, config)
-  .then(response => {
-    const feed = response.data.value;
-    res.render('news', {feed})
-  })
-  .catch(e => console.error(e))
+    .then(response => {
+      const feed = response.data.value;
+      res.render('news', { feed })
+    })
+    .catch(e => console.error(e))
 }
 
 
