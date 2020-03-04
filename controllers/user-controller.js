@@ -119,21 +119,47 @@ const remove = (req, res, next) => {
 
 // News
 const newsFeed = (req, res, next) => {
-  axios.get(process.env.NEWS_TOP, {
+  // axios config
+  const url = process.env.NEWS_SEARCH;
+  const config = {
+    headers: {
+        "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+        "X-RapidAPI-Key": process.env.NEWS_SECRET
+    },
     params: {
-      country: 'us',
-      page: 10,
-      apiKey: process.env.NEWS_SECRET
+        autoCorrect: false,
+        pageNumber: 1,
+        pageSize: 10,
+        q: "Art",
+        safeSearch: false
     }
-  })
-  .then( news => {
-    const feed = news.data.articles
+  }
+  // axios call
+  axios.get(url, config)
+  .then(response => {
+    const feed = response.data.value;
     res.render('news', {feed})
   })
-  .catch( err => {
-    console.log(err);
-  })
+  .catch(e => console.error(e))
 }
+
+
+//const newsFeed = (req, res, next) => {
+//  axios.get(process.env.NEWS_TOP, {
+//    params: {
+//      country: 'us',
+//      page: 10,
+//      apiKey: process.env.NEWS_SECRET
+//    }
+//  })
+//  .then( news => {
+//    const feed = news.data.articles
+//    res.render('news', {feed})
+//  })
+//  .catch( err => {
+//    console.log(err);
+//  })
+//}
 
 
 
