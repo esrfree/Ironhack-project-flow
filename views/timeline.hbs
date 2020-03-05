@@ -57,7 +57,7 @@
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
               <li><a href="/profile/{{user._id}}" class="active">Profile</a></li>
-              <li><a href="/timeLine">Timeline</a></li>
+              <li></li>
             </ul>
             <ul class="follow-me list-inline">
               {{!-- <li>1,299 people following her</li> --}}
@@ -137,15 +137,16 @@
             {{#each posts}}
             <!--Post Date-->
             <div class="post-date hidden-xs hidden-sm">
-              <h5>{{this.author.firstName}}</h5>
+              <h5>{{this.author.firstName}} {{this.author.lastName}}</h5>
               <p class="text-grey"> {{#formatTime  this.createdAt "MMM Do YY"}}{{/formatTime}}</p>
             </div>
             <!--Post Date End-->
-
+{{#if this.image}}
             <img src={{this.image}} alt="post-image" class="img-responsive post-image" />
+            {{/if}}
             <!--Image from post-->
             <div class="post-container">
-              <img src={{this.author.photo}} alt="user" class="profile-photo-md pull-left" />
+              <img src={{this.author.profilePicture.imgPath}} alt="user" class="profile-photo-md pull-left" />
               <div class="post-detail">
                 <div class="user-info">
                   <h5><a href="profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}}
@@ -181,7 +182,7 @@
                 <div class="line-divider"></div>
                 <div class="post-comment">
                   <!--comments form-->
-                  <img src={{user.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
+                  <img src="{{../user.profilePicture.imgPath}}" alt="" class="profile-photo-sm" />
                   <form action="/createComment/{{this._id}}" method="POST">
                     <input type="text" name="comment" class="form-control" placeholder="Comment">
                     <button class="btn-primary post-comment-button">Comment</button>
@@ -195,7 +196,7 @@
                     {{else}}
                     {{#each this.comments}}
 
-                    <img src={{this.author.photo}} alt="" class="profile-photo-sm" />
+                    <img src={{this.author.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
                     <p class="no-margin">
                       <a href="profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
                       <i class="em em-laughing"></i>
@@ -213,7 +214,7 @@
                   <div class="post-comment-action">
                     <!-- reply start-->
                     <div class="post-comment">
-                      <img src={{req.user.photo}} alt="" class="profile-photo-sm" />
+                      <img src={{req.user.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
                       <form action="/createReply/{{this._id}}" method="POST">
                         <input name="reply" type="text" class="form-control" placeholder="Replies">
                         <button class="btn-primary post-comment-button">Reply</button>
@@ -222,7 +223,7 @@
                     </div><!-- reply form end-->
                     {{#if this.replies}}
                     {{#each this.replies}}
-                    <img src={{this.author.photo}} alt="" class="profile-photo-sm" />
+                    <img src={{this.author.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
                     <p class="no-margin">
                       <a href="/profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
                       <i class="em em-laughing"></i>

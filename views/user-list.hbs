@@ -1,3 +1,18 @@
+<!--
+<h1>All Users</h1>
+{{#each users}}
+  <img src="{{this.profilePicture.imgPath}}" alt="profile picture"> 
+  <p>
+    {{this.firstName}} {{this.lastName}} <br>
+    {{this.email}}
+    <form action="/users/{{this._id}}" method="GET">
+      <button type="submit">Profile</button>
+    </form>
+  </p>
+  <br>
+{{/each}}
+-->
+
 <!-- Header
     ================================================= -->
 		<header id="header">
@@ -30,56 +45,6 @@
     </header>
     <!--Header End-->
 
-<!-- Modal that opens when the page is rendered / commented out to test --> 
-{{!-- <div class="modal fade" id="interestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body interest-modal-body">
-        <h4 class="grey" class="modal-header"><i ></i>Pick Your Favorite News Topics</h4>
-          <label>
-            <input type="checkbox">
-            &nbsp;&nbsp;&nbsp;Technology
-          </label>
-          <br>
-          <label>
-            <input type="checkbox">
-            &nbsp;&nbsp;&nbsp;Science
-          </label>
-          <br>
-          <label>
-            <input type="checkbox">
-            &nbsp;&nbsp;&nbsp;Money
-          </label>
-          <br>
-          <label>
-            <input type="checkbox">
-            &nbsp;&nbsp;&nbsp;Politics
-          </label>
-          <br>
-          <label>
-            <input type="checkbox">
-            &nbsp;&nbsp;&nbsp;Money
-          </label>
-          <br>
-          <label>
-            <input type="checkbox">
-            &nbsp;&nbsp;&nbsp;Travel
-          </label>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary-black" data-dismiss="modal">Maybe later</button>
-        <button type="button" class="btn btn-primary">Show me my news</button>
-      </div>
-    </div>
-  </div>
-</div> --}}
-
 <div id="page-contents">
     	<div class="container">
         <div class="row">
@@ -101,22 +66,24 @@
               <div class="col-xs-12">
                 <h3>Flow-ers Around the World</h3>
                 <table class="table table-bordered">
+                {{#each users}}  
                   <tr>
                     <td class="text-center">
-                      <img src="/theme/images/users/default_profile.png" alt="user" class="profile-photo-md" />
+                      <img src="{{this.profilePicture.imgPath}}" alt="user picture" class="profile-photo-md" />
                     </td>
                     <td>
-                        Humberto Buniotto
+                        {{this.firstName}} {{this.lastName}}
                     </td>
                     <td>
-                        City, State
+                        {{this.address.city}}
                     </td>
                     <td>
-                      <a class="anchor-link" href="/profile"> <!-- Humberto, edit path to userId_ -->
+                      <a class="anchor-link" href="/users/{{this._id}}"> <!-- Humberto, edit path to userId_ -->
                         View Profile
                       </a>
                     </td>
                   </tr>
+                {{/each}}
                 </table>
               </div>
             </div>

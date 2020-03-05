@@ -18,12 +18,11 @@ const userSchema = new Schema(
         },
         profilePicture: {
             imgName: String,
-            imgPath: {type: String, default: "./theme/images/users/default_profile.png"},
-            // default: "./theme/images/users/default_profile.png"
+            imgPath: {type: String, default: "./theme/images/users/default_profile.png"}
         },
         backgroundPicture: {
             imgName: String,
-            imgPath: String,
+            imgPath: {type: String, default: "../images/covers/1.jpg"}
         },
         // the email the user will use on the site ()
         email: {

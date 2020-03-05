@@ -19,7 +19,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right main-menu">
-          <li class="header-button-profile"><a href="/profile">Michaela</a></li> <!-- replace with first name -->
+          <li class="header-button-profile"><a href="/profile">{{user.firstName}}</a></li> <!-- replace with first name -->
           <li class="header-button"><a href="/logout">Log out</a></li>
         </ul>
         <form class="navbar-form navbar-right hidden-sm">
@@ -36,8 +36,41 @@
   <!-- Timeline
       ================================================= -->
 
-  <div class="timeline">
-    <div class="timeline-cover">
+      <div class="timeline">
+        <div class="timeline-cover">          
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src={{user.profilePicture.imgPath}} alt="" class="img-responsive profile-photo" />
+                  <!---
+                  <h3>{{user.firstName}} {{user.lastName}}</h3>
+                  <p class="text-muted">
+                    {{user.address.city}},
+                    {{user.address.state}}
+                  </p>
+                  -->
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a ></a></li>
+                  <li><a ></a></li>
+                  <li><a ></a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  {{!-- <li>1,299 people following her</li> --}}
+                  <li>
+                    <form action="profile/edit" method="GET">
+                      <button type="submit" class="btn-primary">Edit Profile</button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
 
       <!--Timeline Menu for Large Screens-->
       <div class="timeline-nav-bar hidden-sm hidden-xs">
@@ -50,7 +83,7 @@
           </div>
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
-              <li><a>{{user.firstName}}</a></li>
+              <li><a>{{user.firstName}} {{user.lastName}}</a></li>
               <li><a>{{user.address.city}}, {{user.address.state}}</a></li>
               <li><a></a></li>
             </ul>

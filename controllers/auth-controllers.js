@@ -11,7 +11,7 @@ Your User object is now available through req.user in an express app route callb
 after the user has been authenticated by passport.
 */
 const authenticated = passport.authenticate('local', {
-  successRedirect: '/profile',
+  successRedirect: '/timeline',
   failureRedirect: '/signup'
 })
 

@@ -99,6 +99,7 @@ router.post('/createPost', uploadCloud.single("image"), (req, res, next) => {
   }
   const newPost = req.body;
   newPost.author = req.user._id;
+  if(req.file)
   newPost.image = req.file.url;
 
   Post.create(newPost)

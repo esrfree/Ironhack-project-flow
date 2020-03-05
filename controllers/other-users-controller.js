@@ -8,10 +8,10 @@ and it doesn't use the req.user object created after Passport authentication */
 // Listing all users ( returning first name, last name, email, updated & created )
 const list = (req, res) => {
   User.find()
-  .select( 'firstName lastName email' )
+  .select( 'profilePicture firstName lastName email' )
   .then( users => {
     console.log(users)
-    res.send( users )
+    res.render('user-list', {users} )
   })
   .catch( err => res.status(400).send({ errorMessage: err } )
   )}
@@ -39,9 +39,9 @@ sensitive information before sending the user object in the response
 to the requesting client.
 */
 const readOther = (req, res) => {
-  let userFound = req.profile;
-  userFound.password = undefined;
-  res.send({ userFound })
+  let user = req.profile;
+  user.password = undefined;
+  res.render('profile', { user })
 }
 
 // Updating
