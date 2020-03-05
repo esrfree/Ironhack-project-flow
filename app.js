@@ -9,6 +9,7 @@ const logger = require('morgan');
 const path = require('path');
 const passport = require('passport');
 const helpers = require('handlebars-helpers')(['comparison', 'string']);
+const moment = require('moment');
 
 
 
@@ -41,23 +42,27 @@ app.use(passport.session());
 app.use(localUser);  //uses the req.user generated after authentication with Passport
 
 // Express View engine setup
-app.use(require('node-sass-middleware')({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  sourceMap: true
-}));
+// app.use(require('node-sass-middleware')({
+//   src: path.join(__dirname, 'public'),
+//   dest: path.join(__dirname, 'public'),
+//   sourceMap: true
+// }));
 
 // hbs as view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-// app.set('hbs', 'helpers');
 hbs.registerHelper(helpers);
-// hbs.registerHelper('compare', (id1, id2) => {
-//   console.log("calling helper compare")
-//   if (id1 !== id2)
-//     return true
-//   return false
-// });
+hbs.registerHelper('formatTime', (date, format) => {
+  let mmnt = moment(date);
+  return mmnt.format(format);
+
+});
+hbs.registerHelper('relativeTime', (date) => {
+  let mmnt = moment(date);
+  return mmnt.startOf('hour').fromNow();;
+
+});
+
 
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -67,7 +72,6 @@ app.locals.title = 'Flow, MERN stack social media platform';
 
 // Routes middleware - pages
 app.use('/', require('./routes/index'));
-app.use('/', require('./routes/timeline'));
 app.use('/', require('./routes/profile'));
 app.use('/', require('./routes/profile-edit'));
 app.use('/', require('./routes/news'));

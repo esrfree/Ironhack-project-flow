@@ -26,7 +26,8 @@ router.post("/createComment/:postId", (req, res, next) => {
       )
         .then(updatedPost => {
           //res.status(200).json(updatedPost);
-          res.redirect(`/profile/${req.user._id}`);
+          // res.redirect(`/profile/${req.user._id}`);
+          res.redirect("back");
         })
         .catch(err => next(err));
     })
@@ -50,7 +51,8 @@ router.post("/deleteComment/:commentId/:postId", (req, res, next) => {
       // remove the message itself and redirect user to the previous page
       Comment.findByIdAndDelete(req.params.commentId)
         .then(() => {
-          res.redirect(`/profile/${req.user._id}`);
+          // res.redirect(`/profile/${req.user._id}`);
+          res.redirect("back");
         })
         .catch(err => next(err));
     })
