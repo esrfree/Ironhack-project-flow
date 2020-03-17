@@ -24,12 +24,12 @@ const userSchema = new Schema(
       the username field unique and would then give you issues when trying to create more than one user as it will
       view username unique as if there should only be 1 username in the collection.
       */
-      userName: {
-          type: String,
-          trim: true,
-          unique: 'Username already exists',
-          required: 'Username is required'
-      },
+      //userName: {
+      //    type: String,
+      //    trim: true,
+      //    unique: 'Username already exists',
+      //    required: 'Username is required'
+      //},
 
       // the users avatar for others to see
       avatar: {
