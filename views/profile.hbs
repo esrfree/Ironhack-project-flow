@@ -13,14 +13,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"><img src="images/flow-logo.png" alt="flow-logo"></a>
+        <a class="navbar-brand" href="index.html"><img src="/images/flow-logo.png" alt="flow-logo"></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right main-menu">
-          <li class="header-button-profile"><a href="/profile/{{user._id}}">{{user.firstName}}</a></li>
-          <!-- replace with first name -->
+          <li class="header-button-profile"><a href="/profile">{{user.firstName}}</a></li> <!-- replace with first name -->
           <li class="header-button"><a href="/logout">Log out</a></li>
         </ul>
         <form class="navbar-form navbar-right hidden-sm">
@@ -36,8 +35,42 @@
 
   <!-- Timeline
       ================================================= -->
-  <div class="">
-    <div class="timeline-cover">
+
+      <div class="timeline">
+        <div class="timeline-cover">          
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src={{user.profilePicture.imgPath}} alt="" class="img-responsive profile-photo" />
+                  <!---
+                  <h3>{{user.firstName}} {{user.lastName}}</h3>
+                  <p class="text-muted">
+                    {{user.address.city}},
+                    {{user.address.state}}
+                  </p>
+                  -->
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a ></a></li>
+                  <li><a ></a></li>
+                  <li><a ></a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  {{!-- <li>1,299 people following her</li> --}}
+                  <li>
+                    <form action="profile/edit" method="GET">
+                      <button type="submit" class="btn-primary">Edit Profile</button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
 
       <!--Timeline Menu for Large Screens-->
       <div class="timeline-nav-bar hidden-sm hidden-xs">
@@ -45,19 +78,14 @@
           <div class="col-md-3">
             <div class="profile-info">
               <img src={{user.profilePicture.imgPath}} alt="" class="img-responsive profile-photo" />
-              {{!-- <h3>{{user.firstName}} {{user.lastName}}</h3>
-              <p class="text-muted">
-                {{user.address.street}}
-                {{user.address.city}}
-                {{user.address.state}},
-                {{user.address.zip}}
-              </p> <!-- replace with city --> --}}
+              
             </div>
           </div>
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
-              <li><a href="/profile/{{user._id}}" class="active">Profile</a></li>
-              <li></li>
+              <li><a>{{user.firstName}} {{user.lastName}}</a></li>
+              <li><a>{{user.address.city}}, {{user.address.state}}</a></li>
+              <li><a></a></li>
             </ul>
             <ul class="follow-me list-inline">
               {{!-- <li>1,299 people following her</li> --}}
@@ -70,23 +98,23 @@
           </div>
         </div>
       </div>
-      <!--Timeline Menu for Large Screens End-->
+      <!--Timeline Menu for Large Screens end-->
 
       <!--Timeline Menu for Small Screens-->
-      <div class="navbar-mobile hidden-lg hidden-md" style="bottom: initial; top: 70px">
+      <div class="navbar-mobile hidden-lg hidden-md">
         <div class="profile-info">
           <img src={{user.profilePicture.imgPath}} alt="" class="img-responsive profile-photo" />
-          {{!-- <h4>{{user.firstName}} {{user.lastName}}</h4>
-          <p class="text-muted">Miami</p> <!-- replace with city --> --}}
+          <h4></h4>
+          <p class="text-muted"></p> <!-- replace with city -->
         </div>
         <div class="mobile-menu">
-          <br><br>
           <a href="/profile/edit" class="btn-primary">Edit Profile</a>
         </div>
       </div>
       <!--Timeline Menu for Small Screens End-->
 
-    </div>
+
+    </div><!-- div class timeline-cover end====================================== -->
     <div id="page-contents">
       <div class="row">
         <div class="col-md-3">
@@ -106,7 +134,7 @@
               <div class="row">
                 <div class="col-md-9 col-sm-9">
                   <div class="form-group">
-                    <img src="{{user.profilePicture.imgPath}}" alt="" class="profile-photo-md" />
+                    <img src="{{user.photo}}" alt="" class="profile-photo-md" />
                     <textarea name="text" id="exampleTextarea" cols="30" rows="3" class="form-control"
                       placeholder="What's going on?"></textarea>
                   </div>
@@ -121,40 +149,39 @@
                         <label>
                       </li><!-- Style please-->
                     </ul>
-                    <button type="submit" class="btn btn-primary">Post</button> <!-- Link to method to post-->
+                    <button type="submit" class="btn btn-primary">Post</button> <!-- Delvis, link to method to post?-->
                   </div>
                 </div>
               </div>
             </form>
           </div><!-- Post Create Box End-->
 
-          <!-- Post Content >>> Delvis, the post is not working / getting an error <<<
+          <!-- Post Content
               ================================================= -->
           <div class="post-content">
             {{#if noPost}}
-            <h4> No recent posts :( </h4>
+            <h3> There are no Post to display at this time. Be the first to create a new post! </h3>
             {{else}}
             {{#each posts}}
             <!--Post Date-->
             <div class="post-date hidden-xs hidden-sm">
-              <h5>{{this.author.firstName}} {{this.author.lastName}}</h5>
+              <h5>{{user.firstName}}</h5>
               <p class="text-grey"> {{#formatTime  this.createdAt "MMM Do YY"}}{{/formatTime}}</p>
             </div>
             <!--Post Date End-->
-{{#if this.image}}
-            <img src={{this.image}} alt="post-image" class="img-responsive post-image" />
-            {{/if}}
-            <!--Image from post-->
+            <img src={{this.image}} class="img-responsive post-image" />
             <div class="post-container">
-              <img src={{this.author.profilePicture.imgPath}} alt="user" class="profile-photo-md pull-left" />
+              <img src={{this.author.photo}} alt="user" class="profile-photo-md pull-left" />
               <div class="post-detail">
                 <div class="user-info">
+
                   <h5><a href="profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}}
                       {{this.author.lastName}}</a></h5>
-                  <p class="text-muted">Published {{#relativeTime this.createdAt}} {{/relativeTime}}</p>
+                  <p class="text-muted">{{#relativeTime this.createdAt}} {{/relativeTime}}</p>
                   <!-- Needs to reflect the time since post-->
                 </div>
                 <div class="reaction">
+
                   <form action="/updateLikes/{{this._id}}" method="POST">
                     <button type="submit" class="btn text-green"><i class="icon ion-thumbsup"></i>
                       {{#if this.likes.length }}
@@ -163,9 +190,8 @@
                       0
                       {{/if}}</button>
                   </form>
-                  {{!-- <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-                  <!-- Needs to reflect the number of likes-->
-                  <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a> --}}
+                  <!-- Needs to reflect the number of likes    DONE-->
+                  {{!-- <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a> --}}
                   <!-- Needs to reflect the number of dislikes-->
                 </div>
                 <div class="line-divider"></div>
@@ -173,64 +199,67 @@
                   <p>{{this.text}}<i class="em em-anguished"></i> <i class="em em-anguished"></i> <i
                       class="em em-anguished"></i></p>
                 </div>
+
                 {{#if this.isOwner}}
                 <form action="/deletePost/{{this._id}}" method="POST"><button
                     class="btn-primary post-comment-button">Delete
                     Post</button></form>
-                {{/if}}
+
+                {{/if }}
                 <br>
                 <div class="line-divider"></div>
                 <div class="post-comment">
-                  <!--comments form-->
-                  <img src="{{../user.profilePicture.imgPath}}" alt="" class="profile-photo-sm" />
+                  <!-- comment form start-->
+                  <img src={{req.user.photo}} alt="" class="profile-photo-sm" />
                   <form action="/createComment/{{this._id}}" method="POST">
-                    <input type="text" name="comment" class="form-control" placeholder="Comment">
-                    <button class="btn-primary post-comment-button">Comment</button>
+                    <input name="comment" type="text" class="form-control" placeholder="Comment">
+                    <button type="submit" class="btn-primary post-comment-button">Create Comment</button>
                   </form>
-                </div><!-- comment form end-->
-
+                </div><!-- comments form end-->
                 <div>
-                  <!-- comment text start-->
+                  <!-- comments text start-->
                   <div class="post-comment">
                     {{#if this.noComments}}
                     {{else}}
                     {{#each this.comments}}
 
-                    <img src={{this.author.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
+                    <img src={{this.author.photo}} alt="user-comment" class="profile-photo-sm" />
                     <p class="no-margin">
-                      <a href="profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
+                      <a href="/profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
                       <i class="em em-laughing"></i>
-                      {{this.comment}}
+                      {{this._doc.comment}}
                     </p>
                   </div>
                   <div class="post-comment-action">
                     {{#if this.isOwner}}
-                    <form action="/deleteComment/{{this._id}}/{{../this._id}}" method="POST"><button
-                        class="anchor-button">Delete Comment</button>
+                    <form action="/deleteComment/{{this._doc._id}}/{{../this._id}}" method="POST"><button
+                        class="anchor-button">Delete comment</button>
                     </form>
                     {{/if}}
                   </div>
 
                   <div class="post-comment-action">
-                    <!-- reply start-->
+
+                    <!--Reply  Start============= -->
                     <div class="post-comment">
-                      <img src={{req.user.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
-                      <form action="/createReply/{{this._id}}" method="POST">
+                      <img src={{req.user.photo}} alt="" class="profile-photo-sm" />
+                      <form action="/createReply/{{this._doc._id}}" method="POST">
                         <input name="reply" type="text" class="form-control" placeholder="Replies">
                         <button class="btn-primary post-comment-button">Reply</button>
-                        {{!-- </form>
-                      </form> --}}
+                      </form>
                     </div><!-- reply form end-->
-                    {{#if this.replies}}
-                    {{#each this.replies}}
-                    <img src={{this.author.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
+
+                    <!--Reply text Start============= -->
+                    {{#if this._doc.replies}}
+                    {{#each this._doc.replies}}
+                    <img src={{this.author.photo}} alt="" class="profile-photo-sm" />
                     <p class="no-margin">
                       <a href="/profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
                       <i class="em em-laughing"></i>
                       {{this.reply}}
                     </p>
                     {{#compare this.author.email "===" user.email }}
-                    <form action="/deleteReply/{{this._id}}/{{../this._id}}" method="POST"><button
+                    <form action="/deleteReply/{{this._id}}/{{../this._doc._id}}" method="POST"><button
                         class="anchor-button">Delete Reply</button></form>
                     {{else}}
                     <h1> </h1>
@@ -241,17 +270,17 @@
                   </div>
                   {{/each}}
                   {{/if}}
-                </div><!-- comment text end-->
+                </div><!-- comments text end-->
               </div>
             </div>
             {{/each}}
             {{/if}}
-          </div><!-- Post Content end========================== -->
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+          </div><!-- Post Content end================================== -->
+        </div><!-- div class col-md-7 end====================================== -->
+      </div><!-- div class row end====================================== -->
+    </div><!-- div class id page-contents end================================ -->
+  </div><!-- div timeline end================================= -->
+</div><!-- div class container end ================================ -->
 
 <!-- Footer
     ================================================= -->
@@ -261,7 +290,6 @@
       <div class="footer-wrapper">
         <div class="col-xs-12 col-md-3 col-sm-3">
           <a href=""><img src="images/flow-logo.png" alt="flow-logo" class="navbar-brand" /></a>
-
         </div>
         <div class="col-md-2 col-sm-2">
           <h6>Site Map</h6>
