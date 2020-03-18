@@ -72,10 +72,7 @@ app.locals.title = 'Flow, MERN stack social media platform';
 
 // Routes middleware - pages
 app.use('/', require('./routes/index'));
-app.use('/', require('./routes/profile'));
-app.use('/', require('./routes/profile-edit'));
 app.use('/', require('./routes/news'));
-//app.use('/', require('./routes/user-list'));
 
 // Routes middleware - functionality
 app.use('/', require('./routes/user-routes'));
