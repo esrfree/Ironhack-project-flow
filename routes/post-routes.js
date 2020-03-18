@@ -5,9 +5,10 @@ const User = require("../models/User");
 const Comment = require("../models/Comment.model")
 const Reply = require('../models/Reply.model')
 const uploadCloud = require("../configs/cloudinary-config");
+const isLoggedIn    = require('../configs/route-guard-config');
 
 //Display all Post
-router.get("/timeLine", (req, res, next) => {
+router.get("/timeline", isLoggedIn, (req, res, next) => {
   // console.log('inside route***********************************************************');
   Post.find({})
     .populate([
