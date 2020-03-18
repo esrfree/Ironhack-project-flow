@@ -11,18 +11,20 @@ router
   .get(userCtrl.signup)
   .post(userCtrl.create)
   .post(authCtrl.authenticated)
-  
+
+router
+  .route('/profile')
+  .get(isLoggedIn, userCtrl.read)
+//.put(userCtrl.update)
+//.delete(userCtrl.remove)
+
 router
   .route('/profile/edit')
   .get(isLoggedIn, userCtrl.readForUpdate)
   .post(isLoggedIn, uploadCloud.single('photo'), userCtrl.update)
   //.post(isLoggedIn, userCtrl.update)
 
-router
-  .route('/timeline')
-  .get(isLoggedIn, userCtrl.read)
-//.put(userCtrl.update)
-//.delete(userCtrl.remove)
+
 
 
 

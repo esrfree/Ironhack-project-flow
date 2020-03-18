@@ -56,7 +56,7 @@
           </div>
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
-              <li><a href="/profile/{{user._id}}" class="active">Profile</a></li>
+              <li><a href="/profile/{{user._id}}" class="active">{{user.firstName}} {{user.lastName}}</a></li>
               <li></li>
             </ul>
             <ul class="follow-me list-inline">
@@ -214,7 +214,7 @@
                   <div class="post-comment-action">
                     <!-- reply start-->
                     <div class="post-comment">
-                      <img src={{req.user.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
+                      <img src={{../user.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
                       <form action="/createReply/{{this._id}}" method="POST">
                         <input name="reply" type="text" class="form-control" placeholder="Replies">
                         <button class="btn-primary post-comment-button">Reply</button>

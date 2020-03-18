@@ -4,11 +4,12 @@ const Post = require("../models/Post.model");
 const User = require("../models/User");
 const Comment = require("../models/Comment.model")
 const Reply = require('../models/Reply.model')
+const isLoggedIn    = require('../configs/route-guard-config');
 
 //modify route***********************************************
-router.post("/createReply/:commentId", (req, res, next) => {
+router.post("/createReply/:commentId", isLoggedIn, (req, res, next) => {
 
-  if (!req.user) {
+  if (!user) {
     res.redirect("/");
     console.log("no user")
     return;

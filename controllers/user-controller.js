@@ -62,9 +62,6 @@ const create = ( req, res, next ) => {
 
 // Reading - for profile page
 const read = (req, res) => {
-  //socket.on('connection', (socket => {
-  //  socket.emit('message', `User ${req.user.name} connected`);
-  //}))
   res.render('profile');
 }
 
@@ -74,7 +71,7 @@ uses the lodash module to extend and merge the changes that came in the
 request body to update the user data.
 */
 const readForUpdate = (req, res) => {
-  res.render('edit-profile');
+  res.render('profile-edit');
 }
 
 const update = (req, res, next) => {
@@ -94,7 +91,6 @@ const update = (req, res, next) => {
       if (updatedUser.state) foundUser.address.state = updatedUser.state;
       if (updatedUser.zip) foundUser.address.zip = updatedUser.zip;
       foundUser.save();
-      console.log(foundUser.firstName)
       res.redirect('/profile');
     })
     .catch(err => {
