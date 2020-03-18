@@ -118,11 +118,11 @@ const remove = (req, res, next) => {
 const newsFeed = (req, res, next) => {
   let topic = req.query.topic || "ironhack";
   // axios config
-  const url = process.env.NEWS_SEARCH;
+  const url = process.env.CONTEXTUAL_URL;
   const config = {
     headers: {
       "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-      "X-RapidAPI-Key": process.env.NEWS_SECRET
+      "X-RapidAPI-Key": process.env.CONTEXTUAL_KEY
     },
     params: {
         autoCorrect: false,
