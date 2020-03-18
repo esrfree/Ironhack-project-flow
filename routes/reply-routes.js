@@ -7,21 +7,25 @@ const Reply = require('../models/Reply.model')
 const isLoggedIn    = require('../configs/route-guard-config');
 
 //modify route***********************************************
-router.post("/createReply/:commentId", isLoggedIn, (req, res, next) => {
+router.post("/createReply/:commentId", (req, res, next) => {
 
-  if (!user) {
+  console.log("reply" + req.body)
+  
+  if (!req.user) {
     res.redirect("/");
     console.log("no user")
     return;
   }
+  
   // create a new reply from our request and set the logged in user to be author of the reply
   const theReply = req.body;
   theReply.author = req.user._id;
   console.log(theReply)
+  
   // create a new reply message, and once we have it push the reference _id of the reply to it onto the original message
   Reply.create(theReply)
     .then(newlyCreatedReply => {
-      // console.log("created reply" + newlyCreatedReply)
+      console.log("created reply" + newlyCreatedReply)
       // find the message we reply to from params and update it with the reference to the reply
       Comment.findByIdAndUpdate(
         req.params.commentId,
