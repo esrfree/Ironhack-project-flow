@@ -84,8 +84,11 @@
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
               <li><a>{{user.firstName}} {{user.lastName}}</a></li>
-              <li><a>{{user.address.city}}, {{user.address.state}}</a></li>
-              <li><a></a></li>
+              {{#if user.address }}
+                <li>{{user.address.city}}, {{user.address.state}}</li>
+              {{else}}
+                <li></li>
+              {{/if}}
             </ul>
             <ul class="follow-me list-inline">
               {{!-- <li>1,299 people following her</li> --}}
