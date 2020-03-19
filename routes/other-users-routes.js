@@ -14,8 +14,8 @@ router
 router
     .route('/users/:userId', isLoggedIn)
     .get(otherUserCtrl.readOther)
-    .put(otherUserCtrl.updateOther)
-    .delete(otherUserCtrl.deleteOther)
+    //.put(otherUserCtrl.updateOther)
+    //.delete(otherUserCtrl.deleteOther)
 
 router.param('userId', otherUserCtrl.userById)
 
