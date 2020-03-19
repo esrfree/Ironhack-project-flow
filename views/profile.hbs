@@ -83,7 +83,7 @@
           </div>
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
-              <li><a>{{user.firstName}} {{user.lastName}}</a></li>
+              <li><a href="/users/{{user.id}}">{{user.firstName}} {{user.lastName}}</a></li>
               {{#if user.address }}
                 <li>{{user.address.city}}, {{user.address.state}}</li>
               {{else}}
