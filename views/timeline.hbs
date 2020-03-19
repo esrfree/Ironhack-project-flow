@@ -56,7 +56,7 @@
           </div>
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
-              <li><a href="/profile/{{user._id}}" class="active">{{user.firstName}} {{user.lastName}}</a></li>
+              <li><a href="/users/{{user._id}}" class="active">{{user.firstName}} {{user.lastName}}</a></li>
               <li></li>
             </ul>
             <ul class="follow-me list-inline">
@@ -149,7 +149,7 @@
               <img src={{this.author.profilePicture.imgPath}} alt="user" class="profile-photo-md pull-left" />
               <div class="post-detail">
                 <div class="user-info">
-                  <h5><a href="profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}}
+                  <h5><a href="users/{{this.author._id}}" class="profile-link">{{this.author.firstName}}
                       {{this.author.lastName}}</a></h5>
                   <p class="text-muted">Published {{#relativeTime this.createdAt}} {{/relativeTime}}</p>
                   <!-- Needs to reflect the time since post-->
@@ -198,7 +198,7 @@
 
                     <img src={{this.author.profilePicture.imgPath}} alt="" class="profile-photo-sm" />
                     <p class="no-margin">
-                      <a href="profile/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
+                      <a href="users/{{this.author._id}}" class="profile-link">{{this.author.firstName}} </a>
                       <i class="em em-laughing"></i>
                       {{this.comment}}
                     </p>

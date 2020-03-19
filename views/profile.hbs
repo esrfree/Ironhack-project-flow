@@ -83,7 +83,7 @@
           </div>
           <div class="col-md-9">
             <ul class="list-inline profile-menu">
-              <li><a>{{user.firstName}} {{user.lastName}}</a></li>
+              <li><a href="/users/{{user.id}}">{{user.firstName}} {{user.lastName}}</a></li>
               {{#if user.address }}
                 <li>{{user.address.city}}, {{user.address.state}}</li>
               {{else}}
@@ -298,7 +298,7 @@
           <h6>Site Map</h6>
           <ul class="footer-links">
             <li><a href="/timeLine">Timeline</a></li>
-            <li><a href="/profile">Profile</a></li>
+            <li><a href="/profile/{{user._id}}">Profile</a></li>
             <li><a href="/news">News</a></li>
           </ul>
         </div>

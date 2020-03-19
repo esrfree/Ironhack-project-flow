@@ -57,7 +57,7 @@ const updateOther = (req, res, next) => {
       return res.status(400).send({ errorMessage: err })
     }
     userFound.password = undefined;
-    res.send({ userFound });
+    res.render('profile', { userFound });
   })
 }
 
