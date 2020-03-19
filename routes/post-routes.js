@@ -2,12 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post.model");
 const User = require("../models/User");
-const Comment = require("../models/Comment.model")
-const Reply = require('../models/Reply.model')
+const Comment = require("../models/Comment.model");
+const Reply = require('../models/Reply.model');
+const isLoggedIn    = require('../configs/route-guard-config');
 const uploadCloud = require("../configs/cloudinary-config");
 
 //Display all Post
-router.get("/timeLine", (req, res, next) => {
+router.get("/timeline", isLoggedIn, (req, res, next) => {
   // console.log('inside route***********************************************************');
   Post.find({})
     .populate([
